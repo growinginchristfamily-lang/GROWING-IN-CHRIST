@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .events-filter {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-btn {
+      padding: 8px 20px;
+      border: 1.5px solid var(--border);
+      border-radius: 24px;
+      background: var(--white);
+      color: var(--mid);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-btn.active, .filter-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--white);
+    }
+
+    .events-list { display: flex; flex-direction: column; gap: 24px; }
+    .event-row {
+      background: var(--white);
+      border-radius: 12px;
+      display: grid;
+      grid-template-columns: 100px 1fr auto;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: transform var(--transition);
+    }
+    .event-row:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .event-row-date {
+      background: var(--gold);
+      color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 20px 12px;
+    }
+    .event-row-date strong {
+      font-family: var(--font-display);
+      font-size: 2.4rem;
+      line-height: 1;
+    }
+    .event-row-date span {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+    .event-row-body { padding: 24px 28px; }
+    .event-row-body h3 { font-size: 1.2rem; margin-bottom: 8px; }
+    .event-row-body p  { font-size: 0.9rem; }
+    .event-row-meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+    .event-row-action {
+      padding: 24px;
+      display: flex;
+      align-items: center;
+    }
+    .event-badge {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 12px;
+      font-family: var(--font-sans);
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 10px;
+    }
+    .badge-free     { background: #E8F5E9; color: #2E7D32; }
+    .badge-register { background: #FFF3E0; color: #E65100; }
+    .badge-upcoming { background: var(--gold-pale); color: var(--gold); }
+
+    @media (max-width: 700px) {
+      .event-row { grid-template-columns: 80px 1fr; }
+      .event-row-action { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">What's Happening</span>
+    <h1>Events &amp; Gatherings</h1>
+    <p>Stay connected with what God is doing in and through Growing in Christ Ministry.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Events</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <div class="events-filter">
+      <button class="filter-btn active">All Events</button>
+      <button class="filter-btn">Services</button>
+      <button class="filter-btn">Conferences</button>
+      <button class="filter-btn">Outreach</button>
+      <button class="filter-btn">Youth</button>
+      <button class="filter-btn">Training</button>
+    </div>
+
+    <div class="events-list">
+
+      <!-- Event 1 -->
+      <div class="event-row">
+        <div class="event-row-date">
+          <strong>15</strong>
+          <span>June</span>
+          <span style="margin-top:2px;font-size:0.68rem">2025</span>
+        </div>
+        <div class="event-row-body">
+          <h3>Annual Revival Conference <span class="event-badge badge-register">Register</span></h3>
+          <p>Our flagship annual event — three days of powerful worship, Bible teaching, testimonies, and equipping for believers from across Kenya. Theme: <em>"Rooted &amp; Established in Christ"</em></p>
+          <div class="event-row-meta">
+            <span> 9:00 AM – 9:00 PM</span>
+            <span> Main Auditorium, Nairobi</span>
+            <span> 3 Days</span>
+          </div>
+        </div>
+        <div class="event-row-action">
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20register%20for%20this%20event." target="_blank" rel="noopener" class="btn btn-green" style="white-space:nowrap">Register Now</a>
+        </div>
+      </div>
+
+      <!-- Event 2 -->
+      <div class="event-row">
+        <div class="event-row-date" style="background:var(--green-dark)">
+          <strong>22</strong>
+          <span>June</span>
+          <span style="margin-top:2px;font-size:0.68rem">2025</span>
+        </div>
+        <div class="event-row-body">
+          <h3>Community Health Outreach <span class="event-badge badge-free">Free</span></h3>
+          <p>Free medical checkups, prayer, and Gospel sharing in Mathare Valley. Bring a friend, neighbour, or family member who needs care.</p>
+          <div class="event-row-meta">
+            <span> 8:00 AM – 3:00 PM</span>
+            <span> Mathare Valley, Nairobi</span>
+            <span> Volunteers welcome</span>
+          </div>
+        </div>
+        <div class="event-row-action">
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20volunteer%20for%20the%20Community%20Health%20Outreach." target="_blank" rel="noopener" class="btn btn-outline" style="white-space:nowrap">Volunteer</a>
+        </div>
+      </div>
+
+      <!-- Event 3 -->
+      <div class="event-row">
+        <div class="event-row-date" style="background:var(--green-mid)">
+          <strong>05</strong>
+          <span>July</span>
+          <span style="margin-top:2px;font-size:0.68rem">2025</span>
+        </div>
+        <div class="event-row-body">
+          <h3>Arise Youth Camp <span class="event-badge badge-register">Register</span></h3>
+          <p>A weekend retreat in Naivasha for young people aged 13–35 featuring worship, outdoor activities, mentorship, and discipleship sessions with the theme <em>"Arise &amp; Shine."</em></p>
+          <div class="event-row-meta">
+            <span> Friday – Sunday</span>
+            <span> Naivasha, Rift Valley</span>
+            <span> Ages 13–35</span>
+          </div>
+        </div>
+        <div class="event-row-action">
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20register%20for%20this%20event." target="_blank" rel="noopener" class="btn btn-green" style="white-space:nowrap">Register Now</a>
+        </div>
+      </div>
+
+      <!-- Event 4 -->
+      <div class="event-row">
+        <div class="event-row-date" style="background:var(--green)">
+          <strong>20</strong>
+          <span>July</span>
+          <span style="margin-top:2px;font-size:0.68rem">2025</span>
+        </div>
+        <div class="event-row-body">
+          <h3>Leadership &amp; Ministry Training <span class="event-badge badge-upcoming">Upcoming</span></h3>
+          <p>One-day intensive training for ministry leaders, cell group leaders, and anyone called to serve in the church. Topics include spiritual authority, team leadership, and pastoral care.</p>
+          <div class="event-row-meta">
+            <span> 9:00 AM – 5:00 PM</span>
+            <span> Conference Hall, Nairobi</span>
+            <span> Application required</span>
+          </div>
+        </div>
+        <div class="event-row-action">
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20apply%20for%20the%20Leadership%20and%20Ministry%20Training." target="_blank" rel="noopener" class="btn btn-outline" style="white-space:nowrap">Apply</a>
+        </div>
+      </div>
+
+      <!-- Event 5 -->
+      <div class="event-row">
+        <div class="event-row-date" style="background:var(--green-deep)">
+          <strong>03</strong>
+          <span>Aug</span>
+          <span style="margin-top:2px;font-size:0.68rem">2025</span>
+        </div>
+        <div class="event-row-body">
+          <h3>Marriage Enrichment Seminar <span class="event-badge badge-free">Free</span></h3>
+          <p>A one-day seminar for married couples and those preparing for marriage. Biblical teaching on communication, purpose, prayer, and building a Christ-centred home.</p>
+          <div class="event-row-meta">
+            <span> 10:00 AM – 4:00 PM</span>
+            <span> Main Auditorium</span>
+            <span> Couples</span>
+          </div>
+        </div>
+        <div class="event-row-action">
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20RSVP%20for%20the%20Marriage%20Enrichment%20Seminar." target="_blank" rel="noopener" class="btn btn-outline" style="white-space:nowrap">RSVP</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Regular Services -->
+<section class="section" style="background:var(--cream);padding-top:0">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:40px">
+      <span class="label">Every Week</span>
+      <h2>Regular Gatherings</h2>
+      <div class="divider"></div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px">
+      <div style="background:var(--white);border-radius:12px;padding:32px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-size:2rem;margin-bottom:16px"></div>
+        <h3 style="font-size:1.1rem">Sunday Early Service</h3>
+        <p style="margin-top:8px;font-size:0.9rem">Sundays · 8:00 AM</p>
+        <p style="font-size:0.88rem">Main Auditorium</p>
+      </div>
+      <div style="background:var(--gold);border-radius:12px;padding:32px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-size:2rem;margin-bottom:16px"></div>
+        <h3 style="font-size:1.1rem;color:white">Sunday Main Service</h3>
+        <p style="margin-top:8px;font-size:0.9rem;color:rgba(255,255,255,0.85)">Sundays · 10:00 AM</p>
+        <p style="font-size:0.88rem;color:rgba(255,255,255,0.75)">Main Auditorium</p>
+      </div>
+      <div style="background:var(--white);border-radius:12px;padding:32px;text-align:center;box-shadow:var(--shadow)">
+        <div style="font-size:2rem;margin-bottom:16px"></div>
+        <h3 style="font-size:1.1rem">Midweek Bible Study</h3>
+        <p style="margin-top:8px;font-size:0.9rem">Wednesdays · 6:30 PM</p>
+        <p style="font-size:0.88rem">Fellowship Hall</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+<script></script>
+<script>
+  // Filter button interaction
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>

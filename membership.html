@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Membership — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .membership-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    .benefit-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      border-top: 3px solid var(--gold);
+    }
+    .benefit-card .icon { font-size: 1.8rem; margin-bottom: 12px; }
+    .benefit-card h4 { font-size: 1rem; margin-bottom: 8px; }
+
+    .steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      counter-reset: steps;
+      margin-top: 40px;
+    }
+    .step {
+      display: grid;
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      position: relative;
+      padding-bottom: 32px;
+    }
+    .step:last-child { padding-bottom: 0; }
+    .step:not(:last-child)::before {
+      content: '';
+      position: absolute;
+      left: 29px;
+      top: 60px;
+      bottom: 0;
+      width: 2px;
+      background: var(--border);
+    }
+    .step-num {
+      width: 60px; height: 60px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+      z-index: 1;
+    }
+    .step-content { padding-top: 12px; }
+    .step-content h4 { font-size: 1.05rem; margin-bottom: 6px; }
+
+    .membership-form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: var(--shadow-lg);
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    @media (max-width: 900px) {
+      .membership-benefits { grid-template-columns: 1fr 1fr; }
+      .membership-form-card { padding: 28px 20px; }
+    }
+    @media (max-width: 600px) {
+      .membership-benefits { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Join the Family</span>
+    <h1>Membership</h1>
+    <p>Become an official member of Growing in Christ Ministry and commit to growing, serving, and belonging.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Membership</span></div>
+  </div>
+</section>
+
+<!-- Why become a member -->
+<section class="section">
+  <div class="container text-center">
+    <span class="label">Why Join?</span>
+    <h2>Benefits of Membership</h2>
+    <div class="divider"></div>
+    <p style="max-width:540px;margin:0 auto">Membership is not just a title — it's a commitment to belong, grow, serve, and be accountable within a community of faith.</p>
+    <div class="membership-benefits">
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>A Spiritual Home</h4>
+        <p style="font-size:0.88rem">Find belonging in a community that knows your name, walks with you, and celebrates your growth.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Discipleship Access</h4>
+        <p style="font-size:0.88rem">Priority access to Bible training, small groups, and discipleship programmes designed for members.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Ministry Involvement</h4>
+        <p style="font-size:0.88rem">Discover and deploy your spiritual gifts by serving in one of our active ministries.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Pastoral Care</h4>
+        <p style="font-size:0.88rem">Receive dedicated pastoral support, counselling, and prayer from our leadership team.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Network &amp; Fellowship</h4>
+        <p style="font-size:0.88rem">Connect with a wide network of believers across Nairobi and the broader Growing in Christ community.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon"></div>
+        <h4>Leadership Pipeline</h4>
+        <p style="font-size:0.88rem">Be identified for mentorship and developed for leadership within the church and beyond.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Steps -->
+<section class="section" style="background:var(--cream)">
+  <div class="container">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start">
+      <div>
+        <span class="label">The Process</span>
+        <h2>How to Become a Member</h2>
+        <div class="divider divider-left"></div>
+        <p>Membership at Growing in Christ Ministry is a thoughtful, intentional process designed to ensure every member is equipped and connected.</p>
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1</div>
+            <div class="step-content">
+              <h4>Attend Consistently</h4>
+              <p style="font-size:0.9rem">Begin attending our Sunday services and midweek programmes regularly to experience our community.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">2</div>
+            <div class="step-content">
+              <h4>Complete the New Believers Class</h4>
+              <p style="font-size:0.9rem">A 4-week foundational class covering salvation, baptism, the Holy Spirit, and church life.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">3</div>
+            <div class="step-content">
+              <h4>Baptism</h4>
+              <p style="font-size:0.9rem">Water baptism by immersion as a public declaration of faith in Jesus Christ.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">4</div>
+            <div class="step-content">
+              <h4>Submit Your Membership Form</h4>
+              <p style="font-size:0.9rem">Complete the membership application below and meet with a pastor for a brief welcome conversation.</p>
+            </div>
+          </div>
+          <div class="step">
+            <div class="step-num">5</div>
+            <div class="step-content">
+              <h4>Welcome &amp; Commissioning</h4>
+              <p style="font-size:0.9rem">Be officially welcomed into the church family during a Sunday service and connected to a small group.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div style="background:linear-gradient(135deg,var(--green-deep),var(--gold)30);height:520px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:10rem;box-shadow:var(--shadow-lg)"></div>
+    </div>
+  </div>
+</section>
+
+<!-- Membership Form -->
+<section class="section">
+  <div class="container">
+    <div class="text-center" style="margin-bottom:48px">
+      <span class="label">Apply Now</span>
+      <h2>Membership Application</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="membership-form-card">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label>First Name *</label>
+          <input type="text" class="form-control" placeholder="John">
+        </div>
+        <div class="form-group">
+          <label>Last Name *</label>
+          <input type="text" class="form-control" placeholder="Doe">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email Address *</label>
+        <input type="email" class="form-control" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Phone Number *</label>
+        <input type="tel" class="form-control" placeholder="+254 7XX XXX XXX">
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="date" class="form-control">
+        </div>
+        <div class="form-group">
+          <label>Gender</label>
+          <select class="form-control">
+            <option>Select</option>
+            <option>Male</option>
+            <option>Female</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Marital Status</label>
+        <select class="form-control">
+          <option>Single</option>
+          <option>Married</option>
+          <option>Widowed</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>How long have you been attending Growing in Christ?</label>
+        <select class="form-control">
+          <option>Less than 1 month</option>
+          <option>1–3 months</option>
+          <option>3–6 months</option>
+          <option>6–12 months</option>
+          <option>Over a year</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Which ministry are you interested in serving?</label>
+        <select class="form-control">
+          <option>Worship &amp; Music</option>
+          <option>Youth Ministry</option>
+          <option>Children's Ministry</option>
+          <option>Community Outreach</option>
+          <option>Ushering &amp; Hosting</option>
+          <option>Media &amp; Communications</option>
+          <option>Intercessory Prayer</option>
+          <option>Not yet sure</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Tell us about yourself &amp; your faith journey</label>
+        <textarea class="form-control" placeholder="Share a little about yourself and what brought you to Growing in Christ…"></textarea>
+      </div>
+      <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20submit%20my%20membership%20application%20to%20Growing%20in%20Christ%20Ministry." target="_blank" rel="noopener" class="btn btn-green" style="width:100%;justify-content:center;font-size:0.95rem;padding:15px">
+        Submit Application via WhatsApp →
+      </a>
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+</body>
+</html>

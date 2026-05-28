@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ministries — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .ministry-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .ministry-section:nth-child(even) { background: var(--cream); }
+    .ministry-section:nth-child(odd)  { background: var(--white); }
+    .ministry-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .ministry-layout.reverse { direction: rtl; }
+    .ministry-layout.reverse > * { direction: ltr; }
+    .ministry-visual {
+      height: 380px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 6rem;
+      color: rgba(255,255,255,0.3);
+      box-shadow: var(--shadow-lg);
+    }
+    .ministry-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 6px 14px;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+    .ministry-features { margin-top: 20px; display: flex; flex-direction: column; gap: 10px; }
+    .ministry-feature {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-family: var(--font-serif);
+      font-size: 0.98rem;
+      color: var(--mid);
+    }
+    .ministry-feature::before {
+      content: '';
+      color: var(--gold);
+      font-weight: 700;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    @media (max-width: 900px) {
+      .ministry-layout { grid-template-columns: 1fr; }
+      .ministry-layout.reverse { direction: ltr; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">What We Do</span>
+    <h1>Our Ministries</h1>
+    <p>Every ministry is a means of grace — equipping believers and blessing the community through the Gospel.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Ministries</span></div>
+  </div>
+</section>
+
+<!-- Worship & Prayer -->
+<div id="worship" class="ministry-section">
+  <div class="container">
+    <div class="ministry-layout">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Worship &amp; Prayer</h2>
+        <div class="divider divider-left"></div>
+        <p>Our worship ministry exists to usher the congregation into the presence of God through Spirit-led, Word-anchored worship. We believe that genuine worship is the foundation of all we do.</p>
+        <p style="margin-top:14px">Our prayer ministry intercedes for our congregation, the nation of Kenya, and the nations of the world — meeting weekly and in special prayer gatherings throughout the year.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">Sunday worship services — 8:00 AM &amp; 10:00 AM</div>
+          <div class="ministry-feature">Weekly prayer meeting — Wednesday 6:30 PM</div>
+          <div class="ministry-feature">Annual 21 Days of Prayer &amp; Fasting</div>
+          <div class="ministry-feature">Worship team training and development</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Get Involved</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green-deep),#C8962A)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Youth Ministry -->
+<div id="youth" class="ministry-section">
+  <div class="container">
+    <div class="ministry-layout reverse">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Youth Ministry</h2>
+        <div class="divider divider-left"></div>
+        <p>Our youth ministry — "Arise" — is a dynamic community for young people aged 13–35, built on discipleship, friendship, and practical faith. We are raising a generation that will transform Kenya and the world.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">Sunday youth service &amp; small groups</div>
+          <div class="ministry-feature">Annual Arise Youth Camp</div>
+          <div class="ministry-feature">Leadership development and mentoring</div>
+          <div class="ministry-feature">Quarterly youth outreach missions</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Join Arise Youth</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid))"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Community Outreach -->
+<div id="outreach" class="ministry-section">
+  <div class="container">
+    <div class="ministry-layout">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Community Outreach</h2>
+        <div class="divider divider-left"></div>
+        <p>We take the love of Christ beyond our walls into the communities around us. From health missions and food distribution to evangelism and skills training, we serve the whole person.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">Monthly community health outreaches</div>
+          <div class="ministry-feature">Food and clothing distribution drives</div>
+          <div class="ministry-feature">Street evangelism and prayer walks</div>
+          <div class="ministry-feature">Visits to children's homes and prisons</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Volunteer With Us</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green),#C8962A60)"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Discipleship -->
+<div id="discipleship" class="ministry-section">
+  <div class="container">
+    <div class="ministry-layout reverse">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Discipleship &amp; Training</h2>
+        <div class="divider divider-left"></div>
+        <p>We are committed to the Great Commission — making disciples who make disciples. Our systematic Bible training and small group network equip every believer to grow and multiply.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">New Believers Class — every quarter</div>
+          <div class="ministry-feature">Growing Deeper Bible Study course</div>
+          <div class="ministry-feature">Home-based small groups across Nairobi</div>
+          <div class="ministry-feature">Annual leadership and ministry training conference</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Enroll Today</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green-deep),var(--green-dark))"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Children -->
+<div id="children" class="ministry-section">
+  <div class="container">
+    <div class="ministry-layout">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Children's Ministry</h2>
+        <div class="divider divider-left"></div>
+        <p>"Train up a child in the way he should go." Our children's ministry provides a safe, fun, and faith-filled environment where children aged 0–12 encounter the love of Jesus.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">Sunday school classes — all ages</div>
+          <div class="ministry-feature">Annual children's camp</div>
+          <div class="ministry-feature">Bible memory and storytelling programmes</div>
+          <div class="ministry-feature">Family integration events</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Register Your Child</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid))"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Mentorship -->
+<div id="mentorship" class="ministry-section" style="border-bottom:none">
+  <div class="container">
+    <div class="ministry-layout reverse">
+      <div>
+        <div class="ministry-tag">Ministry</div>
+        <h2>Mentorship &amp; Care</h2>
+        <div class="divider divider-left"></div>
+        <p>Our mentorship ministry connects believers with experienced spiritual mentors who walk with them through life's seasons — providing guidance, accountability, and pastoral care.</p>
+        <div class="ministry-features">
+          <div class="ministry-feature">One-on-one spiritual mentoring</div>
+          <div class="ministry-feature">Marriage and family enrichment sessions</div>
+          <div class="ministry-feature">Professional mentoring network</div>
+          <div class="ministry-feature">Pastoral counselling and support</div>
+        </div>
+        <a href="contact.html" class="btn btn-green" style="margin-top:24px">Request a Mentor</a>
+      </div>
+      <div class="ministry-visual" style="background:linear-gradient(135deg,var(--green-deep),#C8962A30)"></div>
+    </div>
+  </div>
+</div>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+</body>
+</html>

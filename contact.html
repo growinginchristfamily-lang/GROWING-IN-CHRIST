@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.4fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .contact-info-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      margin-bottom: 28px;
+    }
+    .contact-icon {
+      width: 48px; height: 48px;
+      background: var(--gold-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      border: 1px solid var(--border);
+    }
+    .contact-info-item h4 {
+      font-size: 0.95rem;
+      margin-bottom: 4px;
+    }
+    .contact-info-item p { font-size: 0.9rem; }
+
+    .contact-form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .services-box {
+      background: var(--gold);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 32px;
+    }
+    .services-box h3 { color: white; font-size: 1rem; margin-bottom: 14px; }
+    .service-time {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
+      font-family: var(--font-sans);
+      font-size: 0.88rem;
+      color: rgba(255,255,255,0.9);
+    }
+    .service-time:last-child { border-bottom: none; }
+    .service-time strong { color: white; }
+
+    .map-placeholder {
+      width: 100%;
+      height: 300px;
+      background: linear-gradient(135deg, #E8F0E8, #C8D8C8);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      margin-top: 32px;
+      border: 1px solid var(--border);
+      color: rgba(0,0,0,0.2);
+      position: relative;
+      overflow: hidden;
+    }
+    .map-placeholder span {
+      position: absolute;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      color: var(--gray);
+      bottom: 16px;
+    }
+
+    @media (max-width: 900px) { .contact-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Get in Touch</span>
+    <h1>Contact Us</h1>
+    <p>We'd love to hear from you. Reach out for any enquiry, prayer request, or to connect with our ministry.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Contact</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="contact-layout">
+
+      <!-- Info -->
+      <div>
+        <span class="label">Find Us</span>
+        <h2>We're Here for You</h2>
+        <div class="divider divider-left"></div>
+        <p>Whether you need prayer, pastoral guidance, information about our programmes, or just want to know more — we're ready to help.</p>
+
+        <div style="margin-top:32px">
+          <div class="contact-info-item">
+            <div class="contact-icon">Loc</div>
+            <div>
+              <h4>Our Location</h4>
+              <p>Growing in Christ Ministry<br>Thika Road, Roysambu<br>Nairobi, Kenya</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">Tel</div>
+            <div>
+              <h4>Phone</h4>
+              <p>0705 214 338<br></p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">Mail</div>
+            <div>
+              <h4>Email</h4>
+              <p>info@growinginchrist.org<br>pastor@growinginchrist.org</p>
+            </div>
+          </div>
+          <div class="contact-info-item">
+            <div class="contact-icon">Hrs</div>
+            <div>
+              <h4>Office Hours</h4>
+              <p>Monday – Friday: 9:00 AM – 5:00 PM<br>Saturday: 10:00 AM – 2:00 PM</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="services-box">
+          <h3> Service Times</h3>
+          <div class="service-time"><span>Sunday Early Service</span><strong>8:00 AM</strong></div>
+          <div class="service-time"><span>Sunday Main Service</span><strong>10:00 AM</strong></div>
+          <div class="service-time"><span>Wednesday Bible Study</span><strong>6:30 PM</strong></div>
+          <div class="service-time"><span>Friday Youth Night</span><strong>6:00 PM</strong></div>
+        </div>
+
+        <div class="map-placeholder">
+          
+          <span>Thika Road, Roysambu · Nairobi, Kenya</span>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="contact-form-card">
+        <span class="label">Send a Message</span>
+        <h2 style="margin-bottom:8px">How Can We Help?</h2>
+        <p style="margin-bottom:28px">Fill in the form below and a member of our team will respond within 24–48 hours.</p>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label>First Name *</label>
+            <input type="text" class="form-control" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name *</label>
+            <input type="text" class="form-control" placeholder="Doe">
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Email Address *</label>
+          <input type="email" class="form-control" placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" class="form-control" placeholder="+254 7XX XXX XXX">
+        </div>
+        <div class="form-group">
+          <label>Subject</label>
+          <select class="form-control">
+            <option>General Enquiry</option>
+            <option>Prayer Request</option>
+            <option>Membership</option>
+            <option>Pastoral Support</option>
+            <option>Event Information</option>
+            <option>Volunteering</option>
+            <option>Giving &amp; Finance</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>Your Message *</label>
+          <textarea class="form-control" placeholder="Tell us how we can serve you…"></textarea>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px;margin-bottom:20px">
+          <input type="checkbox" id="prayer" style="margin-top:3px;accent-color:var(--gold)">
+          <label for="prayer" style="font-family:var(--font-sans);font-size:0.85rem;color:var(--mid);cursor:pointer">This is a prayer request — please pray for my situation</label>
+        </div>
+        <button class="btn btn-green" onclick="sendContactToWA()" style="width:100%;justify-content:center;font-size:0.95rem;padding:15px">
+          Send via WhatsApp →
+        </button>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Social Connect -->
+<section class="section-sm" style="background:var(--cream)">
+  <div class="container text-center">
+    <span class="label">Stay Connected</span>
+    <h2>Follow Our Journey</h2>
+    <div class="divider"></div>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap;margin-top:8px">
+      <a href="#" class="btn btn-outline">Facebook</a>
+      <a href="#" class="btn btn-outline">Instagram</a>
+      <a href="#" class="btn btn-outline">YouTube</a>
+      <a href="#" class="btn btn-outline">WhatsApp Group</a>
+      <a href="#" class="btn btn-outline">Telegram</a>
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+
+<script>
+function sendContactToWA() {
+  var fn   = document.querySelector('input[placeholder="John"]')?.value || '';
+  var ln   = document.querySelector('input[placeholder="Doe"]')?.value || '';
+  var email= document.querySelector('input[type="email"]')?.value || '';
+  var phone= document.querySelector('input[type="tel"]')?.value || '';
+  var subj = document.querySelector('.contact-form-card select')?.value || 'General Enquiry';
+  var msg  = document.querySelector('.contact-form-card textarea')?.value || '';
+  var prayer = document.getElementById('prayer')?.checked ? '\n\n*PRAYER REQUEST: Yes*' : '';
+  if (!fn || !msg) { alert('Please fill in your name and message.'); return; }
+  var text = 'Hello Growing in Christ Ministry! 👋\n\n*Name:* ' + fn + ' ' + ln +
+    '\n*Email:* ' + (email||'—') + '\n*Phone:* ' + (phone||'—') +
+    '\n*Subject:* ' + subj + '\n\n*Message:*\n' + msg + prayer;
+  window.open('https://wa.me/254705214338?text=' + encodeURIComponent(text), '_blank');
+}
+</script>
+
+</body>
+</html>

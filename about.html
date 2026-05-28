@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Mission/Vision/Motto cards */
+    .mvv-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .mvv-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 36px 28px;
+      border-top: 4px solid var(--green);
+      box-shadow: var(--shadow);
+      transition: transform var(--transition);
+    }
+    .mvv-card:hover { transform: translateY(-4px); }
+    .mvv-card .icon { font-size: 2rem; margin-bottom: 16px; }
+    .mvv-card.gold-top { border-top-color: var(--gold); }
+
+    /* Motto / Slogan banner */
+    .motto-banner {
+      background: linear-gradient(135deg, var(--green-dark), var(--green));
+      border-radius: 16px;
+      padding: 48px 56px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      margin-top: 48px;
+    }
+    .motto-banner::before {
+      content: '';
+      position: absolute;
+      font-size: 16rem;
+      color: rgba(255,255,255,0.04);
+      top: 50%; left: 50%;
+      transform: translate(-50%,-50%);
+    }
+    .motto-banner h2 { color: white; font-style: italic; position: relative; }
+    .motto-banner p  { color: rgba(255,255,255,0.75); position: relative; margin-top: 12px; }
+    .motto-tag {
+      display: inline-block;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 20px;
+      padding: 5px 16px;
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 14px;
+      position: relative;
+    }
+
+    /* Values grid */
+    .values-section { background: var(--cream); }
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 48px;
+    }
+    .value-card {
+      background: var(--white);
+      border-radius: 10px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      border-left: 4px solid var(--green);
+      transition: transform var(--transition);
+    }
+    .value-card:hover { transform: translateY(-3px); }
+    .value-card .v-num {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      color: var(--green-pale);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .value-card h4 { font-size: 1rem; margin-bottom: 6px; color: var(--green-dark); }
+    .value-card p  { font-size: 0.88rem; }
+
+    /* Leadership */
+    .leadership-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .leader-card {
+      text-align: center; background: var(--white);
+      border-radius: 12px; padding: 32px 20px 28px;
+      box-shadow: var(--shadow); transition: transform var(--transition);
+    }
+    .leader-card:hover { transform: translateY(-4px); }
+    .leader-avatar {
+      width: 88px; height: 88px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--green-dark), var(--green-light));
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-size: 2rem; color: white;
+      margin: 0 auto 16px;
+    }
+    .leader-card h4 { margin-bottom: 4px; }
+    .leader-card .role {
+      font-family: var(--font-sans); font-size: 0.78rem;
+      color: var(--green); font-weight: 600;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+    .leader-card p { font-size: 0.88rem; margin-top: 10px; }
+
+    /* History */
+    .history-timeline { margin-top: 48px; position: relative; }
+    .history-timeline::before {
+      content: ''; position: absolute; left: 50%; top: 0; bottom: 0;
+      width: 2px; background: var(--border); transform: translateX(-50%);
+    }
+    .timeline-item {
+      display: grid; grid-template-columns: 1fr 60px 1fr;
+      gap: 24px; align-items: center; margin-bottom: 40px;
+    }
+    .timeline-year {
+      width: 60px; height: 60px; background: var(--green);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display); font-weight: 700; font-size: 0.85rem;
+      color: white; text-align: center; line-height: 1.2; z-index: 1;
+    }
+    .timeline-content {
+      background: var(--white); padding: 20px 24px;
+      border-radius: 10px; box-shadow: var(--shadow);
+    }
+    .timeline-content h4 { font-size: 1rem; margin-bottom: 6px; }
+    .timeline-content p  { font-size: 0.88rem; }
+
+    @media (max-width: 1000px) {
+      .mvv-grid { grid-template-columns: 1fr 1fr; }
+      .values-grid { grid-template-columns: 1fr 1fr; }
+      .leadership-grid { grid-template-columns: 1fr 1fr; }
+      .history-timeline::before { display: none; }
+      .timeline-item { grid-template-columns: 60px 1fr; }
+      .timeline-empty { display: none; }
+      .motto-banner { padding: 36px 28px; }
+    }
+    @media (max-width: 600px) {
+      .mvv-grid, .values-grid { grid-template-columns: 1fr; }
+      .leadership-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 400px) {
+      .leadership-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Our Story</span>
+    <h1>About Us</h1>
+    <p>Learn who we are, what we believe, and the journey God has taken us on — rooted in the Seventh-day Adventist faith.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>About Us</span></div>
+  </div>
+</section>
+
+<!--  MISSION / VISION / MOTTO  -->
+<section class="section">
+  <div class="container text-center">
+    <span class="label">What We Stand For</span>
+    <h2>Mission, Vision &amp; Motto</h2>
+    <div class="divider"></div>
+    <p style="max-width:620px;margin:0 auto 0">Grounded in the Seventh-day Adventist calling, everything we do flows from these foundational commitments.</p>
+
+    <div class="mvv-grid">
+      <div class="mvv-card">
+        <div class="icon"></div>
+        <span class="label">Our Mission</span>
+        <h3 style="font-size:1.15rem;margin-bottom:12px">Make Disciples of Jesus Christ</h3>
+        <p style="font-size:0.93rem">To make disciples of Jesus Christ who live as His loving witnesses and proclaim to all people the everlasting gospel of the Three Angels' Messages in preparation for His soon return <em>(Matt 28:18–20, Acts 1:8, Rev 14:6–12).</em></p>
+      </div>
+
+      <div class="mvv-card">
+        <div class="icon"></div>
+        <span class="label">Our Vision</span>
+        <h3 style="font-size:1.15rem;margin-bottom:12px">Restoration of All Creation</h3>
+        <p style="font-size:0.93rem">In harmony with Bible revelation, we see as the climax of God's plan the restoration of all His creation to full harmony with His perfect will and righteousness — a world made new.</p>
+      </div>
+
+      <div class="mvv-card gold-top">
+        <div class="icon"></div>
+        <span class="label" style="color:var(--gold)">Our Slogan</span>
+        <h3 style="font-size:1.15rem;margin-bottom:12px">Freedom, Healing &amp; Hope</h3>
+        <p style="font-size:0.93rem">Seventh-day Adventists are devoted to helping people understand the Bible to find <strong>freedom, healing, and hope</strong> in Jesus. This is the heartbeat of every ministry we run.</p>
+      </div>
+    </div>
+
+    <!-- Motto Banner -->
+    <div class="motto-banner">
+      <div class="motto-tag"> Our Motto</div>
+      <h2>"The Advent Message to All the World<br>in My Generation."</h2>
+      <p>This timeless SDA motto captures our urgency, our scope, and our personal responsibility in sharing the Gospel before Christ's soon return.</p>
+    </div>
+  </div>
+</section>
+
+<!--  CORE VALUES  -->
+<section class="values-section section">
+  <div class="container text-center">
+    <span class="label">What Guides Us</span>
+    <h2>Core Values</h2>
+    <div class="divider"></div>
+    <p style="max-width:580px;margin:0 auto">Guided by the Bible and the Holy Spirit, these Christ-centred values shape every aspect of our ministry life.</p>
+
+    <div class="values-grid">
+      <div class="value-card">
+        <div class="v-num">01</div>
+        <h4>Christ-Like Living</h4>
+        <p>Illustrating the lordship of Jesus in our lives through moral, ethical, and social behaviours consistent with His teachings and example.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">02</div>
+        <h4>Christ-Like Healing</h4>
+        <p>Affirming the biblical principles of whole-person wellbeing — we make healthful living and healing of the sick a priority through compassionate ministry.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">03</div>
+        <h4>Christ-Like Serving</h4>
+        <p>Following Jesus' example, we commit to humble service — ministering to individuals most affected by poverty, tragedy, hopelessness, and disease.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">04</div>
+        <h4>Scripture-First</h4>
+        <p>We are called by God and guided by the Bible. Every decision, programme, and relationship is measured against the authority of God's Word.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">05</div>
+        <h4>Witnessing &amp; Service</h4>
+        <p>Witnessing and serving others represents the character of Jesus Christ. Everyone has God-given gifts and the responsibility to use them actively.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">06</div>
+        <h4>True Worship</h4>
+        <p>Genuine worship of our Creator occurs through fellowship, prayer, singing, and studying the Bible together as a Spirit-filled community.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">07</div>
+        <h4>Community &amp; Belonging</h4>
+        <p>Everyone has a place in God's family. We build an environment of authentic relationships where every person is known, loved, and supported.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">08</div>
+        <h4>Integrity &amp; Excellence</h4>
+        <p>We pursue transparency and accountability in all things — and give God our very best in worship, leadership, service, and stewardship.</p>
+      </div>
+      <div class="value-card">
+        <div class="v-num">09</div>
+        <h4>Empowered by the Spirit</h4>
+        <p>The Holy Spirit transforms lives and equips believers with abilities to advance God's kingdom. We operate in dependence on His power daily.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  HISTORY  -->
+<section class="section" style="background:var(--white)">
+  <div class="container text-center">
+    <span class="label">Our Journey</span>
+    <h2>A History of Faithfulness</h2>
+    <div class="divider"></div>
+    <div class="history-timeline">
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h4>Founded in a Living Room</h4>
+          <p>Growing in Christ Ministry began with a small prayer group of 12 people meeting weekly in Nairobi, Kenya, with a vision to disciple the next generation.</p>
+        </div>
+        <div class="timeline-year">2013</div>
+        <div class="timeline-empty"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-year">2016</div>
+        <div class="timeline-content">
+          <h4>First Permanent Home</h4>
+          <p>The congregation moved into its first dedicated facility and launched the Youth Ministry and Community Outreach programmes.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h4>Annual Conference Launched</h4>
+          <p>The first annual Growing in Christ conference drew 500 attendees from across Kenya, centred on the Three Angels' Messages and discipleship.</p>
+        </div>
+        <div class="timeline-year">2019</div>
+        <div class="timeline-empty"></div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-empty"></div>
+        <div class="timeline-year">2022</div>
+        <div class="timeline-content">
+          <h4>Expansion &amp; New Ministries</h4>
+          <p>Launched Children's Ministry, Mentorship Programme, and began weekly community health outreaches across Nairobi.</p>
+        </div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-content">
+          <h4>15,000 Lives Impacted</h4>
+          <p>A milestone year — the ministry reached 15,000 lives through outreach, discipleship, and conference programmes across Kenya.</p>
+        </div>
+        <div class="timeline-year">2025</div>
+        <div class="timeline-empty"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--  LEADERSHIP  -->
+<section class="section" style="background:var(--cream)">
+  <div class="container text-center">
+    <span class="label">Who Leads Us</span>
+    <h2>Our Leadership Team</h2>
+    <div class="divider"></div>
+    <div class="leadership-grid">
+      <div class="leader-card">
+        <div class="leader-avatar">D</div>
+        <h4>Ps. David Kimani</h4>
+        <span class="role">Senior Pastor</span>
+        <p>Over 15 years in pastoral ministry with a passion for discipleship and expository preaching rooted in Adventist theology.</p>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">R</div>
+        <h4>Ps. Ruth Akinyi</h4>
+        <span class="role">Associate Pastor</span>
+        <p>Leads our women's ministry, counselling, and midweek teaching programme.</p>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">S</div>
+        <h4>Samuel Njoroge</h4>
+        <span class="role">Youth Pastor</span>
+        <p>Building a generation of godly young Adventist believers in the heart of Nairobi.</p>
+      </div>
+      <div class="leader-card">
+        <div class="leader-avatar">M</div>
+        <h4>Mary Wanjiku</h4>
+        <span class="role">Outreach Director</span>
+        <p>Coordinates all community outreach, health missions, and social impact programmes across Nairobi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+</body>
+</html>

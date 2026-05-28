@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — Growing in Christ Ministry</title>
+  <meta name="description" content="Growing in Christ Ministry — A community devoted to spiritual growth, discipleship, and Christ-centred service in Kenya.">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /*  Hero  */
+    .hero {
+      position: relative;
+      min-height: 92vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 50%, var(--green) 100%);
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cdefs%3E%3CradialGradient id='a'%3E%3Cstop offset='0' stop-color='%23C8962A' stop-opacity='0.08'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='40' fill='url(%23a)'/%3E%3C/svg%3E") repeat;
+      opacity: 0.6;
+    }
+    .hero-cross {
+      position: absolute;
+      right: 8%;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18rem;
+      color: rgba(200,150,42,0.07);
+      font-family: serif;
+      line-height: 1;
+      user-select: none;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+    .hero-content .label {
+      animation: fadeUp 0.6s ease both;
+    }
+    .hero-content h1 {
+      color: var(--white);
+      margin-bottom: 20px;
+      font-style: italic;
+      animation: fadeUp 0.7s ease 0.1s both;
+    }
+    .hero-content h1 em {
+      color: var(--gold-light);
+      font-style: italic;
+    }
+    .hero-content p {
+      color: rgba(255,255,255,0.75);
+      font-size: 1.2rem;
+      max-width: 560px;
+      margin-bottom: 36px;
+      animation: fadeUp 0.7s ease 0.2s both;
+    }
+    .hero-btns {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeUp 0.7s ease 0.3s both;
+    }
+    .hero-scroll {
+      position: absolute;
+      bottom: 32px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /*  Welcome Section  */
+    .welcome {
+      background: var(--white);
+      padding: 80px 0;
+    }
+    .welcome-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+    }
+    .welcome-verse {
+      background: var(--gold-pale);
+      border-left: 4px solid var(--gold);
+      padding: 24px 28px;
+      border-radius: 0 var(--radius) var(--radius) 0;
+      margin-top: 24px;
+    }
+    .welcome-verse blockquote {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--green-dark);
+      line-height: 1.6;
+    }
+    .welcome-verse cite {
+      display: block;
+      margin-top: 10px;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--green);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .welcome-image {
+      position: relative;
+    }
+    .welcome-image img {
+      width: 100%;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+    }
+    .welcome-image-badge {
+      position: absolute;
+      bottom: -20px;
+      left: -20px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 20px 24px;
+      border-radius: 10px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+    .welcome-image-badge strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .welcome-image-badge span {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    /*  Ministries  */
+    .ministries-home { background: var(--cream); }
+    .ministries-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .ministry-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 36px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      transition: all var(--transition);
+      border: 1px solid transparent;
+    }
+    .ministry-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border);
+    }
+    .ministry-icon {
+      width: 64px; height: 64px;
+      background: var(--gold-pale);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.6rem;
+      margin: 0 auto 20px;
+      transition: background var(--transition);
+    }
+    .ministry-card:hover .ministry-icon { background: var(--gold); }
+    .ministry-card h3 { font-size: 1.15rem; margin-bottom: 12px; }
+    .ministry-card p  { font-size: 0.93rem; }
+
+    /*  Stats  */
+    .stats-section {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
+      padding: 64px 0;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px;
+      text-align: center;
+    }
+    .stats-grid .stat-num { font-size: 3rem; }
+
+    /*  Events Home  */
+    .events-home { background: var(--white); }
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .event-card {
+      background: var(--cream);
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: all var(--transition);
+    }
+    .event-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
+    .event-card-date {
+      background: var(--gold);
+      color: var(--white);
+      padding: 16px;
+      text-align: center;
+    }
+    .event-card-date strong {
+      display: block;
+      font-family: var(--font-display);
+      font-size: 2rem;
+      line-height: 1;
+    }
+    .event-card-date span {
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .event-card-body { padding: 22px; }
+    .event-card-body h3 { font-size: 1.05rem; margin-bottom: 8px; }
+    .event-card-body p  { font-size: 0.88rem; }
+    .event-meta {
+      display: flex;
+      gap: 16px;
+      margin-top: 14px;
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /*  Testimonials  */
+    .testimonials { background: var(--gold-pale); }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .testimonial-card {
+      background: var(--white);
+      border-radius: 12px;
+      padding: 32px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      position: absolute;
+      top: 16px; left: 20px;
+      font-family: var(--font-display);
+      font-size: 5rem;
+      color: var(--gold-pale);
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-size: 0.98rem;
+      color: var(--mid);
+      line-height: 1.75;
+      position: relative;
+      z-index: 1;
+      margin-bottom: 20px;
+    }
+    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--gold);
+      display: flex; align-items: center; justify-content: center;
+      color: white;
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .testimonial-name strong {
+      display: block;
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--green-deep);
+    }
+    .testimonial-name span {
+      font-size: 0.78rem;
+      color: var(--gray);
+    }
+
+    /*  CTA Banner  */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
+      padding: 72px 0;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '';
+      position: absolute;
+      font-size: 22rem;
+      color: rgba(200,150,42,0.04);
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+    .cta-banner h2 { color: var(--white); position: relative; }
+    .cta-banner p  { color: rgba(255,255,255,0.7); max-width: 520px; margin: 16px auto 32px; position: relative; }
+    .cta-banner .btn { position: relative; }
+
+    /*  Blog home  */
+    .blog-home { background: var(--cream); }
+    .blog-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+      margin-top: 48px;
+    }
+
+
+    /* Gallery Home */
+    .gallery-home-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 40px;
+    }
+    /* Departments Home */
+    .departments-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+    @media(max-width:900px){
+      .gallery-home-grid { grid-template-columns: repeat(2,1fr); }
+      .departments-grid  { grid-template-columns: repeat(2,1fr); }
+    }
+    @media(max-width:600px){
+      .gallery-home-grid { grid-template-columns: 1fr 1fr; }
+      .departments-grid  { grid-template-columns: 1fr; }
+    }
+
+    /*  Responsive  */
+    @media (max-width: 900px) {
+      .welcome-grid, .ministries-grid, .stats-grid,
+      .events-grid, .testimonials-grid, .blog-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .welcome-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .ministries-grid, .stats-grid,
+      .events-grid, .testimonials-grid, .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Layout injected by layout.js -->
+
+<!-- Admin Access Button (fixed bottom-left) -->
+<a href="admin.html" id="adminAccessBtn" title="Website Admin" style="
+  position:fixed;bottom:24px;left:24px;z-index:8000;
+  background:var(--green-deep);color:white;
+  width:48px;height:48px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 18px rgba(8,42,23,0.45);
+  font-size:1.1rem;transition:all 0.3s ease;
+  border:2px solid rgba(255,255,255,0.15);
+  text-decoration:none;
+" onmouseover="this.style.background='var(--green)';this.style.transform='scale(1.1)'"
+   onmouseout="this.style.background='var(--green-deep)';this.style.transform='scale(1)'">
+  ⚙
+</a>
+
+<!-- 
+     HERO
+ -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-cross"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="label">Welcome to Our Community</span>
+      <h1>Growing Deeper<br>in <em>Christ Together</em></h1>
+      <p>Discipleship, worship, and service rooted in the Gospel. Join a growing family of believers committed to knowing Christ and making Him known.</p>
+      <div class="hero-btns">
+        <a href="about.html" class="btn btn-green">Discover Our Story</a>
+        <a href="events.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:white">Upcoming Events</a>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <span style="font-size:1rem">↓</span>
+  </div>
+</section>
+
+<!-- 
+     WELCOME
+ -->
+<section class="welcome">
+  <div class="container">
+    <div class="welcome-grid">
+      <div>
+        <span class="label">Who We Are</span>
+        <h2>A Church Built on the Word of God</h2>
+        <div class="divider divider-left"></div>
+        <p>Growing in Christ Ministry is a faith community in Nairobi, Kenya, devoted to making disciples, building families, and transforming communities through the power of the Gospel of Jesus Christ.</p>
+        <p style="margin-top:16px">We gather to worship, grow in Scripture, serve the needy, and equip every believer to live out their calling — whether in the home, workplace, or mission field.</p>
+        <div class="welcome-verse">
+          <blockquote>"But grow in the grace and knowledge of our Lord and Savior Jesus Christ. To him be glory both now and forever!"</blockquote>
+          <cite>— 2 Peter 3:18 (NIV)</cite>
+        </div>
+        <a href="about.html" class="btn btn-green" style="margin-top:28px">Learn More About Us</a>
+      </div>
+      <div class="welcome-image">
+        <!-- Placeholder image replaced with a styled div -->
+        <div style="width:100%;height:420px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:4rem;box-shadow:var(--shadow-lg)"></div>
+        <div class="welcome-image-badge">
+          <strong>10+</strong>
+          <span>Years of<br>Ministry</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+     STATS
+ -->
+<section class="stats-section">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">2,400+</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Members Baptised</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">35+</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Community Outreaches</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">15,000+</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Lives Impacted</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">12</div>
+        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Active Ministries</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+     MINISTRIES
+ -->
+<section class="ministries-home section">
+  <div class="container text-center">
+    <span class="label">What We Do</span>
+    <h2>Our Ministries</h2>
+    <div class="divider"></div>
+    <p style="max-width:560px;margin:0 auto">Every ministry exists to equip believers and bless the community — from Sunday worship to weekday outreach.</p>
+    <div class="ministries-grid">
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Worship &amp; Prayer</h3>
+        <p>Spirit-filled worship experiences and intercessory prayer that usher in the presence of God and transform hearts.</p>
+        <a href="ministries.html#worship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Youth Ministry</h3>
+        <p>Empowering the next generation with biblical truth, mentorship, and a community where young people thrive.</p>
+        <a href="ministries.html#youth" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Community Outreach</h3>
+        <p>Taking the love of Christ beyond our walls through practical service, health missions, and evangelism.</p>
+        <a href="ministries.html#outreach" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Discipleship &amp; Training</h3>
+        <p>Systematic Bible study, small groups, and leadership development to help every believer grow in faith.</p>
+        <a href="ministries.html#discipleship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Children's Ministry</h3>
+        <p>Fun, age-appropriate teaching that plants eternal seeds in the hearts of our youngest members.</p>
+        <a href="ministries.html#children" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+      <div class="ministry-card">
+        <div class="ministry-icon"></div>
+        <h3>Mentorship &amp; Care</h3>
+        <p>Connecting believers with experienced mentors for personal, spiritual, and professional growth.</p>
+        <a href="ministries.html#mentorship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+     UPCOMING EVENTS
+ -->
+<section class="events-home section">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
+      <div>
+        <span class="label">What's Coming</span>
+        <h2>Upcoming Events</h2>
+        <div class="divider divider-left" style="margin-bottom:0"></div>
+      </div>
+      <a href="events.html" class="btn btn-outline">View All Events</a>
+    </div>
+    <div class="events-grid">
+      <div class="event-card">
+        <div class="event-card-date">
+          <strong>15</strong>
+          <span>June 2025</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Annual Revival Conference</h3>
+          <p>A three-day encounter with God featuring worship, teaching, and powerful testimonies from across Kenya.</p>
+          <div class="event-meta">
+            <span> 9:00 AM</span>
+            <span> Main Auditorium</span>
+          </div>
+          <a href="events.html" class="btn btn-green" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Register Now</a>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-date">
+          <strong>22</strong>
+          <span>June 2025</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Community Health Outreach</h3>
+          <p>Free medical checkups, prayer, and Gospel sharing in the Mathare Valley neighbourhood.</p>
+          <div class="event-meta">
+            <span> 8:00 AM</span>
+            <span> Mathare Valley</span>
+          </div>
+          <a href="events.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Learn More</a>
+        </div>
+      </div>
+      <div class="event-card">
+        <div class="event-card-date">
+          <strong>05</strong>
+          <span>July 2025</span>
+        </div>
+        <div class="event-card-body">
+          <h3>Youth Camp — Arise</h3>
+          <p>A weekend retreat for young people: worship, adventure, mentorship, and discipleship sessions.</p>
+          <div class="event-meta">
+            <span> Fri–Sun</span>
+            <span> Naivasha</span>
+          </div>
+          <a href="events.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Learn More</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+     TESTIMONIALS
+ -->
+<section class="testimonials section">
+  <div class="container text-center">
+    <span class="label">Stories of Grace</span>
+    <h2>Changed Lives</h2>
+    <div class="divider"></div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card">
+        <p class="testimonial-text">Joining the discipleship programme at Growing in Christ changed everything. I found a community that loved me, taught me the Word, and helped me discover my purpose in God.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">A</div>
+          <div class="testimonial-name">
+            <strong>Alice Wambui</strong>
+            <span>Member since 2021</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">The youth ministry gave me mentors who walked with me through the hardest seasons of my life. I grew spiritually in ways I never thought possible as a young person in Nairobi.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">J</div>
+          <div class="testimonial-name">
+            <strong>James Omondi</strong>
+            <span>Youth Member</span>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card">
+        <p class="testimonial-text">Attending the annual conference opened my eyes to what ministry really means — serving Christ in every sphere of life. The teachings transformed both my faith and my career.</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">G</div>
+          <div class="testimonial-name">
+            <strong>Grace Muthoni</strong>
+            <span>Conference Attendee</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 
+     BELIEFS PREVIEW
+ -->
+<section class="blog-home section">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:48px">
+      <div>
+        <span class="label">What We Believe</span>
+        <h2>Our Doctrinal Foundation</h2>
+        <div class="divider divider-left" style="margin-bottom:0"></div>
+      </div>
+      <a href="beliefs.html" class="btn btn-outline">All 28 Beliefs</a>
+    </div>
+    <div class="blog-grid">
+      <div class="card">
+        <div style="height:180px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div class="card-body">
+          <span class="label" style="font-size:0.68rem">Doctrine · God</span>
+          <h3>The Holy Trinity</h3>
+          <p style="font-size:0.9rem">One God in three persons — Father, Son, and Holy Spirit — each fully divine, united in purpose and love.</p>
+          <a href="beliefs.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:8px 18px">Read More →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div style="height:180px;background:linear-gradient(135deg,var(--green-deep),var(--green-mid));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div class="card-body">
+          <span class="label" style="font-size:0.68rem">Doctrine · Salvation</span>
+          <h3>Salvation in Christ</h3>
+          <p style="font-size:0.9rem">By grace through faith in Jesus Christ alone — His death, resurrection, and intercession secure our redemption.</p>
+          <a href="beliefs.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:8px 18px">Read More →</a>
+        </div>
+      </div>
+      <div class="card">
+        <div style="height:180px;background:linear-gradient(135deg,var(--green),rgba(200,150,42,0.4));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div class="card-body">
+          <span class="label" style="font-size:0.68rem">Doctrine · Prophecy</span>
+          <h3>The Gift of Prophecy</h3>
+          <p style="font-size:0.9rem">The Holy Spirit has manifested this gift in the ministry of Ellen G. White, whose writings are a continuing source of truth.</p>
+          <a href="ellen-white.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:8px 18px">Learn More →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- GALLERY -->
+<section id="galleryHomeSection" class="section" style="background:var(--white);display:none">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
+      <div>
+        <span class="label">Our Life Together</span>
+        <h2>Photo Gallery</h2>
+        <div class="divider divider-left" style="margin-bottom:0"></div>
+      </div>
+    </div>
+    <div class="gallery-home-grid">
+      <!-- Rendered by site-sync.js -->
+    </div>
+  </div>
+</section>
+
+
+<!-- DEPARTMENTS -->
+<section id="departmentsHomeSection" class="section" style="background:var(--cream)">
+  <div class="container text-center">
+    <span class="label">How We're Organised</span>
+    <h2>Our Departments</h2>
+    <div class="divider"></div>
+    <p style="max-width:560px;margin:0 auto">Each department serves a vital role in keeping our ministry running and our community thriving.</p>
+    <div class="departments-grid">
+      <!-- Rendered by site-sync.js from GicData -->
+    </div>
+  </div>
+</section>
+
+<!-- 
+     CTA BANNER
+ -->
+<section class="cta-banner">
+  <div class="container">
+    <span class="label">Join the Family</span>
+    <h2>Be Part of Something Greater</h2>
+    <p>Whether you're new to faith or looking for a spiritual home — you are welcome here. Come as you are.</p>
+    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <a href="membership.html" class="btn btn-green">Become a Member</a>
+      <a href="give.html" class="btn btn-outline-white">Support Our Ministry</a>
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+</body>
+</html>

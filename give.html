@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Give Online — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .give-layout {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 64px;
+      align-items: start;
+    }
+    .give-form-card {
+      background: var(--white);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+    }
+    .give-form-card h2 { margin-bottom: 8px; }
+    .give-form-card > p { margin-bottom: 28px; }
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .amount-btn {
+      padding: 14px 8px;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      background: var(--white);
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      color: var(--green-dark);
+      cursor: pointer;
+      transition: all var(--transition);
+      text-align: center;
+    }
+    .amount-btn:hover, .amount-btn.selected {
+      border-color: var(--gold);
+      background: var(--gold-pale);
+      color: var(--gold);
+    }
+    .give-type-tabs {
+      display: flex;
+      gap: 0;
+      border: 1.5px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      margin-bottom: 28px;
+    }
+    .give-tab {
+      flex: 1;
+      padding: 11px;
+      background: var(--white);
+      border: none;
+      font-family: var(--font-sans);
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: var(--gray);
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .give-tab.active {
+      background: var(--gold);
+      color: var(--white);
+    }
+
+    .give-sidebar h3 { font-size: 1.2rem; margin-bottom: 20px; }
+    .give-impact-item {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+    .give-impact-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+    .give-impact-text h4 { font-size: 0.95rem; margin-bottom: 4px; }
+    .give-impact-text p  { font-size: 0.85rem; }
+
+    .mpesa-box {
+      background: linear-gradient(135deg, #1A7A3A, #0D5C28);
+      border-radius: 12px;
+      padding: 28px;
+      margin-top: 32px;
+      color: white;
+    }
+    .mpesa-box h3 { color: white; font-size: 1.1rem; margin-bottom: 8px; }
+    .mpesa-box p  { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+    .mpesa-paybill {
+      background: rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 14px 18px;
+      margin-top: 14px;
+      font-family: var(--font-sans);
+    }
+    .mpesa-paybill strong {
+      display: block;
+      font-size: 0.7rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 4px;
+    }
+    .mpesa-paybill span {
+      font-size: 1.4rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+    }
+
+    @media (max-width: 900px) { .give-layout { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Support the Ministry</span>
+    <h1>Give Online</h1>
+    <p>Your generosity enables us to make disciples, serve communities, and advance the Gospel across Kenya.</p>
+    <div class="breadcrumb"><a href="index.html">Home</a> › <span>Give</span></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="give-layout">
+
+      <!-- Form -->
+      <div class="give-form-card">
+        <span class="label">Online Giving</span>
+        <h2>Make a Contribution</h2>
+        <p>All gifts are used faithfully to support ministry, outreach, and community impact.</p>
+
+        <div class="give-type-tabs">
+          <button class="give-tab active">One-Time Gift</button>
+          <button class="give-tab">Monthly Giving</button>
+          <button class="give-tab">Tithe &amp; Offering</button>
+        </div>
+
+        <label style="font-family:var(--font-sans);font-size:0.82rem;font-weight:600;color:var(--green-dark);display:block;margin-bottom:10px">Select Amount (KSh)</label>
+        <div class="amount-grid">
+          <button class="amount-btn" onclick="selectAmount(this)">500</button>
+          <button class="amount-btn selected" onclick="selectAmount(this)">1,000</button>
+          <button class="amount-btn" onclick="selectAmount(this)">2,500</button>
+          <button class="amount-btn" onclick="selectAmount(this)">5,000</button>
+          <button class="amount-btn" onclick="selectAmount(this)">10,000</button>
+          <button class="amount-btn" onclick="selectAmount(this)">Other</button>
+        </div>
+
+        <div class="form-group">
+          <label>Custom Amount (KSh)</label>
+          <input type="number" class="form-control" placeholder="Enter amount">
+        </div>
+
+        <div class="form-group">
+          <label>Giving Towards</label>
+          <select class="form-control">
+            <option>General Ministry Fund</option>
+            <option>Community Outreach</option>
+            <option>Youth Ministry</option>
+            <option>Building Fund</option>
+            <option>Missions</option>
+            <option>Children's Ministry</option>
+          </select>
+        </div>
+
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+          <div class="form-group">
+            <label>First Name</label>
+            <input type="text" class="form-control" placeholder="John">
+          </div>
+          <div class="form-group">
+            <label>Last Name</label>
+            <input type="text" class="form-control" placeholder="Doe">
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label>Phone Number</label>
+          <input type="tel" class="form-control" placeholder="+254 7XX XXX XXX">
+        </div>
+
+        <div class="form-group">
+          <label>Email Address</label>
+          <input type="email" class="form-control" placeholder="your@email.com">
+        </div>
+
+        <button class="btn btn-green" onclick="submitGiveWA()" style="width:100%;justify-content:center;font-size:0.95rem;padding:15px" id="giveNowBtn">
+          Give Now — KSh 1,000 
+        </button>
+        <p style="font-size:0.78rem;text-align:center;margin-top:12px;color:var(--gray)"> Secure payment · Your details are protected</p>
+      </div>
+
+      <!-- Sidebar -->
+      <div class="give-sidebar">
+        <span class="label">Your Impact</span>
+        <h3>Where Your Gift Goes</h3>
+        <div class="give-impact-item">
+          <div class="give-impact-icon"></div>
+          <div class="give-impact-text">
+            <h4>Community Outreach</h4>
+            <p>Funds medical camps, food distributions, and evangelism missions reaching thousands annually.</p>
+          </div>
+        </div>
+        <div class="give-impact-item">
+          <div class="give-impact-icon"></div>
+          <div class="give-impact-text">
+            <h4>Discipleship &amp; Training</h4>
+            <p>Supports Bible training, small group materials, and leadership development programmes.</p>
+          </div>
+        </div>
+        <div class="give-impact-item">
+          <div class="give-impact-icon"></div>
+          <div class="give-impact-text">
+            <h4>Youth &amp; Children</h4>
+            <p>Enables youth camps, children's ministry, and the next-generation discipleship pipeline.</p>
+          </div>
+        </div>
+        <div class="give-impact-item">
+          <div class="give-impact-icon"></div>
+          <div class="give-impact-text">
+            <h4>Building &amp; Operations</h4>
+            <p>Maintains our facility and funds the systems that keep ministry running week to week.</p>
+          </div>
+        </div>
+
+        <!-- M-Pesa -->
+        <div class="mpesa-box">
+          <h3> Give via M-Pesa</h3>
+          <p>Prefer to give directly via M-Pesa? Use our Paybill number:</p>
+          <div class="mpesa-paybill">
+            <strong>Paybill Number</strong>
+            <span>400200</span>
+          </div>
+          <div class="mpesa-paybill" style="margin-top:8px">
+            <strong>Account Number</strong>
+            <span>GROWING25</span>
+          </div>
+          <p style="margin-top:12px;font-size:0.8rem">Enter your name as reference. SMS confirmation will be sent.</p>
+        </div>
+
+        <div style="background:var(--gold-pale);border-radius:12px;padding:24px;margin-top:24px;border:1px solid var(--border)">
+          <h4 style="font-size:0.95rem;margin-bottom:8px">Need Help?</h4>
+          <p style="font-size:0.85rem">Contact our finance team at <a href="mailto:giving@growinginchrist.org">giving@growinginchrist.org</a> or call <strong>0705 214 338</strong></p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<script src="site-data.js"></script>
+<script src="layout.js"></script>
+<script src="site-sync.js"></script>
+<script>
+  function selectAmount(btn) {
+    document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
+    btn.classList.add('selected');
+  }
+  document.querySelectorAll('.give-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.give-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+
+<script>
+function submitGiveWA() {
+  var amount = document.getElementById('giveNowBtn').textContent.replace('Give Now — KSh ','').trim();
+  var custom = document.querySelector('.give-form-card input[type="number"]')?.value;
+  if (custom) amount = custom;
+  var towards = document.querySelector('.give-form-card select')?.value || 'General Ministry Fund';
+  var fn  = document.querySelectorAll('.give-form-card input[type="text"]')[0]?.value || '';
+  var ln  = document.querySelectorAll('.give-form-card input[type="text"]')[1]?.value || '';
+  var phone = document.querySelector('.give-form-card input[type="tel"]')?.value || '';
+  var email = document.querySelector('.give-form-card input[type="email"]')?.value || '';
+  var tabs = document.querySelectorAll('.give-tab');
+  var giveType = 'One-Time Gift';
+  tabs.forEach(t => { if(t.classList.contains('active')) giveType = t.textContent.trim(); });
+  var text = 'Hello Growing in Christ Ministry! 🙏\n\n*ONLINE GIVING*\n\n*Amount:* KSh ' + (amount||'—') +
+    '\n*Type:* ' + giveType + '\n*Towards:* ' + towards +
+    '\n*Name:* ' + (fn + ' ' + ln).trim() +
+    '\n*Phone:* ' + (phone||'—') + '\n*Email:* ' + (email||'—') +
+    '\n\nThank you for your generosity! God bless you. 🙌';
+  window.open('https://wa.me/254705214338?text=' + encodeURIComponent(text), '_blank');
+}
+// Update button text on amount select
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.amount-btn').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      if (this.textContent !== 'Other') {
+        document.getElementById('giveNowBtn').textContent = 'Give Now — KSh ' + this.textContent;
+      }
+    });
+  });
+  var customInput = document.querySelector('.give-form-card input[type="number"]');
+  if (customInput) {
+    customInput.addEventListener('input', function() {
+      if (this.value) document.getElementById('giveNowBtn').textContent = 'Give Now — KSh ' + this.value;
+    });
+  }
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ellen White Books — Growing in Christ Ministry</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /*  Search bar  */
+    .search-bar {
+      position: relative;
+      max-width: 520px;
+      margin: 0 auto 40px;
+    }
+    .search-bar input {
+      width: 100%;
+      padding: 14px 50px 14px 20px;
+      border: 2px solid var(--border);
+      border-radius: 50px;
+      font-family: var(--font-sans);
+      font-size: 0.95rem;
+      color: var(--dark);
+      background: var(--white);
+      outline: none;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    .search-bar input:focus {
+      border-color: var(--green);
+      box-shadow: 0 0 0 3px rgba(27,107,58,0.12);
+    }
+    .search-bar .search-icon {
+      position: absolute;
+      right: 18px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--gray);
+      font-size: 1rem;
+    }
+    .result-count {
+      text-align: center;
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: var(--gray);
+      margin-bottom: 28px;
+    }
+
+    /*  Filter chips  */
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+      margin-bottom: 40px;
+    }
+    .filter-chip {
+      padding: 7px 18px;
+      border: 1.5px solid var(--border);
+      border-radius: 20px;
+      background: var(--white);
+      color: var(--mid);
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+    }
+    .filter-chip.active, .filter-chip:hover {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    /*  Hero book banner  */
+    .egw-hero {
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 60%, var(--green) 100%);
+      border-radius: 20px;
+      padding: 48px 56px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 40px;
+      align-items: center;
+      margin-bottom: 56px;
+      position: relative;
+      overflow: hidden;
+    }
+    .egw-hero::before {
+      content: '';
+      position: absolute;
+      right: 48px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 9rem;
+      opacity: 0.12;
+    }
+    .egw-hero h2 { color: white; margin-bottom: 10px; }
+    .egw-hero p  { color: rgba(255,255,255,0.78); margin: 0; font-size: 0.98rem; }
+    .egw-hero-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+    /*  Books grid  */
+    .books-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+    .book-card {
+      background: var(--white);
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      transition: all var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .book-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-lg);
+    }
+    .book-cover {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      font-size: 3.5rem;
+    }
+    .book-cover-inner {
+      width: 110px;
+      height: 150px;
+      border-radius: 4px 10px 10px 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.4rem;
+      box-shadow: 4px 4px 16px rgba(0,0,0,0.3), -2px 0 6px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .book-cover-inner::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 14px;
+      background: rgba(0,0,0,0.2);
+      border-radius: 4px 0 0 4px;
+    }
+    .book-series-badge {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(0,0,0,0.5);
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    .book-featured-badge {
+      position: absolute;
+      top: 12px;
+      left: 12px;
+      background: var(--gold);
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 0.62rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+    .book-body {
+      padding: 20px 22px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+    .book-cat {
+      font-family: var(--font-sans);
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green);
+      margin-bottom: 6px;
+    }
+    .book-body h3 {
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+      color: var(--green-dark);
+      line-height: 1.3;
+    }
+    .book-body p {
+      font-size: 0.875rem;
+      flex: 1;
+      line-height: 1.65;
+      color: var(--mid);
+    }
+    .book-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 14px;
+      font-family: var(--font-sans);
+      font-size: 0.75rem;
+      color: var(--gray);
+    }
+    .book-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+    .book-btn {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: var(--radius);
+      font-family: var(--font-sans);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      transition: all var(--transition);
+    }
+    .book-btn-green {
+      background: var(--green);
+      color: white;
+    }
+    .book-btn-green:hover {
+      background: var(--green-mid);
+      color: white;
+      transform: translateY(-1px);
+    }
+    .book-btn-outline {
+      background: transparent;
+      border: 1.5px solid var(--border);
+      color: var(--mid);
+    }
+    .book-btn-outline:hover {
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /*  Conflict of Ages series banner  */
+    .series-section {
+      background: linear-gradient(135deg, var(--green-dark), var(--green-deep));
+      border-radius: 16px;
+      padding: 40px 48px;
+      margin-bottom: 56px;
+    }
+    .series-section h2 { color: white; margin-bottom: 8px; }
+    .series-section > p  { color: rgba(255,255,255,0.75); margin-bottom: 32px; font-size: 0.98rem; }
+    .series-books {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+    .series-item {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 10px;
+      padding: 20px 14px;
+      text-align: center;
+      text-decoration: none;
+      transition: all var(--transition);
+      cursor: pointer;
+    }
+    .series-item:hover {
+      background: rgba(255,255,255,0.15);
+      transform: translateY(-3px);
+    }
+    .series-num {
+      font-family: var(--font-sans);
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--green-light);
+      margin-bottom: 8px;
+    }
+    .series-item h4 {
+      font-family: var(--font-display);
+      font-size: 0.88rem;
+      color: white;
+      margin-bottom: 10px;
+      line-height: 1.3;
+    }
+    .series-item .dl-link {
+      font-family: var(--font-sans);
+      font-size: 0.72rem;
+      color: rgba(255,255,255,0.6);
+      text-decoration: none;
+    }
+
+    /*  App banner  */
+    .app-banner {
+      background: var(--green-pale);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 36px 48px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 32px;
+      align-items: center;
+      margin-top: 56px;
+    }
+    .app-banner h3 { margin-bottom: 8px; color: var(--green-dark); }
+    .app-banner p  { font-size: 0.93rem; margin: 0; }
+    .app-btns { display: flex; gap: 12px; flex-wrap: wrap; flex-shrink: 0; }
+
+    /*  No results  */
+    .no-results {
+      display: none;
+      text-align: center;
+      padding: 60px 20px;
+      color: var(--gray);
+    }
+    .no-results .icon { font-size: 3rem; margin-bottom: 16px; }
+
+    @media (max-width: 1000px) {
+      .books-grid { grid-template-columns: repeat(2, 1fr); }
+      .series-books { grid-template-columns: repeat(3, 1fr); }
+      .egw-hero { grid-template-columns: 1fr; }
+      .egw-hero::before { display: none; }
+    }
+    @media (max-width: 640px) {
+      .books-grid { grid-template-columns: 1fr; }
+      .series-books { grid-template-columns: repeat(2, 1fr); }
+      .app-banner { grid-template-columns: 1fr; }
+      .series-section, .egw-hero { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE HERO -->
+<section class="page-hero">
+  <div class="container">
+    <span class="label">Spirit of Prophecy</span>
+    <h1>Ellen G. White Books</h1>
+    <p>Browse, read, and download the inspired writings of Ellen G. White — all free via the official EGW Writings library.</p>
+    <div class="breadcrumb">
+      <a href="index.html">Home</a> › <span>Ellen White Books</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+
+    <!-- About EGW Banner -->
+    <div class="egw-hero">
+      <div>
+        <span class="label" style="color:var(--green-light)">About Ellen G. White</span>
+        <h2>The Most Translated American Author</h2>
+        <p>Ellen G. White (1827–1915) wrote more than 100,000 pages on spiritual and practical topics over a 70-year ministry. Guided by the Holy Spirit, her works have been published in over 160 languages and remain an authoritative source of truth for the Seventh-day Adventist Church.</p>
+      </div>
+      <div class="egw-hero-btns">
+        <a href="https://egwwritings.org" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;background:white;color:var(--green-dark);border-radius:8px;font-family:var(--font-sans);font-size:0.85rem;font-weight:600;transition:all 0.3s;text-decoration:none"
+           onmouseover="this.style.background='#EAF6EF'" onmouseout="this.style.background='white'">
+           Open EGWWritings.org
+        </a>
+        <a href="https://whiteestate.org/resources/apps/" target="_blank" rel="noopener"
+           style="display:inline-flex;align-items:center;gap:8px;padding:13px 22px;background:rgba(255,255,255,0.1);border:2px solid rgba(255,255,255,0.4);color:white;border-radius:8px;font-family:var(--font-sans);font-size:0.85rem;font-weight:600;transition:all 0.3s;text-decoration:none"
+           onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">
+           Download the App
+        </a>
+      </div>
+    </div>
+
+    <!-- Conflict of Ages Series -->
+    <div class="series-section">
+      <span class="label" style="color:var(--green-light)">Featured Collection</span>
+      <h2>The Conflict of the Ages Series</h2>
+      <p>The crown jewel of Ellen White's writings — five volumes tracing the great controversy between Christ and Satan from Eden to the New Earth.</p>
+      <div class="series-books">
+        <a href="https://egwwritings.org/book/b84" target="_blank" rel="noopener" class="series-item">
+          <div class="series-num">Vol. 1</div>
+          <h4>Patriarchs and Prophets</h4>
+          <div class="dl-link"> Free PDF &amp; eBook</div>
+        </a>
+        <a href="https://egwwritings.org/book/b4" target="_blank" rel="noopener" class="series-item">
+          <div class="series-num">Vol. 2</div>
+          <h4>Prophets and Kings</h4>
+          <div class="dl-link"> Free PDF &amp; eBook</div>
+        </a>
+        <a href="https://egwwritings.org/book/b130" target="_blank" rel="noopener" class="series-item">
+          <div class="series-num">Vol. 3</div>
+          <h4>The Desire of Ages</h4>
+          <div class="dl-link"> Free PDF &amp; eBook</div>
+        </a>
+        <a href="https://egwwritings.org/book/b127" target="_blank" rel="noopener" class="series-item">
+          <div class="series-num">Vol. 4</div>
+          <h4>The Acts of the Apostles</h4>
+          <div class="dl-link"> Free PDF &amp; eBook</div>
+        </a>
+        <a href="https://egwwritings.org/book/b132" target="_blank" rel="noopener" class="series-item">
+          <div class="series-num">Vol. 5</div>
+          <h4>The Great Controversy</h4>
+          <div class="dl-link"> Free PDF &amp; eBook</div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Search & Filter -->
+    <div style="text-align:center;margin-bottom:16px">
+      <span class="label">Complete Library</span>
+      <h2>All Books</h2>
+      <div class="divider"></div>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" id="bookSearch" placeholder="Search by title, topic, or keyword…" oninput="filterBooks()">
+      <span class="search-icon"></span>
+    </div>
+
+    <div class="filter-bar">
+      <button class="filter-chip active" data-filter="all" onclick="setFilter(this,'all')">All Books</button>
+      <button class="filter-chip" data-filter="devotional" onclick="setFilter(this,'devotional')">Devotional</button>
+      <button class="filter-chip" data-filter="prophecy" onclick="setFilter(this,'prophecy')">Prophecy</button>
+      <button class="filter-chip" data-filter="health" onclick="setFilter(this,'health')">Health &amp; Lifestyle</button>
+      <button class="filter-chip" data-filter="education" onclick="setFilter(this,'education')">Education</button>
+      <button class="filter-chip" data-filter="ministry" onclick="setFilter(this,'ministry')">Ministry &amp; Church</button>
+      <button class="filter-chip" data-filter="family" onclick="setFilter(this,'family')">Family &amp; Home</button>
+    </div>
+
+    <div class="result-count" id="resultCount">Showing all 24 books</div>
+
+    <!-- BOOKS GRID -->
+    <div class="books-grid" id="booksGrid">
+
+      <!-- Steps to Christ -->
+      <div class="book-card" data-cat="devotional" data-title="Steps to Christ faith salvation gospel">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0F4425,#1B6B3A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#2E8B57,#1B6B3A)"></div>
+          <div class="book-featured-badge"> Most Popular</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Devotional · Salvation</div>
+          <h3>Steps to Christ</h3>
+          <p>The most widely translated work by Ellen White. A simple, warm guide to understanding salvation and building a personal relationship with Jesus Christ.</p>
+          <div class="book-meta">
+            <span> 160 pages</span>
+            <span>·</span>
+            <span>160+ languages</span>
+          </div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b108" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_SC.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Desire of Ages -->
+      <div class="book-card" data-cat="prophecy" data-title="Desire of Ages Jesus Christ life ministry">
+        <div class="book-cover" style="background:linear-gradient(135deg,#082A17,#2E8B57)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3DAD6E,#1B6B3A)"></div>
+          <div class="book-series-badge">Conflict Series Vol.3</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Prophecy · Biography of Christ</div>
+          <h3>The Desire of Ages</h3>
+          <p>A masterful portrayal of the life, ministry, death, and resurrection of Jesus Christ, drawing from all four Gospels. A must-read for every Christian.</p>
+          <div class="book-meta"><span> 835 pages</span><span>·</span><span>Conflict Series Vol. 3</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b130" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_DA.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Great Controversy -->
+      <div class="book-card" data-cat="prophecy" data-title="Great Controversy end times prophecy last days">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0F4425,#C8962A30)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#4A8C2A,#2A5010)"></div>
+          <div class="book-series-badge">Conflict Series Vol.5</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Prophecy · End Times</div>
+          <h3>The Great Controversy</h3>
+          <p>Traces the conflict between Christ and Satan from the destruction of Jerusalem to the end of time. A prophetic masterwork on last-day events and the final triumph of God.</p>
+          <div class="book-meta"><span> 678 pages</span><span>·</span><span>Conflict Series Vol. 5</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b132" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_GC.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Patriarchs & Prophets -->
+      <div class="book-card" data-cat="prophecy" data-title="Patriarchs Prophets Old Testament creation flood Moses">
+        <div class="book-cover" style="background:linear-gradient(135deg,#3A2800,#8B6914)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#C8962A,#8B6914)"></div>
+          <div class="book-series-badge">Conflict Series Vol.1</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Prophecy · Old Testament</div>
+          <h3>Patriarchs and Prophets</h3>
+          <p>From Creation to the reign of King David — a sweeping narrative of Old Testament history revealing God's plan of redemption through the patriarchs, Moses, and the prophets.</p>
+          <div class="book-meta"><span> 793 pages</span><span>·</span><span>Conflict Series Vol. 1</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b84" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_PP.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prophets & Kings -->
+      <div class="book-card" data-cat="prophecy" data-title="Prophets Kings Israel Old Testament kingdom Elijah">
+        <div class="book-cover" style="background:linear-gradient(135deg,#1A0A00,#6B4C1E)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#9B7030,#5A3A10)"></div>
+          <div class="book-series-badge">Conflict Series Vol.2</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Prophecy · Old Testament</div>
+          <h3>Prophets and Kings</h3>
+          <p>Covers the history of the Hebrew nation from Solomon's reign through the captivity and restoration — including the ministries of Elijah, Isaiah, Jeremiah, and Daniel.</p>
+          <div class="book-meta"><span>740 pages</span><span>·</span><span>Conflict Series Vol. 2</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b4" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_PK.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Acts of the Apostles -->
+      <div class="book-card" data-cat="prophecy" data-title="Acts Apostles Paul early church New Testament Pentecost">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A1A2A,#1B4A6B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3D7AAD,#1B4A6B)"></div>
+          <div class="book-series-badge">Conflict Series Vol.4</div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Prophecy · Early Church</div>
+          <h3>The Acts of the Apostles</h3>
+          <p>A thrilling account of the birth of the early church — from Pentecost through Paul's missionary journeys — revealing God's power at work through yielded lives.</p>
+          <div class="book-meta"><span> 602 pages</span><span>·</span><span>Conflict Series Vol. 4</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b127" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_AA.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Ministry of Healing -->
+      <div class="book-card" data-cat="health" data-title="Ministry Healing health medicine wholeness body">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A2A1A,#1B6B3A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#2E8B57,#0A4020)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Health &amp; Healing</div>
+          <h3>The Ministry of Healing</h3>
+          <p>Christ's method of healing — touching the body, mind, and spirit. A comprehensive guide to wholistic health, compassionate service, and medical ministry in the name of Jesus.</p>
+          <div class="book-meta"><span> 550 pages</span><span>·</span><span>Health &amp; Wholeness</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b135" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_MH.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Education -->
+      <div class="book-card" data-cat="education" data-title="Education learning school children character formation">
+        <div class="book-cover" style="background:linear-gradient(135deg,#1A1A0A,#4A6B1B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#6BAD3D,#3A5010)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Education &amp; Character</div>
+          <h3>Education</h3>
+          <p>True education is the harmonious development of the physical, mental, and spiritual powers. Ellen White's foundational vision for Christian education and character formation.</p>
+          <div class="book-meta"><span> 311 pages</span><span>·</span><span>Education &amp; Family</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b29" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_Ed.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Christ's Object Lessons -->
+      <div class="book-card" data-cat="devotional" data-title="Parables Jesus object lessons stories teaching">
+        <div class="book-cover" style="background:linear-gradient(135deg,#1A2A0A,#3A6B10)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#7AAD3D,#3A6B10)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Devotional · Teaching</div>
+          <h3>Christ's Object Lessons</h3>
+          <p>An illuminating exposition of the parables of Jesus — unlocking the spiritual lessons hidden in stories of seeds, soil, lost sheep, talents, and wedding feasts.</p>
+          <div class="book-meta"><span> 436 pages</span><span>·</span><span>Parables of Jesus</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b14" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_COL.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Thoughts from the Mount of Blessing -->
+      <div class="book-card" data-cat="devotional" data-title="Sermon Mount Beatitudes Thoughts blessing Matthew 5">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A2A2A,#1B6B6B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3DAD9B,#1B6B6B)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Devotional · Sermon on the Mount</div>
+          <h3>Thoughts from the Mount of Blessing</h3>
+          <p>A rich, devotional commentary on the Sermon on the Mount — the Beatitudes, the Lord's Prayer, and the kingdom principles Jesus taught on the mountainside.</p>
+          <div class="book-meta"><span> 208 pages</span><span>·</span><span>Gospel &amp; Discipleship</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b150" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_MB.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gospel Workers -->
+      <div class="book-card" data-cat="ministry" data-title="Gospel Workers ministry evangelism pastors preaching">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A1A2A,#2B5A3A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3D8A5A,#1B4A2A)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Ministry &amp; Evangelism</div>
+          <h3>Gospel Workers</h3>
+          <p>Invaluable guidance for ministers, teachers, and church leaders — covering personal preparation, training, methodology, health ministry, and the publishing work.</p>
+          <div class="book-meta"><span> 526 pages</span><span>·</span><span>Ministry &amp; Leadership</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b133" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_GW09.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Adventist Home -->
+      <div class="book-card" data-cat="family" data-title="Adventist Home family marriage parenting husband wife">
+        <div class="book-cover" style="background:linear-gradient(135deg,#2A0A1A,#6B1B3A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#AD3D6B,#6B1B3A)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Family &amp; Home</div>
+          <h3>The Adventist Home</h3>
+          <p>Biblical counsel on marriage, parenting, and the home as a school of Christ. Practical guidance for building a happy, God-centred family life that reflects heaven.</p>
+          <div class="book-meta"><span> 560 pages</span><span>·</span><span>Family &amp; Relationships</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b128" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_AH.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Child Guidance -->
+      <div class="book-card" data-cat="family" data-title="Child Guidance children parenting raising discipline">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A1A2A,#3A5A8A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#5A8AAD,#3A5A8A)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Family &amp; Parenting</div>
+          <h3>Child Guidance</h3>
+          <p>Practical, Spirit-filled counsel on raising children in the nurture and admonition of the Lord — covering discipline, education, character building, and spiritual formation.</p>
+          <div class="book-meta"><span> 620 pages</span><span>·</span><span>Parenting &amp; Children</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b137" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_CG.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testimonies for the Church -->
+      <div class="book-card" data-cat="ministry" data-title="Testimonies Church counsel guidance leadership spiritual">
+        <div class="book-cover" style="background:linear-gradient(135deg,#1A0A2A,#4A1B6B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#7A3DAD,#4A1B6B)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Ministry &amp; Church</div>
+          <h3>Testimonies for the Church</h3>
+          <p>Nine volumes of inspired counsel addressed to the Adventist Church — covering individual spirituality, church governance, health, education, and mission. Available in full online.</p>
+          <div class="book-meta"><span> 9 Volumes</span><span>·</span><span>Church Counsel</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b116" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://egwwritings.org" target="_blank" rel="noopener" class="book-btn book-btn-outline"> All Volumes</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Counsels on Diet and Foods -->
+      <div class="book-card" data-cat="health" data-title="Diet Foods health nutrition eating vegetarian">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A2A0A,#1B5A1B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#4BAD3D,#1B5A1B)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Health &amp; Nutrition</div>
+          <h3>Counsels on Diet and Foods</h3>
+          <p>Comprehensive biblical and practical counsel on wholesome eating, plant-based diet, temperance, and lifestyle choices that honour the body as the temple of the Holy Spirit.</p>
+          <div class="book-meta"><span> 512 pages</span><span>·</span><span>Health &amp; Lifestyle</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b138" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_CD.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- My Life Today -->
+      <div class="book-card" data-cat="devotional" data-title="My Life Today devotional daily prayer quiet time">
+        <div class="book-cover" style="background:linear-gradient(135deg,#2A1A0A,#6B4A1B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#AD7A3D,#6B4A1B)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Daily Devotional</div>
+          <h3>My Life Today</h3>
+          <p>A classic daily devotional compiled from Ellen White's writings — offering short, powerful readings for each day of the year to nourish the soul and focus the mind on Christ.</p>
+          <div class="book-meta"><span> 370 pages</span><span>·</span><span>365 Daily Readings</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b156" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_MLT.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Christian Service -->
+      <div class="book-card" data-cat="ministry" data-title="Christian Service outreach evangelism witnessing lay ministry">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A2A1A,#2B6B3A)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3DAD5A,#2B6B3A)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Ministry &amp; Outreach</div>
+          <h3>Christian Service</h3>
+          <p>A call and guide to lay ministry — practical counsel on outreach, personal witnessing, community service, and the responsibility of every believer to share the Gospel.</p>
+          <div class="book-meta"><span> 280 pages</span><span>·</span><span>Lay Ministry</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b136" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_CS.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Prayer -->
+      <div class="book-card" data-cat="devotional" data-title="Prayer intercession communion God daily quiet">
+        <div class="book-cover" style="background:linear-gradient(135deg,#0A0A2A,#1B1B6B)">
+          <div class="book-cover-inner" style="background:linear-gradient(160deg,#3D3DAD,#1B1B6B)"></div>
+        </div>
+        <div class="book-body">
+          <div class="book-cat">Devotional · Prayer</div>
+          <h3>Prayer</h3>
+          <p>A devotional compilation of Ellen White's most powerful insights on prayer — covering personal prayer, intercessory prayer, family worship, and communing with God daily.</p>
+          <div class="book-meta"><span> 300 pages</span><span>·</span><span>Prayer &amp; Devotion</span></div>
+          <div class="book-actions">
+            <a href="https://egwwritings.org/book/b812" target="_blank" rel="noopener" class="book-btn book-btn-green"> Read Online</a>
+            <a href="https://media2.egwwritings.org/pdf/en_Pr.pdf" target="_blank" rel="noopener" class="book-btn book-btn-outline"> PDF</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- No results message -->
+    <div class="no-results" id="noResults">
+      <div class="icon"></div>
+      <h3>No books found</h3>
+      <p>Try a different search term or browse by category.</p>
+    </div>
+
+    <!-- EGW App Banner -->
+    <div class="app-banner">
+      <div>
+        <h3> Get the EGW Writings App — Free</h3>
+        <p>Download all of Ellen White's writings to your phone or tablet — available for Android, iPhone, Windows, and Mac. Read offline, search, highlight, take notes, and listen to audio versions in 155+ languages.</p>
+      </div>
+      <div class="app-btns">
+        <a href="https://play.google.com/store/apps/details?id=com.whiteestate.egwwritings" target="_blank" rel="noopener" class="btn btn-green">
+           Android App
+        </a>
+        <a href="https://apps.apple.com/app/egw-writings-2/id372551387" target="_blank" rel="noopener" class="btn btn-outline">
+           iPhone / iPad
+        </a>
+        <a href="https://egwwritings.org" target="_blank" rel="noopener" class="btn btn-outline">
+           Read Online
+        </a>
+      </div>
+    </div>
+
+    <!-- Link to Beliefs page -->
+    <div style="background:var(--green-pale);border-radius:12px;padding:32px 36px;text-align:center;margin-top:40px;border:1px solid var(--border)">
+      <span class="label">Related Resource</span>
+      <h3 style="margin-bottom:12px">Explore the 28 Fundamental Beliefs</h3>
+      <p style="max-width:500px;margin:0 auto 24px">Ground your reading in the official doctrinal framework of the Seventh-day Adventist Church.</p>
+      <a href="beliefs.html" class="btn btn-green">View SDA Beliefs →</a>
+    </div>
+
+  </div>
+</section>
+
+<script src="layout.js"></script>
+<script>
+  let activeFilter = 'all';
+
+  function setFilter(btn, filter) {
+    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+    btn.classList.add('active');
+    activeFilter = filter;
+    filterBooks();
+  }
+
+  function filterBooks() {
+    const query = document.getElementById('bookSearch').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.book-card');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const catMatch = activeFilter === 'all' || card.dataset.cat === activeFilter;
+      const titleData = (card.dataset.title || '').toLowerCase();
+      const titleEl = card.querySelector('h3');
+      const titleText = titleEl ? titleEl.textContent.toLowerCase() : '';
+      const queryMatch = query === '' || titleData.includes(query) || titleText.includes(query);
+
+      if (catMatch && queryMatch) {
+        card.style.display = '';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+
+    const noRes = document.getElementById('noResults');
+    const count = document.getElementById('resultCount');
+    noRes.style.display = visible === 0 ? 'block' : 'none';
+    count.textContent = visible === 0
+      ? 'No results found'
+      : `Showing ${visible} book${visible !== 1 ? 's' : ''}`;
+  }
+</script>
+</body>
+</html>
