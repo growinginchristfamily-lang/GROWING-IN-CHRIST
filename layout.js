@@ -79,6 +79,7 @@
             <a href="ministries.html#children">Children's Ministry</a>
           </div>
         </div>
+        <a href="membership.html">Membership</a>
         <a href="contact.html">Contact</a>
       </div>
       <a href="give.html" class="btn btn-green nav-cta">Give Online</a>
@@ -108,6 +109,7 @@
     <a href="beliefs.html">28 Fundamental Beliefs</a>
     <a href="ellen-white.html">Ellen G. White</a>
     <a href="gallery.html">Photo Gallery</a>
+    <a href="membership.html">Membership</a>
     <a href="contact.html">Contact</a>
     <a href="give.html" style="color:var(--green-light);margin-top:16px">Give Online ↗</a>
   </div>`;
@@ -220,7 +222,9 @@
   });
 
   /* ── ACTION BUTTON REDIRECTS ── */
-  document.addEventListener('DOMContentLoaded', function () {
+  // Run directly after inject (not inside DOMContentLoaded) so timing is
+  // explicit and not dependent on script load order.
+  function rewireActionButtons () {
     document.querySelectorAll('a.btn, button.btn').forEach(function (el) {
       const text = (el.textContent || el.innerText || '').trim().toLowerCase();
       const href = (el.getAttribute('href') || '').toLowerCase();
@@ -234,6 +238,10 @@
         el.addEventListener('click', function (e) { e.preventDefault(); window.open(WA_MEMBER, '_blank'); });
       }
     });
-  });
+  }
+  // Run immediately (injected HTML is already in DOM); also re-run after
+  // DOMContentLoaded to catch any buttons already in the page HTML.
+  rewireActionButtons();
+  document.addEventListener('DOMContentLoaded', rewireActionButtons);
 
 })();

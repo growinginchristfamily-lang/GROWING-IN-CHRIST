@@ -114,6 +114,14 @@
       box-shadow: 0 2px 8px rgba(15,44,25,0.06);
     }
     .admin-topbar h2 { font-size: 1.15rem; }
+    .topbar-left { display: flex; align-items: center; gap: 12px; }
+    .sidebar-toggle {
+      display: none; background: none; border: none; cursor: pointer;
+      padding: 4px 6px; color: var(--dark); font-size: 1.5rem; line-height: 1;
+    }
+    @media (max-width: 680px) {
+      .sidebar-toggle { display: flex; align-items: center; }
+    }
     .admin-content { padding: 32px; flex: 1; }
 
     /* ── PANELS ── */
@@ -238,47 +246,23 @@
       </div>
       <button id="loginBtn" class="btn-primary" onclick="doLogin()">Sign In</button>
       <div style="margin-top:16px">
-        <button class="btn-link" onclick="showOtpRequest()">Forgot password?</button>
+        <button class="btn-link" onclick="showResetRequest()">Forgot password?</button>
       </div>
     </div>
 
-    <!-- OTP Request -->
-    <div id="otpRequestForm" style="display:none">
-      <div id="otpRequestAlert" class="alert" style="display:none"></div>
+    <!-- Password Reset -->
+    <div id="resetRequestForm" style="display:none">
+      <div id="resetRequestAlert" class="alert" style="display:none"></div>
       <p style="font-size:0.88rem;color:var(--gray);margin-bottom:20px;text-align:left">
-        Enter the registered email address. A 6-digit verification code will be sent to reset your password.
+        Enter your admin email address. Firebase will send you a secure link to reset your password.
       </p>
       <div class="form-group">
-        <label>Registered Email</label>
-        <input id="otpEmail" type="email" class="form-control" placeholder="your@email.com">
+        <label>Admin Email Address</label>
+        <input id="resetEmail" type="email" class="form-control" placeholder="your@email.com" autocomplete="email">
       </div>
-      <button class="btn-primary" onclick="sendOTP()">Send Verification Code</button>
+      <button class="btn-primary" onclick="sendPasswordReset()">Send Reset Link</button>
       <div style="margin-top:16px">
         <button class="btn-link" onclick="showLogin()">← Back to Login</button>
-      </div>
-    </div>
-
-    <!-- OTP Verify + New Password -->
-    <div id="otpVerifyForm" style="display:none">
-      <div id="otpVerifyAlert" class="alert" style="display:none"></div>
-      <p style="font-size:0.88rem;color:var(--gray);margin-bottom:20px;text-align:left">
-        Enter the 6-digit code sent to your email address, then choose a new password.
-      </p>
-      <div class="form-group">
-        <label>Verification Code</label>
-        <input id="otpCode" type="text" class="form-control" placeholder="000000" maxlength="6" style="letter-spacing:0.3em;font-size:1.2rem;text-align:center">
-      </div>
-      <div class="form-group">
-        <label>New Password</label>
-        <input id="newPassword1" type="password" class="form-control" placeholder="At least 8 characters">
-      </div>
-      <div class="form-group">
-        <label>Confirm New Password</label>
-        <input id="newPassword2" type="password" class="form-control" placeholder="Repeat new password">
-      </div>
-      <button class="btn-primary" onclick="verifyOTPAndReset()">Reset Password</button>
-      <div style="margin-top:16px">
-        <button class="btn-link" onclick="showOtpRequest()">← Resend code</button>
       </div>
     </div>
   </div>
@@ -344,7 +328,10 @@
   <!-- Main -->
   <main class="admin-main">
     <div class="admin-topbar">
-      <h2 id="panelTitle">Dashboard</h2>
+      <div class="topbar-left">
+        <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Open navigation" onclick="document.getElementById('adminSidebar').classList.toggle('open')">&#9776;</button>
+        <h2 id="panelTitle">Dashboard</h2>
+      </div>
       <div style="font-size:0.82rem;color:var(--gray)" id="lastSavedLabel">Changes sync live to all visitors</div>
     </div>
     <div class="admin-content">
@@ -380,6 +367,7 @@
             <div class="form-group"><label>Primary CTA Text</label><input type="text" class="form-control" id="hp-ctaPrimary"></div>
             <div class="form-group"><label>Secondary CTA Text</label><input type="text" class="form-control" id="hp-ctaSecondary"></div>
             <div class="field-full form-group"><label>Hero Image URL</label><input type="url" class="form-control" id="hp-heroImage" placeholder="https://..."></div>
+            <div class="field-full form-group"><label>Welcome Section Image URL <span style="font-weight:400;color:var(--gray)">(image shown beside mission statement)</span></label><input type="url" class="form-control" id="hp-welcomeImage" placeholder="https://..."></div>
           </div>
         </div>
         <div class="section-card">
@@ -558,21 +546,7 @@
 <!-- ══════════════════════════════════════════
      SCRIPTS
 ════════════════════════════════════════════ -->
-<!--
-  TODO: Sign up at https://www.emailjs.com
-        Create a service (Gmail) and an email template.
-        Set template variables: {{otp}}, {{to_email}}
-        Replace the three TODO values below.
--->
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-<script>
-  // TODO: Replace with your EmailJS public key
-  emailjs.init('TODO_YOUR_EMAILJS_PUBLIC_KEY');
-
-  const EMAILJS_SERVICE_ID  = 'TODO_YOUR_SERVICE_ID';   // e.g. 'service_abc123'
-  const EMAILJS_TEMPLATE_ID = 'TODO_YOUR_TEMPLATE_ID';  // e.g. 'template_xyz789'
-  const ADMIN_EMAIL         = 'growinginchristfamily@gmail.com';
-</script>
+<!-- Firebase handles authentication and password reset -->
 
 <script type="module">
   import { auth, db, doc, getDoc, setDoc, onSnapshot,
@@ -599,11 +573,19 @@
   }
   function hideAlert (id) { $(id).style.display = 'none'; }
 
+  /* ── SIDEBAR OVERLAY CLOSE ON MOBILE ───────────────── */
+  document.addEventListener('click', function (e) {
+    const sidebar = document.getElementById('adminSidebar');
+    const toggle  = document.getElementById('sidebarToggleBtn');
+    if (sidebar && sidebar.classList.contains('open') &&
+        !sidebar.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
+      sidebar.classList.remove('open');
+    }
+  });
+
   /* ── CURRENT USER ─────────────────────────────────── */
   let currentUser = null;
   let siteData    = null;
-  let pendingOTP  = null;
-  let otpEmail    = null;
 
   onAuthStateChanged(auth, user => {
     if (user) {
@@ -624,22 +606,16 @@
     const emailInput = V('loginEmail');
     const passInput  = V('loginPassword');
     if (!emailInput || !passInput) { showAlert('loginAlert','Please enter email and password.'); return; }
-    // Resolve credentials: use hardcoded values directly for Firebase auth
-    const email = 'growinginchristfamily@gmail.com';
-    const pass  = 'gicm@2026';
-    if (emailInput.toLowerCase() !== email || passInput !== pass) {
-      showAlert('loginAlert','Incorrect email or password.');
-      return;
-    }
     hideAlert('loginAlert');
     $('loginBtn').disabled = true; $('loginBtn').textContent = 'Signing in…';
     try {
-      await signInWithEmailAndPassword(auth, email, pass);
-      // onAuthStateChanged handles the rest
+      await signInWithEmailAndPassword(auth, emailInput, passInput);
+      // onAuthStateChanged handles showing the admin app
     } catch (e) {
       let msg = 'Login failed. Check your credentials.';
       if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') msg = 'Incorrect email or password.';
-      if (e.code === 'auth/too-many-requests') msg = 'Too many attempts. Try again later.';
+      if (e.code === 'auth/too-many-requests') msg = 'Too many attempts. Please try again later.';
+      if (e.code === 'auth/invalid-email') msg = 'Please enter a valid email address.';
       showAlert('loginAlert', msg);
     }
     $('loginBtn').disabled = false; $('loginBtn').textContent = 'Sign In';
@@ -655,76 +631,35 @@
     await signOut(auth);
   };
 
-  /* ── OTP PASSWORD RESET via EmailJS ──────────────── */
-  window.showOtpRequest = function () {
-    $('loginForm').style.display       = 'none';
-    $('otpRequestForm').style.display  = 'block';
-    $('otpVerifyForm').style.display   = 'none';
-    hideAlert('otpRequestAlert');
+  /* ── PASSWORD RESET via Firebase ─────────────────── */
+  window.showResetRequest = function () {
+    $('loginForm').style.display        = 'none';
+    $('resetRequestForm').style.display = 'block';
+    hideAlert('resetRequestAlert');
+    $('resetEmail').value = '';
   };
   window.showLogin = function () {
-    $('loginForm').style.display       = 'block';
-    $('otpRequestForm').style.display  = 'none';
-    $('otpVerifyForm').style.display   = 'none';
+    $('loginForm').style.display        = 'block';
+    $('resetRequestForm').style.display = 'none';
   };
 
-  window.sendOTP = async function () {
-    const email = V('otpEmail').toLowerCase();
-    if (!email) { showAlert('otpRequestAlert','Please enter your email address.'); return; }
-    if (email !== ADMIN_EMAIL) { showAlert('otpRequestAlert','That email address is not registered.'); return; }
-
-    // Generate 6-digit OTP
-    pendingOTP = Math.floor(100000 + Math.random() * 900000).toString();
-    otpEmail   = email;
-    const expiry = Date.now() + 15 * 60 * 1000;
-
-    // Store OTP temporarily in module scope (never persisted)
-    window._otpExpiry = expiry;
-
+  window.sendPasswordReset = async function () {
+    const email = V('resetEmail').trim();
+    if (!email) { showAlert('resetRequestAlert', 'Please enter your email address.'); return; }
+    const btn = document.querySelector('#resetRequestForm .btn-primary');
+    btn.disabled = true; btn.textContent = 'Sending…';
     try {
-      await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-        to_email: email,
-        otp:      pendingOTP,
-      });
-      showAlert('otpRequestAlert', 'Verification code sent! Check your inbox (and spam folder).', 'success');
-      setTimeout(() => {
-        $('otpRequestForm').style.display  = 'none';
-        $('otpVerifyForm').style.display   = 'block';
-        hideAlert('otpVerifyAlert');
-      }, 1500);
+      await sendPasswordResetEmail(auth, email);
+      showAlert('resetRequestAlert',
+        'Password reset email sent! Check your inbox (and spam folder) for a link from Firebase. Click it to set a new password, then return here to log in.',
+        'success');
     } catch (e) {
-      console.warn('[OTP] EmailJS error:', e);
-      // Fallback: show OTP in console for dev — remove in production
-      console.log('%c[DEV] OTP: ' + pendingOTP, 'color:green;font-size:1.2rem;font-weight:bold');
-      showAlert('otpRequestAlert', 'Email sending failed. Check the browser console for the code (dev mode).', 'info');
-      setTimeout(() => {
-        $('otpRequestForm').style.display  = 'none';
-        $('otpVerifyForm').style.display   = 'block';
-      }, 1500);
+      let msg = 'Could not send reset email.';
+      if (e.code === 'auth/invalid-email') msg = 'Please enter a valid email address.';
+      if (e.code === 'auth/too-many-requests') msg = 'Too many requests. Please wait a few minutes and try again.';
+      showAlert('resetRequestAlert', msg);
     }
-  };
-
-  window.verifyOTPAndReset = async function () {
-    const code = V('otpCode');
-    const p1   = V('newPassword1');
-    const p2   = V('newPassword2');
-    if (!code)  { showAlert('otpVerifyAlert','Enter the verification code.'); return; }
-    if (code !== pendingOTP) { showAlert('otpVerifyAlert','Incorrect verification code.'); return; }
-    if (Date.now() > window._otpExpiry) { showAlert('otpVerifyAlert','Code has expired. Request a new one.'); return; }
-    if (!p1 || p1.length < 8) { showAlert('otpVerifyAlert','Password must be at least 8 characters.'); return; }
-    if (p1 !== p2) { showAlert('otpVerifyAlert','Passwords do not match.'); return; }
-
-    // Use Firebase's sendPasswordResetEmail as the actual reset mechanism,
-    // since we can't set a password for a user without being signed in.
-    // After OTP verification we sign in with the new password via reauthentication.
-    // The cleanest static-hosting approach: send Firebase reset email.
-    try {
-      await sendPasswordResetEmail(auth, ADMIN_EMAIL);
-      showAlert('otpVerifyAlert', 'OTP verified! A Firebase password reset link has been sent to your email. Click it to set your new password, then log in here.', 'success');
-      pendingOTP = null;
-    } catch (e) {
-      showAlert('otpVerifyAlert', 'Could not send reset email: ' + e.message);
-    }
+    btn.disabled = false; btn.textContent = 'Send Reset Link';
   };
 
   /* ── LOAD SITE DATA ──────────────────────────────── */
@@ -756,7 +691,6 @@
     // Contact
     if (d.contact) {
       const c = d.contact;
-      $('ct-phone')?.setAttribute('value', c.phone || '');
       if ($('ct-phone')) $('ct-phone').value = c.phone || '';
       const map = { 'ct-email':c.email,'ct-emailPastor':c.emailPastor,'ct-officeHours':c.officeHours,'ct-address':c.address,
                     'ct-s1l':c.service1Label,'ct-s1t':c.service1Time,'ct-s2l':c.service2Label,'ct-s2t':c.service2Time,
@@ -818,6 +752,7 @@
       stat3Num:  V('hp-stat3Num'),  stat3Label: V('hp-stat3Label'),
       stat4Num:  V('hp-stat4Num'),  stat4Label: V('hp-stat4Label'),
       verseText: V('hp-verseText'), verseRef:   V('hp-verseRef'),
+      welcomeImage: V('hp-welcomeImage'),
     });
   };
 

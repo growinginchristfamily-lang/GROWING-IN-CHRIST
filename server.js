@@ -127,6 +127,10 @@ app.use(session({
   cookie            : { secure: false, maxAge: 8 * 60 * 60 * 1000 },  // 8h session
 }));
 
+/* ── PROTECT SENSITIVE FILES — must come BEFORE static middleware ── */
+app.get('/admin-config.json', (req, res) => res.status(403).json({ error: 'Forbidden' }));
+app.get('/.env',              (req, res) => res.status(403).json({ error: 'Forbidden' }));
+
 /* Serve static files (HTML, CSS, JS) */
 app.use(express.static(path.join(__dirname)));
 
