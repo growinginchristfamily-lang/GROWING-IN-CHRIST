@@ -268,7 +268,5 @@ app.listen(PORT, () => {
   console.log(`  ║   Growing in Christ Ministry — Server     ║`);
   console.log(`  ║   http://localhost:${PORT}                    ║`);
   console.log(`  ╚════════════════════════════════════════════╝\n`);
-  console.log(`  Admin:     http://localhost:${PORT}/admin.html`);
-  console.log(`  Username:  GROWING IN CHRIST`);
-  console.log(`  Password:  gicm@2026\n`);
+  console.log(`  Admin:     http://localhost:${PORT}/admin.html\n`);
 });
