@@ -1,1044 +1,1357 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin — Growing in Christ Ministry</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --green:      #1B6B3A; --green-dark: #0F4425; --green-deep: #082A17;
-      --green-mid:  #2E8B57; --green-light:#3DAD6E; --green-pale: #EAF6EF;
-      --gold:       #C8962A; --gold-pale:  #FDF6E3;
-      --white:      #FFFFFF; --cream:      #F7FAF8;
-      --dark:       #0F2D1B; --mid:        #2E5040; --gray:       #607868;
-      --border:     rgba(27,107,58,0.18);
-      --shadow:     0 4px 24px rgba(15,44,25,0.10);
-      --shadow-lg:  0 12px 48px rgba(15,44,25,0.20);
-      --font-d:    'Playfair Display', Georgia, serif;
-      --font-s:    'DM Sans', sans-serif;
-      --radius:    8px;
-      --sidebar:   260px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { font-size: 16px; }
-    body { font-family: var(--font-s); background: var(--cream); color: var(--dark); line-height: 1.6; }
-    h1,h2,h3,h4 { font-family: var(--font-d); color: var(--dark); line-height: 1.2; }
-    a { color: var(--green); text-decoration: none; }
-    input, select, textarea, button { font-family: var(--font-s); }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GIC Admin Panel — Growing in Christ Ministry</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+<style>
+/* ─── RESET & BASE ─── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --green:#1B6B3A;--green-dark:#0F4425;--green-deep:#082A17;--green-mid:#2E8B57;
+  --green-light:#3DAD6E;--green-pale:#EAF6EF;
+  --gold:#C8962A;--gold-light:#E8B84B;--gold-pale:#FDF6E3;
+  --white:#FFF;--cream:#F7FAF8;--dark:#0F2D1B;--mid:#2E5040;--gray:#607868;
+  --sidebar-w:260px;--topbar-h:60px;
+  --border:rgba(27,107,58,.18);
+  --shadow:0 4px 24px rgba(15,44,25,.10);
+  --shadow-lg:0 12px 48px rgba(15,44,25,.20);
+  --radius:6px;--tr:.2s ease;
+  --red:#DC2626;--amber:#D97706;
+}
+html,body{height:100%;font-family:'Segoe UI',system-ui,sans-serif;background:var(--cream);color:var(--dark);font-size:14px;line-height:1.5}
 
-    /* ── LOGIN SCREEN ── */
-    #loginScreen {
-      min-height: 100vh; display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 60%, var(--green) 100%);
-      padding: 24px;
-    }
-    .login-card {
-      background: var(--white); border-radius: 20px; padding: 48px 44px;
-      width: 100%; max-width: 420px; box-shadow: var(--shadow-lg);
-      text-align: center;
-    }
-    .login-logo {
-      width: 72px; height: 72px; border-radius: 50%;
-      background: linear-gradient(135deg, var(--green-dark), var(--green-mid));
-      display: flex; align-items: center; justify-content: center;
-      font-size: 2rem; margin: 0 auto 20px; color: white;
-    }
-    .login-card h2 { font-size: 1.5rem; margin-bottom: 4px; }
-    .login-card p  { font-size: 0.88rem; color: var(--gray); margin-bottom: 28px; }
-    .form-group    { margin-bottom: 18px; text-align: left; }
-    .form-group label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; letter-spacing: 0.04em; }
-    .form-control  {
-      width: 100%; padding: 11px 14px;
-      border: 1.5px solid rgba(27,107,58,0.2); border-radius: var(--radius);
-      font-size: 0.9rem; color: var(--dark); background: var(--white);
-      transition: border-color 0.2s, box-shadow 0.2s; outline: none;
-    }
-    .form-control:focus { border-color: var(--green); box-shadow: 0 0 0 3px rgba(27,107,58,0.12); }
-    .btn-primary {
-      width: 100%; padding: 13px; background: var(--green); color: white;
-      border: none; border-radius: var(--radius); font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: background 0.2s, transform 0.2s; letter-spacing: 0.04em;
-    }
-    .btn-primary:hover { background: var(--green-mid); transform: translateY(-1px); }
-    .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
-    .btn-link { background: none; border: none; color: var(--green); font-size: 0.85rem; cursor: pointer; padding: 4px 0; }
-    .btn-link:hover { color: var(--green-mid); }
-    .alert { padding: 12px 16px; border-radius: var(--radius); font-size: 0.85rem; margin-bottom: 16px; }
-    .alert-error   { background: #FFEBEE; color: #C62828; border: 1px solid #FFCDD2; }
-    .alert-success { background: var(--green-pale); color: var(--green-dark); border: 1px solid rgba(27,107,58,0.2); }
-    .alert-info    { background: var(--gold-pale); color: #7B4A00; border: 1px solid rgba(200,150,42,0.3); }
+/* ─── LOGIN SCREEN ─── */
+#login-screen{
+  display:flex;align-items:center;justify-content:center;min-height:100vh;
+  background:linear-gradient(135deg,var(--green-deep) 0%,var(--green-dark) 55%,var(--green) 100%);
+  padding:20px;
+}
+.login-card{
+  background:var(--white);border-radius:16px;padding:48px 40px;
+  width:100%;max-width:420px;box-shadow:0 32px 80px rgba(0,0,0,.35);
+}
+.login-logo{text-align:center;margin-bottom:32px}
+.login-logo-icon{
+  width:72px;height:72px;background:var(--green);border-radius:50%;
+  display:inline-flex;align-items:center;justify-content:center;
+  font-size:1.8rem;color:white;margin-bottom:16px;
+}
+.login-logo h1{font-size:1.25rem;color:var(--dark);font-weight:700}
+.login-logo p{font-size:.8rem;color:var(--gray);letter-spacing:.1em;text-transform:uppercase;margin-top:4px}
+.login-group{margin-bottom:18px}
+.login-group label{display:block;font-size:.78rem;font-weight:600;color:var(--dark);margin-bottom:6px;letter-spacing:.04em}
+.login-group input{
+  width:100%;padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--radius);
+  font-size:.9rem;color:var(--dark);outline:none;transition:border-color var(--tr),box-shadow var(--tr);
+}
+.login-group input:focus{border-color:var(--green);box-shadow:0 0 0 3px rgba(27,107,58,.12)}
+.btn-login{
+  width:100%;padding:13px;background:var(--green);color:white;border:none;border-radius:var(--radius);
+  font-size:.9rem;font-weight:600;cursor:pointer;transition:all var(--tr);letter-spacing:.04em;
+}
+.btn-login:hover{background:var(--green-mid);transform:translateY(-1px);box-shadow:0 8px 24px rgba(27,107,58,.35)}
+.btn-login:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.login-error{
+  background:#FEF2F2;border:1px solid #FECACA;color:var(--red);
+  border-radius:var(--radius);padding:10px 14px;font-size:.82rem;margin-bottom:16px;display:none;
+}
 
-    /* ── ADMIN LAYOUT ── */
-    #adminApp { display: none; height: 100vh; overflow: hidden; }
+/* ─── DASHBOARD LAYOUT ─── */
+#dashboard{display:none;height:100vh;flex-direction:column}
+#dashboard.visible{display:flex}
 
-    .admin-sidebar {
-      position: fixed; top: 0; left: 0; bottom: 0; width: var(--sidebar);
-      background: var(--green-deep); overflow-y: auto; z-index: 100;
-      display: flex; flex-direction: column;
-    }
-    .sidebar-brand {
-      padding: 24px 20px; border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .sidebar-brand strong { display: block; font-family: var(--font-d); font-size: 1rem; color: white; }
-    .sidebar-brand span   { font-size: 0.7rem; color: rgba(255,255,255,0.45); letter-spacing: 0.1em; text-transform: uppercase; }
-    .sidebar-nav { padding: 16px 0; flex: 1; }
-    .nav-section { padding: 8px 20px; font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-top: 12px; }
-    .nav-item {
-      display: flex; align-items: center; gap: 10px; padding: 11px 20px;
-      color: rgba(255,255,255,0.65); font-size: 0.85rem; font-weight: 500;
-      cursor: pointer; transition: all 0.2s; border-left: 3px solid transparent;
-    }
-    .nav-item:hover   { background: rgba(255,255,255,0.06); color: white; }
-    .nav-item.active  { background: rgba(255,255,255,0.1); color: white; border-left-color: var(--green-light); }
-    .nav-item .ni-icon { width: 18px; text-align: center; flex-shrink: 0; }
-    .sidebar-footer { padding: 16px 20px; border-top: 1px solid rgba(255,255,255,0.08); }
-    .sidebar-user   { font-size: 0.78rem; color: rgba(255,255,255,0.5); margin-bottom: 10px; }
-    .btn-logout {
-      width: 100%; padding: 10px; background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12); border-radius: 6px;
-      color: rgba(255,255,255,0.7); font-size: 0.82rem; cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-logout:hover { background: rgba(255,255,255,0.14); color: white; }
+/* Top navbar */
+.topbar{
+  height:var(--topbar-h);background:var(--white);
+  border-bottom:1px solid var(--border);
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 20px;position:fixed;top:0;left:0;right:0;z-index:200;
+  box-shadow:0 2px 8px rgba(0,0,0,.06);
+}
+.topbar-left{display:flex;align-items:center;gap:12px}
+.topbar-hamburger{
+  display:none;background:none;border:none;cursor:pointer;
+  padding:6px;border-radius:var(--radius);color:var(--dark);font-size:1.1rem;
+}
+.topbar-brand{display:flex;align-items:center;gap:10px}
+.topbar-brand-icon{
+  width:36px;height:36px;background:var(--green);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;color:white;font-size:.9rem;
+}
+.topbar-brand strong{font-size:.95rem;color:var(--dark)}
+.topbar-brand span{font-size:.72rem;color:var(--gray);font-weight:400}
+.live-indicator{
+  display:flex;align-items:center;gap:6px;
+  background:var(--green-pale);border:1px solid rgba(27,107,58,.2);
+  border-radius:20px;padding:5px 12px;font-size:.72rem;color:var(--green-dark);font-weight:600;
+}
+.live-dot{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
+.topbar-right{display:flex;align-items:center;gap:12px}
+.topbar-clock{font-size:.78rem;color:var(--gray);font-family:monospace}
+.topbar-user{font-size:.78rem;color:var(--mid);font-weight:500}
+.btn-logout{
+  background:none;border:1px solid var(--border);border-radius:var(--radius);
+  padding:6px 14px;font-size:.78rem;color:var(--gray);cursor:pointer;transition:all var(--tr);
+}
+.btn-logout:hover{background:#FEF2F2;border-color:#FECACA;color:var(--red)}
 
-    .admin-main {
-      margin-left: var(--sidebar); height: 100vh; overflow-y: auto;
-      display: flex; flex-direction: column;
-    }
-    .admin-topbar {
-      background: white; padding: 0 32px; height: 64px;
-      display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 50;
-      box-shadow: 0 2px 8px rgba(15,44,25,0.06);
-    }
-    .admin-topbar h2 { font-size: 1.15rem; }
-    .topbar-left { display: flex; align-items: center; gap: 12px; }
-    .sidebar-toggle {
-      display: none; background: none; border: none; cursor: pointer;
-      padding: 4px 6px; color: var(--dark); font-size: 1.5rem; line-height: 1;
-    }
-    @media (max-width: 680px) {
-      .sidebar-toggle { display: flex; align-items: center; }
-    }
-    .admin-content { padding: 32px; flex: 1; }
+/* Sidebar */
+.sidebar{
+  width:var(--sidebar-w);background:var(--green-deep);
+  position:fixed;top:var(--topbar-h);left:0;bottom:0;
+  overflow-y:auto;z-index:100;transition:transform var(--tr);
+}
+.sidebar::-webkit-scrollbar{width:4px}
+.sidebar::-webkit-scrollbar-thumb{background:rgba(255,255,255,.15);border-radius:2px}
+.sidebar-section{border-bottom:1px solid rgba(255,255,255,.06)}
+.sidebar-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px 16px;cursor:pointer;transition:background var(--tr);user-select:none;
+}
+.sidebar-header:hover{background:rgba(255,255,255,.05)}
+.sidebar-header.active{background:rgba(27,107,58,.4)}
+.sidebar-header-left{display:flex;align-items:center;gap:10px}
+.sidebar-icon{font-size:1rem;width:20px;text-align:center;color:rgba(255,255,255,.6)}
+.sidebar-label{font-size:.82rem;font-weight:600;color:rgba(255,255,255,.85);letter-spacing:.02em}
+.sidebar-header-right{display:flex;align-items:center;gap:6px}
+.status-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.status-dot.live{background:#22C55E}
+.status-dot.unsaved{background:#F59E0B}
+.status-dot.none{background:rgba(255,255,255,.2)}
+.sidebar-chevron{color:rgba(255,255,255,.35);font-size:.7rem;transition:transform var(--tr)}
+.sidebar-header.active .sidebar-chevron{transform:rotate(180deg)}
 
-    /* ── PANELS ── */
-    .panel { display: none; }
-    .panel.active { display: block; }
+/* Main content */
+.main{
+  margin-left:var(--sidebar-w);margin-top:var(--topbar-h);
+  min-height:calc(100vh - var(--topbar-h));padding:24px;
+}
 
-    .save-bar {
-      background: var(--white); border-radius: var(--radius); padding: 20px 24px;
-      margin-bottom: 28px; box-shadow: var(--shadow);
-      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 12px;
-    }
-    .save-bar p { font-size: 0.88rem; color: var(--gray); }
-    .btn-save {
-      padding: 11px 28px; background: var(--green); color: white;
-      border: none; border-radius: var(--radius); font-size: 0.88rem; font-weight: 600;
-      cursor: pointer; transition: all 0.2s; letter-spacing: 0.04em;
-    }
-    .btn-save:hover { background: var(--green-mid); transform: translateY(-1px); }
-    .btn-save:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+/* ─── SECTION PANELS ─── */
+.section-panel{display:none;animation:fadeIn .2s ease}
+.section-panel.visible{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 
-    .field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    .field-full  { grid-column: 1 / -1; }
-    .section-card {
-      background: var(--white); border-radius: 12px; padding: 28px;
-      box-shadow: var(--shadow); margin-bottom: 24px;
-    }
-    .section-card h3 { font-size: 1rem; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 1px solid var(--border); }
-    .section-card label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--dark); margin-bottom: 6px; }
-    .section-card .form-control { width: 100%; margin-bottom: 0; }
-    textarea.form-control { resize: vertical; min-height: 100px; }
+.section-header{
+  display:flex;align-items:flex-start;justify-content:space-between;
+  margin-bottom:24px;padding-bottom:16px;border-bottom:2px solid var(--border);flex-wrap:wrap;gap:12px;
+}
+.section-title{font-size:1.4rem;font-weight:700;color:var(--dark)}
+.section-subtitle{font-size:.82rem;color:var(--gray);margin-top:3px}
+.section-actions{display:flex;gap:8px;flex-wrap:wrap}
 
-    /* ── STATS GRID ── */
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 28px; }
-    .stat-card  { background: var(--white); border-radius: 12px; padding: 22px 20px; box-shadow: var(--shadow); border-left: 4px solid var(--green); }
-    .stat-card .sc-num   { font-family: var(--font-d); font-size: 1.8rem; font-weight: 700; color: var(--green); }
-    .stat-card .sc-label { font-size: 0.78rem; color: var(--gray); margin-top: 4px; }
+/* Buttons */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;padding:9px 18px;
+  border-radius:var(--radius);font-size:.82rem;font-weight:600;cursor:pointer;
+  border:none;transition:all var(--tr);letter-spacing:.03em;
+}
+.btn-save{background:var(--green);color:white}
+.btn-save:hover{background:var(--green-mid);transform:translateY(-1px);box-shadow:0 6px 18px rgba(27,107,58,.35)}
+.btn-discard{background:none;border:1px solid var(--border);color:var(--gray)}
+.btn-discard:hover{background:#FEF2F2;border-color:#FECACA;color:var(--red)}
+.btn-add{background:var(--green-pale);color:var(--green-dark);border:1px solid rgba(27,107,58,.2)}
+.btn-add:hover{background:var(--green);color:white}
+.btn-danger{background:#FEF2F2;color:var(--red);border:1px solid #FECACA}
+.btn-danger:hover{background:var(--red);color:white}
+.btn-sm{padding:5px 12px;font-size:.75rem}
+.btn:disabled{opacity:.5;cursor:not-allowed;transform:none!important}
 
-    /* ── LIST EDITORS ── */
-    .list-editor-item {
-      background: var(--cream); border-radius: 8px; padding: 18px 20px;
-      margin-bottom: 14px; border: 1px solid var(--border); position: relative;
-    }
-    .list-editor-item .item-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
-    .list-editor-item .item-num    { font-family: var(--font-d); font-size: 0.85rem; color: var(--gray); font-weight: 600; }
-    .btn-remove {
-      background: #FFEBEE; color: #C62828; border: none; border-radius: 5px;
-      padding: 5px 12px; font-size: 0.78rem; cursor: pointer; transition: background 0.2s;
-    }
-    .btn-remove:hover { background: #FFCDD2; }
-    .btn-add {
-      padding: 10px 22px; background: var(--green-pale); color: var(--green-dark);
-      border: 1.5px dashed var(--green); border-radius: var(--radius);
-      font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-      width: 100%; text-align: center; margin-top: 6px;
-    }
-    .btn-add:hover { background: var(--green); color: white; border-style: solid; }
+/* Sync status bar */
+.sync-bar{
+  display:flex;align-items:center;gap:8px;padding:10px 14px;
+  border-radius:var(--radius);font-size:.78rem;font-weight:500;margin-bottom:20px;
+}
+.sync-bar.live{background:var(--green-pale);color:var(--green-dark);border:1px solid rgba(27,107,58,.2)}
+.sync-bar.unsaved{background:#FFF8E7;color:#92400E;border:1px solid #FDE68A}
 
-    /* ── GALLERY ── */
-    .gallery-grid-admin { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px,1fr)); gap: 12px; margin-bottom: 20px; }
-    .gallery-thumb { position: relative; border-radius: 8px; overflow: hidden; aspect-ratio:1; }
-    .gallery-thumb img  { width:100%; height:100%; object-fit:cover; display:block; }
-    .gallery-thumb .gth-del {
-      position:absolute; top:6px; right:6px;
-      background:rgba(0,0,0,0.6); color:white; border:none; border-radius:50%;
-      width:26px; height:26px; cursor:pointer; font-size:0.8rem; display:flex; align-items:center; justify-content:center;
-    }
-    .gallery-thumb .gth-cap { position:absolute; bottom:0; left:0; right:0; padding:6px 8px; background:rgba(0,0,0,0.5); font-size:0.7rem; color:white; }
+/* Form elements */
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.form-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+.form-group{margin-bottom:18px}
+.form-group.full{grid-column:1/-1}
+.form-label{
+  display:block;font-size:.75rem;font-weight:600;color:var(--mid);
+  margin-bottom:5px;letter-spacing:.05em;text-transform:uppercase;
+}
+.form-input,.form-select,.form-textarea{
+  width:100%;padding:9px 12px;border:1.5px solid var(--border);border-radius:var(--radius);
+  font-size:.88rem;color:var(--dark);background:var(--white);outline:none;
+  transition:border-color var(--tr),box-shadow var(--tr);font-family:inherit;
+}
+.form-input:focus,.form-select:focus,.form-textarea:focus{
+  border-color:var(--green);box-shadow:0 0 0 3px rgba(27,107,58,.1);
+}
+.form-textarea{resize:vertical;min-height:90px}
+.form-color{width:48px;height:36px;padding:2px;border:1.5px solid var(--border);border-radius:var(--radius);cursor:pointer}
+.form-color-row{display:flex;align-items:center;gap:10px}
+.form-color-hex{width:90px}
 
-    /* ── ACCOUNT / PASSWORD ── */
-    .pw-card { max-width: 500px; }
-    .divider-h { border: none; border-top: 1px solid var(--border); margin: 24px 0; }
+/* Cards */
+.content-card{
+  background:var(--white);border:1px solid var(--border);border-radius:10px;padding:24px;
+  margin-bottom:20px;
+}
+.content-card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-bottom:18px;padding-bottom:14px;border-bottom:1px solid var(--border);
+}
+.content-card-header h3{font-size:1rem;font-weight:600;color:var(--dark)}
 
-    /* ── TOAST ── */
-    #toast {
-      position: fixed; bottom: 28px; right: 28px; z-index: 9999;
-      background: var(--green-dark); color: white; padding: 14px 22px;
-      border-radius: 10px; font-size: 0.88rem; font-weight: 500;
-      box-shadow: var(--shadow-lg); transform: translateY(80px); opacity: 0;
-      transition: all 0.35s cubic-bezier(0.34,1.56,0.64,1); pointer-events: none;
-    }
-    #toast.show { transform: translateY(0); opacity: 1; }
+/* Array item editor */
+.array-item{
+  background:var(--cream);border:1px solid var(--border);border-radius:8px;
+  padding:16px;margin-bottom:12px;position:relative;
+}
+.array-item-header{
+  display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;
+}
+.array-item-title{font-size:.85rem;font-weight:600;color:var(--dark)}
+.array-item-actions{display:flex;gap:6px}
 
-    /* ── OTP PANEL ── */
-    #otpPanel { display: none; }
+/* Toggle switch */
+.toggle-wrap{display:flex;align-items:center;gap:10px}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0}
+.toggle-slider{
+  position:absolute;inset:0;background:rgba(0,0,0,.15);border-radius:12px;cursor:pointer;transition:.3s;
+}
+.toggle-slider::before{
+  content:'';position:absolute;height:18px;width:18px;left:3px;bottom:3px;
+  background:white;border-radius:50%;transition:.3s;box-shadow:0 1px 4px rgba(0,0,0,.2);
+}
+.toggle input:checked + .toggle-slider{background:var(--green)}
+.toggle input:checked + .toggle-slider::before{transform:translateX(20px)}
+.toggle-label{font-size:.85rem;color:var(--mid)}
 
-    /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .admin-sidebar { width: 220px; }
-      .admin-main    { margin-left: 220px; }
-      .stats-grid    { grid-template-columns: 1fr 1fr; }
-      .field-grid    { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 680px) {
-      .admin-sidebar { transform: translateX(-100%); transition: transform 0.3s; }
-      .admin-sidebar.open { transform: translateX(0); }
-      .admin-main    { margin-left: 0; }
-      .stats-grid    { grid-template-columns: 1fr 1fr; }
-    }
-  </style>
+/* Upload area */
+.upload-area{
+  border:2px dashed var(--border);border-radius:8px;padding:24px;text-align:center;
+  cursor:pointer;transition:all var(--tr);background:var(--cream);
+}
+.upload-area:hover{border-color:var(--green);background:var(--green-pale)}
+.upload-area input[type=file]{display:none}
+.upload-preview{
+  margin-top:12px;border-radius:6px;overflow:hidden;
+  max-height:180px;object-fit:contain;width:100%;
+}
+.upload-progress{
+  height:4px;background:var(--border);border-radius:2px;margin-top:8px;overflow:hidden;display:none;
+}
+.upload-progress-bar{height:100%;background:var(--green);width:0;transition:width .3s}
+
+/* Toast */
+.toast-container{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;gap:8px}
+.toast{
+  background:var(--dark);color:white;padding:12px 18px;border-radius:8px;
+  font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:8px;
+  box-shadow:var(--shadow-lg);animation:slideInToast .3s ease;min-width:240px;
+}
+.toast.success{background:var(--green-dark)}
+.toast.error{background:#991B1B}
+.toast.warning{background:#92400E}
+@keyframes slideInToast{from{transform:translateX(100%);opacity:0}to{transform:translateX(0);opacity:1}}
+
+/* Bottom tab bar (mobile) */
+.bottom-tabs{
+  display:none;position:fixed;bottom:0;left:0;right:0;background:var(--white);
+  border-top:1px solid var(--border);z-index:150;height:56px;
+}
+.bottom-tabs-inner{display:flex;height:100%}
+.bottom-tab{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:2px;background:none;border:none;cursor:pointer;font-size:.62rem;font-weight:600;
+  color:var(--gray);letter-spacing:.04em;transition:color var(--tr);
+}
+.bottom-tab.active{color:var(--green)}
+.bottom-tab i{font-size:1.1rem}
+
+/* Mobile drawer overlay */
+.drawer-overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;
+}
+.drawer-overlay.open{display:block}
+
+/* Maintenance banner */
+.maintenance-banner{
+  background:linear-gradient(135deg,#7F1D1D,#991B1B);color:white;
+  padding:12px 20px;display:flex;align-items:center;gap:10px;
+  font-size:.82rem;font-weight:600;letter-spacing:.03em;
+}
+
+/* Stat badge */
+.stat-badge{
+  display:inline-flex;align-items:center;gap:6px;background:var(--green-pale);
+  border:1px solid rgba(27,107,58,.2);border-radius:20px;
+  padding:4px 12px;font-size:.72rem;font-weight:600;color:var(--green-dark);
+}
+.last-synced{font-size:.7rem;color:var(--gray);margin-top:4px}
+
+/* Divider */
+.divider{height:1px;background:var(--border);margin:20px 0}
+
+/* Help text */
+.help-text{font-size:.75rem;color:var(--gray);margin-top:4px;line-height:1.4}
+
+/* Section nav in sidebar */
+.sidebar-nav-item{
+  display:block;padding:9px 16px 9px 46px;font-size:.78rem;color:rgba(255,255,255,.6);
+  cursor:pointer;transition:all var(--tr);text-decoration:none;
+}
+.sidebar-nav-item:hover,.sidebar-nav-item.active{
+  color:var(--green-light);background:rgba(27,107,58,.2);
+}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:900px){
+  .sidebar{transform:translateX(-100%)}
+  .sidebar.open{transform:translateX(0)}
+  .main{margin-left:0;padding:16px;padding-bottom:72px}
+  .topbar-hamburger{display:flex;align-items:center;justify-content:center}
+  .bottom-tabs{display:block}
+  .form-grid{grid-template-columns:1fr}
+  .form-grid-3{grid-template-columns:1fr}
+  .live-indicator{display:none}
+  .topbar-clock{display:none}
+}
+@media(max-width:600px){
+  .section-header{flex-direction:column}
+  .content-card{padding:16px}
+}
+</style>
 </head>
 <body>
 
-<!-- ══════════════════════════════════════════
-     LOGIN SCREEN
-════════════════════════════════════════════ -->
-<div id="loginScreen">
+<!-- ══ LOGIN SCREEN ══ -->
+<div id="login-screen">
   <div class="login-card">
-    <div class="login-logo">✝</div>
-    <h2>Admin Portal</h2>
-    <p>Growing in Christ Ministry · Nairobi, Kenya</p>
-
-    <!-- Login Form -->
-    <div id="loginForm">
-      <div id="loginAlert" class="alert" style="display:none"></div>
-      <div class="form-group">
-        <label>Email Address</label>
-        <input id="loginEmail" type="email" class="form-control" placeholder="your@email.com" autocomplete="email">
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input id="loginPassword" type="password" class="form-control" placeholder="Enter your password" autocomplete="current-password">
-      </div>
-      <button id="loginBtn" class="btn-primary" onclick="doLogin()">Sign In</button>
-      <div style="margin-top:16px">
-        <button class="btn-link" onclick="showResetRequest()">Forgot password?</button>
-      </div>
+    <div class="login-logo">
+      <div class="login-logo-icon"><i class="fa-solid fa-church"></i></div>
+      <h1>Growing in Christ Ministry</h1>
+      <p>Admin Panel</p>
     </div>
-
-    <!-- Password Reset -->
-    <div id="resetRequestForm" style="display:none">
-      <div id="resetRequestAlert" class="alert" style="display:none"></div>
-      <p style="font-size:0.88rem;color:var(--gray);margin-bottom:20px;text-align:left">
-        Enter your admin email address. Firebase will send you a secure link to reset your password.
-      </p>
-      <div class="form-group">
-        <label>Admin Email Address</label>
-        <input id="resetEmail" type="email" class="form-control" placeholder="your@email.com" autocomplete="email">
-      </div>
-      <button class="btn-primary" onclick="sendPasswordReset()">Send Reset Link</button>
-      <div style="margin-top:16px">
-        <button class="btn-link" onclick="showLogin()">← Back to Login</button>
-      </div>
+    <div class="login-error" id="loginError"></div>
+    <div class="login-group">
+      <label>Email Address</label>
+      <input type="email" id="loginEmail" placeholder="admin@growinginchrist.org" autocomplete="email">
     </div>
+    <div class="login-group">
+      <label>Password</label>
+      <input type="password" id="loginPassword" placeholder="••••••••" autocomplete="current-password">
+    </div>
+    <button class="btn-login" id="loginBtn" onclick="doLogin()">
+      <i class="fa-solid fa-sign-in-alt"></i> Sign In to Admin Panel
+    </button>
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════
-     ADMIN APP
-════════════════════════════════════════════ -->
-<div id="adminApp">
+<!-- ══ DASHBOARD ══ -->
+<div id="dashboard">
 
-  <!-- Sidebar -->
-  <aside class="admin-sidebar" id="adminSidebar">
-    <div class="sidebar-brand">
-      <strong>Growing in Christ</strong>
-      <span>Admin Portal</span>
+  <!-- Maintenance banner (shown when maintenance mode ON) -->
+  <div id="maintenanceBanner" style="display:none" class="maintenance-banner">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    MAINTENANCE MODE IS ON — The website is showing a maintenance page to visitors.
+    <button onclick="quickToggleMaintenance()" style="margin-left:auto;background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;padding:4px 12px;border-radius:4px;cursor:pointer;font-size:.75rem">Turn Off</button>
+  </div>
+
+  <!-- TOP BAR -->
+  <div class="topbar">
+    <div class="topbar-left">
+      <button class="topbar-hamburger" id="hamburgerBtn"><i class="fa-solid fa-bars"></i></button>
+      <div class="topbar-brand">
+        <div class="topbar-brand-icon"><i class="fa-solid fa-church"></i></div>
+        <div><strong>GIC Admin Panel</strong><br><span>Growing in Christ Ministry</span></div>
+      </div>
+      <div class="live-indicator"><div class="live-dot"></div> Live — syncing to all visitors</div>
     </div>
-    <nav class="sidebar-nav">
-      <div class="nav-section">Content</div>
-      <div class="nav-item active" data-panel="dashboard"  onclick="showPanel('dashboard')">
-        <span class="ni-icon">📊</span> Dashboard
-      </div>
-      <div class="nav-item" data-panel="homepage"   onclick="showPanel('homepage')">
-        <span class="ni-icon">🏠</span> Homepage
-      </div>
-      <div class="nav-item" data-panel="about"      onclick="showPanel('about')">
-        <span class="ni-icon">ℹ️</span> About / Mission
-      </div>
-      <div class="nav-item" data-panel="history"    onclick="showPanel('history')">
-        <span class="ni-icon">📅</span> History Timeline
-      </div>
-      <div class="nav-item" data-panel="leadership" onclick="showPanel('leadership')">
-        <span class="ni-icon">👥</span> Leadership
-      </div>
-      <div class="nav-item" data-panel="events"     onclick="showPanel('events')">
-        <span class="ni-icon">📣</span> Events
-      </div>
-      <div class="nav-item" data-panel="announcements" onclick="showPanel('announcements')">
-        <span class="ni-icon">📢</span> Announcements
-      </div>
-      <div class="nav-item" data-panel="ministries" onclick="showPanel('ministries')">
-        <span class="ni-icon">⛪</span> Ministries
-      </div>
-      <div class="nav-item" data-panel="departments" onclick="showPanel('departments')">
-        <span class="ni-icon">🏢</span> Departments
-      </div>
-      <div class="nav-item" data-panel="gallery"    onclick="showPanel('gallery')">
-        <span class="ni-icon">🖼️</span> Gallery
-      </div>
-      <div class="nav-item" data-panel="contact"    onclick="showPanel('contact')">
-        <span class="ni-icon">📞</span> Contact &amp; Services
-      </div>
-      <div class="nav-section">Account</div>
-      <div class="nav-item" data-panel="account"    onclick="showPanel('account')">
-        <span class="ni-icon">🔑</span> Account &amp; Password
-      </div>
-    </nav>
-    <div class="sidebar-footer">
-      <div class="sidebar-user" id="sidebarUser">Signed in</div>
-      <button class="btn-logout" onclick="doLogout()">Sign Out</button>
+    <div class="topbar-right">
+      <span class="topbar-clock" id="liveClock">--:--:--</span>
+      <span class="topbar-user" id="userEmail"></span>
+      <button class="btn-logout" onclick="doLogout()"><i class="fa-solid fa-sign-out-alt"></i> Logout</button>
     </div>
-  </aside>
+  </div>
 
-  <!-- Main -->
-  <main class="admin-main">
-    <div class="admin-topbar">
-      <div class="topbar-left">
-        <button class="sidebar-toggle" id="sidebarToggleBtn" aria-label="Open navigation" onclick="document.getElementById('adminSidebar').classList.toggle('open')">&#9776;</button>
-        <h2 id="panelTitle">Dashboard</h2>
-      </div>
-      <div style="font-size:0.82rem;color:var(--gray)" id="lastSavedLabel">Changes sync live to all visitors</div>
-    </div>
-    <div class="admin-content">
+  <!-- MOBILE DRAWER OVERLAY -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeSidebar()"></div>
 
-      <!-- ── DASHBOARD ── -->
-      <div id="panel-dashboard" class="panel active">
-        <div class="stats-grid">
-          <div class="stat-card"><div class="sc-num" id="dash-members">247</div><div class="sc-label">Active Members</div></div>
-          <div class="stat-card" style="border-left-color:var(--gold)"><div class="sc-num" id="dash-events">5</div><div class="sc-label">Upcoming Events</div></div>
-          <div class="stat-card"><div class="sc-num" id="dash-gallery">0</div><div class="sc-label">Gallery Photos</div></div>
-          <div class="stat-card" style="border-left-color:var(--gold)"><div class="sc-num" id="dash-announce">0</div><div class="sc-label">Announcements</div></div>
-        </div>
-        <div class="section-card">
-          <h3>Welcome to the Admin Portal</h3>
-          <p style="font-size:0.9rem;color:var(--mid);line-height:1.8">
-            All changes you make here are saved to <strong>Firebase Firestore</strong> and instantly reflected on every page of the website for all visitors — no manual refresh needed.<br><br>
-            Use the sidebar to edit homepage content, events, leadership, gallery photos, contact details, and more.
-          </p>
-        </div>
-      </div>
+  <!-- SIDEBAR -->
+  <nav class="sidebar" id="sidebar">
+    <!-- Sections built by JS -->
+  </nav>
 
-      <!-- ── HOMEPAGE ── -->
-      <div id="panel-homepage" class="panel">
-        <div class="save-bar">
-          <p>Edit the homepage hero, statistics, and verse of the week.</p>
-          <button class="btn-save" onclick="saveHomepage()">Save Changes</button>
-        </div>
-        <div class="section-card">
-          <h3>Hero Section</h3>
-          <div class="field-grid">
-            <div class="field-full form-group"><label>Headline</label><input type="text" class="form-control" id="hp-heroHeadline"></div>
-            <div class="field-full form-group"><label>Subtext</label><textarea class="form-control" id="hp-heroSubtext" style="min-height:70px"></textarea></div>
-            <div class="form-group"><label>Primary CTA Text</label><input type="text" class="form-control" id="hp-ctaPrimary"></div>
-            <div class="form-group"><label>Secondary CTA Text</label><input type="text" class="form-control" id="hp-ctaSecondary"></div>
-            <div class="field-full form-group"><label>Hero Image URL</label><input type="url" class="form-control" id="hp-heroImage" placeholder="https://..."></div>
-            <div class="field-full form-group"><label>Welcome Section Image URL <span style="font-weight:400;color:var(--gray)">(image shown beside mission statement)</span></label><input type="url" class="form-control" id="hp-welcomeImage" placeholder="https://..."></div>
-          </div>
-        </div>
-        <div class="section-card">
-          <h3>Statistics</h3>
-          <div class="field-grid">
-            <div class="form-group"><label>Stat 1 Number</label><input type="text" class="form-control" id="hp-stat1Num"></div>
-            <div class="form-group"><label>Stat 1 Label</label><input type="text" class="form-control" id="hp-stat1Label"></div>
-            <div class="form-group"><label>Stat 2 Number</label><input type="text" class="form-control" id="hp-stat2Num"></div>
-            <div class="form-group"><label>Stat 2 Label</label><input type="text" class="form-control" id="hp-stat2Label"></div>
-            <div class="form-group"><label>Stat 3 Number</label><input type="text" class="form-control" id="hp-stat3Num"></div>
-            <div class="form-group"><label>Stat 3 Label</label><input type="text" class="form-control" id="hp-stat3Label"></div>
-            <div class="form-group"><label>Stat 4 Number</label><input type="text" class="form-control" id="hp-stat4Num"></div>
-            <div class="form-group"><label>Stat 4 Label</label><input type="text" class="form-control" id="hp-stat4Label"></div>
-          </div>
-        </div>
-        <div class="section-card">
-          <h3>Verse of the Week</h3>
-          <div class="field-grid">
-            <div class="field-full form-group"><label>Verse Text</label><input type="text" class="form-control" id="hp-verseText"></div>
-            <div class="form-group"><label>Reference (e.g. Philippians 4:13)</label><input type="text" class="form-control" id="hp-verseRef"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ABOUT ── -->
-      <div id="panel-about" class="panel">
-        <div class="save-bar">
-          <p>Edit mission, vision, motto and slogan.</p>
-          <button class="btn-save" onclick="saveAbout()">Save Changes</button>
-        </div>
-        <div class="section-card">
-          <h3>Mission, Vision &amp; Motto</h3>
-          <div class="form-group"><label>Our Mission</label><textarea class="form-control" id="ab-mission"></textarea></div>
-          <div class="form-group"><label>Our Vision</label><textarea class="form-control" id="ab-vision"></textarea></div>
-          <div class="form-group"><label>Our Slogan</label><input type="text" class="form-control" id="ab-slogan"></div>
-          <div class="form-group"><label>Our Motto</label><input type="text" class="form-control" id="ab-motto"></div>
-        </div>
-      </div>
-
-      <!-- ── HISTORY ── -->
-      <div id="panel-history" class="panel">
-        <div class="save-bar">
-          <p>Add, edit, or remove history timeline entries.</p>
-          <button class="btn-save" onclick="saveHistory()">Save Changes</button>
-        </div>
-        <div id="historyList"></div>
-        <button class="btn-add" onclick="addHistoryItem()">+ Add Timeline Entry</button>
-      </div>
-
-      <!-- ── LEADERSHIP ── -->
-      <div id="panel-leadership" class="panel">
-        <div class="save-bar">
-          <p>Manage pastoral and leadership team profiles.</p>
-          <button class="btn-save" onclick="saveLeadership()">Save Changes</button>
-        </div>
-        <div id="leadershipList"></div>
-        <button class="btn-add" onclick="addLeaderItem()">+ Add Leader</button>
-      </div>
-
-      <!-- ── EVENTS ── -->
-      <div id="panel-events" class="panel">
-        <div class="save-bar">
-          <p>Manage upcoming events. Changes appear on events.html immediately.</p>
-          <button class="btn-save" onclick="saveEvents()">Save Changes</button>
-        </div>
-        <div id="eventsList"></div>
-        <button class="btn-add" onclick="addEventItem()">+ Add Event</button>
-      </div>
-
-      <!-- ── ANNOUNCEMENTS ── -->
-      <div id="panel-announcements" class="panel">
-        <div class="save-bar">
-          <p>Manage homepage announcements banner.</p>
-          <button class="btn-save" onclick="saveAnnouncements()">Save Changes</button>
-        </div>
-        <div id="announcementsList"></div>
-        <button class="btn-add" onclick="addAnnouncementItem()">+ Add Announcement</button>
-      </div>
-
-      <!-- ── MINISTRIES ── -->
-      <div id="panel-ministries" class="panel">
-        <div class="save-bar">
-          <p>Edit ministry names, descriptions, and details.</p>
-          <button class="btn-save" onclick="saveMinistries()">Save Changes</button>
-        </div>
-        <div id="ministriesList"></div>
-        <button class="btn-add" onclick="addMinistryItem()">+ Add Ministry</button>
-      </div>
-
-      <!-- ── DEPARTMENTS ── -->
-      <div id="panel-departments" class="panel">
-        <div class="save-bar">
-          <p>Manage church departments shown on departments.html.</p>
-          <button class="btn-save" onclick="saveDepartments()">Save Changes</button>
-        </div>
-        <div id="departmentsList"></div>
-        <button class="btn-add" onclick="addDepartmentItem()">+ Add Department</button>
-      </div>
-
-      <!-- ── GALLERY ── -->
-      <div id="panel-gallery" class="panel">
-        <div class="save-bar">
-          <p>Upload photos or add image URLs. All photos sync to gallery.html.</p>
-          <button class="btn-save" onclick="saveGallery()">Save Changes</button>
-        </div>
-        <div class="section-card">
-          <h3>Add Photo</h3>
-          <div class="field-grid">
-            <div class="field-full form-group"><label>Image URL <span style="font-weight:400;color:var(--gray)">(paste direct image link, e.g. from Google Drive, Cloudinary, or Imgur)</span></label>
-              <input type="url" id="newGalleryUrl" class="form-control" placeholder="https://...">
-            </div>
-            <div class="form-group"><label>Caption</label><input type="text" id="newGalleryCaption" class="form-control" placeholder="e.g. Annual Conference 2025"></div>
-            <div class="form-group"><label>Category</label><input type="text" id="newGalleryCategory" class="form-control" placeholder="e.g. Conferences, Outreach, Youth"></div>
-          </div>
-          <button class="btn-add" style="margin-top:4px" onclick="addGalleryItem()">+ Add Photo</button>
-        </div>
-        <div class="section-card">
-          <h3>Current Photos (<span id="galleryCount">0</span>)</h3>
-          <div id="galleryAdminGrid" class="gallery-grid-admin"></div>
-        </div>
-      </div>
-
-      <!-- ── CONTACT ── -->
-      <div id="panel-contact" class="panel">
-        <div class="save-bar">
-          <p>Update contact info and service times. Syncs to contact.html and footer.</p>
-          <button class="btn-save" onclick="saveContact()">Save Changes</button>
-        </div>
-        <div class="section-card">
-          <h3>Contact Details</h3>
-          <div class="field-grid">
-            <div class="form-group"><label>Phone</label><input type="text" class="form-control" id="ct-phone"></div>
-            <div class="form-group"><label>Email</label><input type="email" class="form-control" id="ct-email"></div>
-            <div class="form-group"><label>Pastor Email</label><input type="email" class="form-control" id="ct-emailPastor"></div>
-            <div class="form-group"><label>Office Hours</label><textarea class="form-control" id="ct-officeHours" style="min-height:70px"></textarea></div>
-            <div class="field-full form-group"><label>Address</label><textarea class="form-control" id="ct-address" style="min-height:70px"></textarea></div>
-          </div>
-        </div>
-        <div class="section-card">
-          <h3>Service Times</h3>
-          <div class="field-grid">
-            <div class="form-group"><label>Service 1 Label</label><input type="text" class="form-control" id="ct-s1l"></div>
-            <div class="form-group"><label>Service 1 Time</label><input type="text" class="form-control" id="ct-s1t"></div>
-            <div class="form-group"><label>Service 2 Label</label><input type="text" class="form-control" id="ct-s2l"></div>
-            <div class="form-group"><label>Service 2 Time</label><input type="text" class="form-control" id="ct-s2t"></div>
-            <div class="form-group"><label>Service 3 Label</label><input type="text" class="form-control" id="ct-s3l"></div>
-            <div class="form-group"><label>Service 3 Time</label><input type="text" class="form-control" id="ct-s3t"></div>
-            <div class="form-group"><label>Service 4 Label</label><input type="text" class="form-control" id="ct-s4l"></div>
-            <div class="form-group"><label>Service 4 Time</label><input type="text" class="form-control" id="ct-s4t"></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- ── ACCOUNT ── -->
-      <div id="panel-account" class="panel">
-        <div class="section-card pw-card">
-          <h3>Change Password</h3>
-          <p style="font-size:0.88rem;color:var(--gray);margin-bottom:20px">
-            Your admin login uses Firebase Authentication. Use the form below to update your password.
-          </p>
-          <div id="pwAlert" class="alert" style="display:none"></div>
-          <div class="form-group"><label>Current Password</label><input type="password" class="form-control" id="pw-current"></div>
-          <div class="form-group"><label>New Password</label><input type="password" class="form-control" id="pw-new"></div>
-          <div class="form-group"><label>Confirm New Password</label><input type="password" class="form-control" id="pw-confirm"></div>
-          <button class="btn-save" onclick="changePassword()">Update Password</button>
-        </div>
-      </div>
-
-    </div><!-- /admin-content -->
+  <!-- MAIN CONTENT -->
+  <main class="main" id="mainContent">
+    <!-- Panels built by JS -->
   </main>
-</div><!-- /adminApp -->
 
-<!-- Toast -->
-<div id="toast"></div>
+  <!-- BOTTOM TABS (mobile) -->
+  <div class="bottom-tabs">
+    <div class="bottom-tabs-inner">
+      <button class="bottom-tab active" onclick="switchBottomTab(0,this)" data-sections="0,1,2">
+        <i class="fa-solid fa-globe"></i>Global
+      </button>
+      <button class="bottom-tab" onclick="switchBottomTab(1,this)" data-sections="3,4,5">
+        <i class="fa-solid fa-file-alt"></i>Content
+      </button>
+      <button class="bottom-tab" onclick="switchBottomTab(2,this)" data-sections="6,7,8">
+        <i class="fa-solid fa-calendar"></i>Events
+      </button>
+      <button class="bottom-tab" onclick="switchBottomTab(3,this)" data-sections="9,10,11">
+        <i class="fa-solid fa-cog"></i>Pages
+      </button>
+    </div>
+  </div>
 
-<!-- ══════════════════════════════════════════
-     SCRIPTS
-════════════════════════════════════════════ -->
-<!-- Firebase handles authentication and password reset -->
+</div>
 
+<!-- TOAST CONTAINER -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ══ FIREBASE + APP LOGIC ══ -->
 <script type="module">
-  import { auth, db, doc, getDoc, setDoc, onSnapshot,
-           signInWithEmailAndPassword, signOut,
-           onAuthStateChanged, sendPasswordResetEmail }
-    from './firebase-config.js';
-  import { EmailAuthProvider, reauthenticateWithCredential, updatePassword }
-    from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js';
+import { auth, db, doc, getDoc, setDoc, onSnapshot,
+         signInWithEmailAndPassword, signOut, onAuthStateChanged }
+  from './firebase-config.js';
+import { getStorage, ref, uploadBytesResumable, getDownloadURL, deleteObject }
+  from 'https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js';
 
-  /* ── HELPERS ─────────────────────────────────────── */
-  const $  = id => document.getElementById(id);
-  const V  = id => ($(id) ? $(id).value.trim() : '');
+const storage = getStorage();
+const MAIN_DOC = doc(db, 'siteData', 'main');
 
-  function toast (msg, duration=3000) {
-    const t = $('toast'); t.textContent = msg; t.classList.add('show');
-    setTimeout(() => t.classList.remove('show'), duration);
+/* ── STATE ── */
+let SAVED   = {};   // Last saved Firestore data
+let PENDING = {};   // Local edits not yet saved
+let unsavedSections = new Set();
+let unsubscribe = null;
+
+/* ── UTILS ── */
+window.toast = function(msg, type='success'){
+  const t = document.createElement('div');
+  t.className = `toast ${type}`;
+  const icon = type==='success'?'fa-check-circle':type==='error'?'fa-times-circle':'fa-exclamation-circle';
+  t.innerHTML = `<i class="fa-solid ${icon}"></i> ${msg}`;
+  document.getElementById('toastContainer').appendChild(t);
+  setTimeout(()=>{t.style.animation='slideInToast .3s ease reverse';setTimeout(()=>t.remove(),300)},3500);
+};
+
+function deepMerge(a,b){
+  if(!b||typeof b!=='object')return a;
+  const out={...a};
+  Object.keys(b).forEach(k=>{
+    if(Array.isArray(b[k])) out[k]=b[k];
+    else if(b[k]&&typeof b[k]==='object'&&a[k]&&typeof a[k]==='object'&&!Array.isArray(a[k]))
+      out[k]=deepMerge(a[k],b[k]);
+    else out[k]=b[k];
+  });
+  return out;
+}
+function get(path, obj){ return path.split('.').reduce((o,k)=>o?.[k], obj); }
+function set(path, val, obj){
+  const parts=path.split('.');
+  let cur=obj;
+  parts.slice(0,-1).forEach(p=>{if(!cur[p]||typeof cur[p]!=='object')cur[p]={};cur=cur[p];});
+  cur[parts[parts.length-1]]=val;
+}
+function esc(s){ return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+
+/* ── CLOCK ── */
+setInterval(()=>{
+  const n=new Date();
+  const el=document.getElementById('liveClock');
+  if(el) el.textContent=n.toLocaleTimeString('en-KE',{hour12:false});
+},1000);
+
+/* ── AUTH ── */
+window.doLogin = async function(){
+  const email = document.getElementById('loginEmail').value.trim();
+  const pass  = document.getElementById('loginPassword').value;
+  const btn   = document.getElementById('loginBtn');
+  const err   = document.getElementById('loginError');
+  err.style.display='none';
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Signing in…';
+  try{
+    await signInWithEmailAndPassword(auth,email,pass);
+  }catch(e){
+    err.textContent = e.code==='auth/invalid-credential'||e.code==='auth/wrong-password'
+      ? 'Incorrect email or password.' : e.message;
+    err.style.display='block';
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-sign-in-alt"></i> Sign In to Admin Panel';
   }
+};
 
-  function showAlert (id, msg, type='error') {
-    const el = $(id);
-    el.textContent = msg;
-    el.className = 'alert alert-' + type;
-    el.style.display = 'block';
+window.doLogout = async function(){
+  if(unsubscribe) unsubscribe();
+  await signOut(auth);
+};
+
+onAuthStateChanged(auth, user=>{
+  if(user){
+    document.getElementById('login-screen').style.display='none';
+    document.getElementById('dashboard').classList.add('visible');
+    document.getElementById('userEmail').textContent=user.email;
+    initDashboard();
+  } else {
+    document.getElementById('login-screen').style.display='flex';
+    document.getElementById('dashboard').classList.remove('visible');
+    if(unsubscribe){unsubscribe();unsubscribe=null;}
   }
-  function hideAlert (id) { $(id).style.display = 'none'; }
+});
 
-  /* ── SIDEBAR OVERLAY CLOSE ON MOBILE ───────────────── */
-  document.addEventListener('click', function (e) {
-    const sidebar = document.getElementById('adminSidebar');
-    const toggle  = document.getElementById('sidebarToggleBtn');
-    if (sidebar && sidebar.classList.contains('open') &&
-        !sidebar.contains(e.target) && e.target !== toggle && !toggle.contains(e.target)) {
-      sidebar.classList.remove('open');
+/* Enter key on password field */
+document.getElementById('loginPassword').addEventListener('keydown',e=>{
+  if(e.key==='Enter') window.doLogin();
+});
+
+/* ── INIT DASHBOARD ── */
+function initDashboard(){
+  buildSidebar();
+  buildPanels();
+  setupMobileNav();
+  // Subscribe to Firestore
+  unsubscribe = onSnapshot(MAIN_DOC, snap=>{
+    if(snap.exists()){
+      SAVED = snap.data();
+      // Only update forms that don't have unsaved changes
+      sections.forEach((s,i)=>{
+        if(!unsavedSections.has(i)) refreshPanel(i);
+      });
+      updateSyncDots();
+      const mb=document.getElementById('maintenanceBanner');
+      if(mb) mb.style.display=(SAVED.siteSettings?.maintenanceMode)?'flex':'none';
     }
   });
+}
 
-  /* ── CURRENT USER ─────────────────────────────────── */
-  let currentUser = null;
-  let siteData    = null;
+/* ── SECTION DEFINITIONS ── */
+const sections = [
+  {id:'global',  icon:'fa-globe',      label:'Global Settings',    path:'siteSettings'},
+  {id:'header',  icon:'fa-heading',    label:'Header & Navigation', path:'header'},
+  {id:'hero',    icon:'fa-home',       label:'Hero / Banner',       path:'hero'},
+  {id:'about',   icon:'fa-book-open',  label:'About',               path:'about'},
+  {id:'depts',   icon:'fa-building',   label:'Departments',         path:'departments'},
+  {id:'min',     icon:'fa-church',     label:'Ministries',          path:'ministries'},
+  {id:'events',  icon:'fa-calendar',   label:'Events',              path:'events'},
+  {id:'gallery', icon:'fa-images',     label:'Gallery',             path:'gallery'},
+  {id:'give',    icon:'fa-heart',      label:'Give / Donations',    path:'give'},
+  {id:'member',  icon:'fa-users',      label:'Membership',          path:'membership'},
+  {id:'contact', icon:'fa-phone',      label:'Contact',             path:'contact'},
+  {id:'footer',  icon:'fa-chevron-down',label:'Footer',             path:'footer'},
+];
 
-  onAuthStateChanged(auth, user => {
-    if (user) {
-      currentUser = user;
-      $('loginScreen').style.display  = 'none';
-      $('adminApp').style.display     = 'flex';
-      $('sidebarUser').textContent    = user.email;
-      loadSiteData();
+/* ── SIDEBAR BUILD ── */
+function buildSidebar(){
+  const sb = document.getElementById('sidebar');
+  sb.innerHTML = sections.map((s,i)=>`
+    <div class="sidebar-section">
+      <div class="sidebar-header" id="sbh-${i}" onclick="activateSection(${i})">
+        <div class="sidebar-header-left">
+          <i class="fa-solid ${s.icon} sidebar-icon"></i>
+          <span class="sidebar-label">${s.label}</span>
+        </div>
+        <div class="sidebar-header-right">
+          <div class="status-dot none" id="dot-${i}" title="Not yet loaded"></div>
+          <i class="fa-solid fa-chevron-down sidebar-chevron"></i>
+        </div>
+      </div>
+    </div>`).join('');
+}
+
+/* ── BUILD PANELS ── */
+function buildPanels(){
+  const main = document.getElementById('mainContent');
+  main.innerHTML = sections.map((s,i)=>`
+    <div class="section-panel" id="panel-${i}">
+      <div class="section-header">
+        <div>
+          <div class="section-title">${s.label}</div>
+          <div class="section-subtitle" id="sync-label-${i}">Loading…</div>
+        </div>
+        <div class="section-actions">
+          <button class="btn btn-discard" onclick="discardSection(${i})"><i class="fa-solid fa-undo"></i> Discard</button>
+          <button class="btn btn-save" onclick="saveSection(${i})"><i class="fa-solid fa-cloud-upload-alt"></i> Save & Sync</button>
+        </div>
+      </div>
+      <div id="panel-body-${i}">
+        <div style="color:var(--gray);padding:40px 0;text-align:center"><i class="fa-solid fa-spinner fa-spin" style="font-size:1.5rem"></i><br><br>Loading section data…</div>
+      </div>
+    </div>`).join('');
+  // Activate first section
+  activateSection(0);
+}
+
+/* ── ACTIVATE SECTION ── */
+window.activateSection = function(i){
+  document.querySelectorAll('.section-panel').forEach(p=>p.classList.remove('visible'));
+  document.querySelectorAll('.sidebar-header').forEach(h=>h.classList.remove('active'));
+  document.getElementById(`panel-${i}`).classList.add('visible');
+  document.getElementById(`sbh-${i}`).classList.add('active');
+  if(window.innerWidth<=900) closeSidebar();
+  refreshPanel(i);
+};
+
+/* ── SYNC DOTS ── */
+function updateSyncDots(){
+  sections.forEach((_,i)=>{
+    const dot = document.getElementById(`dot-${i}`);
+    const label = document.getElementById(`sync-label-${i}`);
+    if(!dot) return;
+    if(unsavedSections.has(i)){
+      dot.className='status-dot unsaved';dot.title='Unsaved changes';
+      if(label) label.textContent='⚠ Unsaved changes — click Save to sync';
     } else {
-      currentUser = null;
-      $('loginScreen').style.display  = 'flex';
-      $('adminApp').style.display     = 'none';
+      dot.className='status-dot live';dot.title='Live on website';
+      const t=SAVED._lastSaved;
+      if(label) label.textContent=t?`✓ Live · Last synced ${new Date(t).toLocaleTimeString('en-KE')}`:'✓ Live on website';
     }
   });
+}
 
-  /* ── LOGIN ────────────────────────────────────────── */
-  window.doLogin = async function () {
-    const emailInput = V('loginEmail');
-    const passInput  = V('loginPassword');
-    if (!emailInput || !passInput) { showAlert('loginAlert','Please enter email and password.'); return; }
-    hideAlert('loginAlert');
-    $('loginBtn').disabled = true; $('loginBtn').textContent = 'Signing in…';
-    try {
-      await signInWithEmailAndPassword(auth, emailInput, passInput);
-      // onAuthStateChanged handles showing the admin app
-    } catch (e) {
-      let msg = 'Login failed. Check your credentials.';
-      if (e.code === 'auth/user-not-found' || e.code === 'auth/wrong-password' || e.code === 'auth/invalid-credential') msg = 'Incorrect email or password.';
-      if (e.code === 'auth/too-many-requests') msg = 'Too many attempts. Please try again later.';
-      if (e.code === 'auth/invalid-email') msg = 'Please enter a valid email address.';
-      showAlert('loginAlert', msg);
+/* ── FIELD CHANGE (mark unsaved) ── */
+window.fieldChange = function(sectionIdx, path, value){
+  if(!PENDING[sectionIdx]) PENDING[sectionIdx]={};
+  set(path, value, PENDING[sectionIdx]);
+  unsavedSections.add(sectionIdx);
+  updateSyncDots();
+};
+
+/* ── SAVE SECTION ── */
+window.saveSection = async function(i){
+  const btn = document.querySelector(`#panel-${i} .btn-save`);
+  btn.disabled=true;
+  btn.innerHTML='<i class="fa-solid fa-spinner fa-spin"></i> Saving…';
+  try{
+    const sectionKey = sections[i].path;
+    // Merge pending into saved
+    if(!SAVED[sectionKey]) SAVED[sectionKey]={};
+    if(PENDING[i]){
+      SAVED[sectionKey] = deepMerge(SAVED[sectionKey]||{}, PENDING[i][sectionKey]||PENDING[i]);
     }
-    $('loginBtn').disabled = false; $('loginBtn').textContent = 'Sign In';
-  };
+    SAVED._lastSaved = new Date().toISOString();
+    await setDoc(MAIN_DOC, SAVED);
+    delete PENDING[i];
+    unsavedSections.delete(i);
+    updateSyncDots();
+    toast('✓ Saved & synced to all visitors','success');
+  }catch(e){
+    toast('Error saving: '+e.message,'error');
+  }finally{
+    btn.disabled=false;
+    btn.innerHTML='<i class="fa-solid fa-cloud-upload-alt"></i> Save & Sync';
+  }
+};
 
-  // Allow Enter key
-  ['loginEmail','loginPassword'].forEach(id => {
-    document.getElementById(id)?.addEventListener('keydown', e => { if (e.key === 'Enter') window.doLogin(); });
+/* ── DISCARD SECTION ── */
+window.discardSection = function(i){
+  delete PENDING[i];
+  unsavedSections.delete(i);
+  refreshPanel(i);
+  updateSyncDots();
+  toast('Changes discarded','warning');
+};
+
+/* ── QUICK TOGGLE MAINTENANCE ── */
+window.quickToggleMaintenance = async function(){
+  if(!SAVED.siteSettings) SAVED.siteSettings={};
+  SAVED.siteSettings.maintenanceMode = false;
+  SAVED._lastSaved = new Date().toISOString();
+  await setDoc(MAIN_DOC, SAVED);
+  toast('Maintenance mode turned off','success');
+};
+
+/* ─────────────────────────────────────────────
+   PANEL RENDERERS
+───────────────────────────────────────────── */
+function refreshPanel(i){ buildPanelContent(i); }
+
+function buildPanelContent(i){
+  const body = document.getElementById(`panel-body-${i}`);
+  if(!body) return;
+  const d = SAVED;
+  switch(i){
+    case 0: body.innerHTML = renderGlobal(d); break;
+    case 1: body.innerHTML = renderHeader(d); break;
+    case 2: body.innerHTML = renderHero(d);   break;
+    case 3: body.innerHTML = renderAbout(d);  break;
+    case 4: body.innerHTML = renderDepts(d);  break;
+    case 5: body.innerHTML = renderMin(d);    break;
+    case 6: body.innerHTML = renderEvents(d); break;
+    case 7: body.innerHTML = renderGallery(d);break;
+    case 8: body.innerHTML = renderGive(d);   break;
+    case 9: body.innerHTML = renderMember(d); break;
+    case 10:body.innerHTML = renderContact(d);break;
+    case 11:body.innerHTML = renderFooter(d); break;
+  }
+}
+
+/* ── FORM HELPER ── */
+function field(label, path, si, val, type='text', help=''){
+  const v = val??'';
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <input class="form-input" type="${type}" value="${esc(v)}"
+      onchange="fieldChange(${si},'${path}',this.value)"
+      oninput="fieldChange(${si},'${path}',this.value)">
+    ${help?`<div class="help-text">${help}</div>`:''}
+  </div>`;
+}
+function textarea(label, path, si, val, help=''){
+  const v = val??'';
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <textarea class="form-textarea" onchange="fieldChange(${si},'${path}',this.value)"
+      oninput="fieldChange(${si},'${path}',this.value)">${esc(v)}</textarea>
+    ${help?`<div class="help-text">${help}</div>`:''}
+  </div>`;
+}
+function colorField(label, path, si, val){
+  const v = val||'#1B6B3A';
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <div class="form-color-row">
+      <input type="color" class="form-color" value="${esc(v)}"
+        oninput="fieldChange(${si},'${path}',this.value);this.nextElementSibling.value=this.value">
+      <input type="text" class="form-input form-color-hex" value="${esc(v)}"
+        oninput="fieldChange(${si},'${path}',this.value);this.previousElementSibling.value=this.value">
+    </div>
+  </div>`;
+}
+function toggle(label, path, si, val, help=''){
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <div class="toggle-wrap">
+      <label class="toggle">
+        <input type="checkbox" ${val?'checked':''} onchange="fieldChange(${si},'${path}',this.checked)">
+        <span class="toggle-slider"></span>
+      </label>
+      <span class="toggle-label">${val?'On':'Off'}</span>
+      ${help?`<span class="help-text">${help}</span>`:''}
+    </div>
+  </div>`;
+}
+function select(label, path, si, val, options){
+  return `<div class="form-group">
+    <label class="form-label">${label}</label>
+    <select class="form-select" onchange="fieldChange(${si},'${path}',this.value)">
+      ${options.map(o=>`<option value="${esc(o)}" ${val===o?'selected':''}>${esc(o)}</option>`).join('')}
+    </select>
+  </div>`;
+}
+function card(title, content){
+  return `<div class="content-card">
+    <div class="content-card-header"><h3>${title}</h3></div>
+    ${content}
+  </div>`;
+}
+
+/* ─── SECTION 0: GLOBAL SETTINGS ─── */
+function renderGlobal(d){
+  const s = d.siteSettings||{};
+  return `
+  ${card('Church Identity',`
+    <div class="form-grid">
+      ${field('Church Name','siteSettings.churchName',0,s.churchName||'Growing in Christ Ministry')}
+      ${field('Church Tagline','siteSettings.tagline',0,s.tagline||'Grow, Serve & Belong in Christ')}
+      ${field('WhatsApp Number (international format)','siteSettings.whatsappNumber',0,s.whatsappNumber||'254705214338','tel','e.g. 254705214338 — no + sign. Updates ALL WhatsApp links sitewide.')}
+      ${field('SEO Title','siteSettings.seoTitle',0,s.seoTitle||'')}
+    </div>
+    <div class="form-group full">
+      ${textarea('Meta Description','siteSettings.metaDescription',0,s.metaDescription||'')}
+    </div>`)}
+
+  ${card('Brand Colors',`
+    <div class="form-grid">
+      ${colorField('Primary Green','siteSettings.colorGreen',0,s.colorGreen||'#1B6B3A')}
+      ${colorField('Accent Gold','siteSettings.colorGold',0,s.colorGold||'#C8962A')}
+      ${colorField('Background Cream','siteSettings.colorCream',0,s.colorCream||'#F7FAF8')}
+      ${colorField('Dark Green (Deep)','siteSettings.colorDeep',0,s.colorDeep||'#082A17')}
+    </div>
+    <div class="help-text" style="margin-top:-10px">Color changes sync to all website pages via CSS variables in Firestore.</div>`)}
+
+  ${card('Font & Typography',`
+    <div class="form-grid">
+      ${select('Display / Heading Font','siteSettings.fontDisplay',0,s.fontDisplay||'Playfair Display',['Playfair Display','Cormorant Garamond','EB Garamond','Libre Baskerville','Merriweather'])}
+      ${select('Body / Sans Font','siteSettings.fontSans',0,s.fontSans||'DM Sans',['DM Sans','Outfit','Nunito','Lato','Source Sans 3'])}
+    </div>`)}
+
+  ${card('Maintenance Mode',`
+    ${toggle('Maintenance Mode','siteSettings.maintenanceMode',0,s.maintenanceMode||false,'When ON, all website pages show a "Site Under Maintenance" message to visitors. Admin panel is unaffected.')}
+    <div class="help-text">⚠ Turn this ON when making major content updates. Turn it OFF when done.</div>`)}
+  `;
+}
+
+/* ─── SECTION 1: HEADER & NAV ─── */
+function renderHeader(d){
+  const s = d.header||{};
+  const links = s.navLinks||[{label:'Home',url:'index.html'},{label:'About',url:'about.html'},{label:'Events',url:'events.html'},{label:'Give',url:'give.html'},{label:'Contact',url:'contact.html'}];
+  return `
+  ${card('Logo',`
+    <div class="form-grid">
+      ${field('Logo Alt Text','header.logoAlt',1,s.logoAlt||'Growing in Christ Ministry')}
+      ${field('Logo URL (Firebase Storage or external)','header.logoUrl',1,s.logoUrl||'')}
+    </div>
+    ${s.logoUrl?`<img src="${esc(s.logoUrl)}" style="max-height:80px;margin-top:8px;border-radius:6px;">`:''}`)}
+
+  ${card('Navbar Style',`
+    <div class="form-grid">
+      ${colorField('Navbar Background','header.navBg',1,s.navBg||'#FFFFFF')}
+      ${colorField('Nav Link Color','header.navLinkColor',1,s.navLinkColor||'#0F2D1B')}
+      ${toggle('Sticky Navbar','header.sticky',1,s.sticky!==false)}
+    </div>`)}
+
+  ${card('Navigation Links',`
+    <div id="navlinks-list">
+      ${links.map((lk,idx)=>`
+      <div class="array-item" id="navlink-${idx}">
+        <div class="array-item-header">
+          <span class="array-item-title">Link ${idx+1}</span>
+          <div class="array-item-actions">
+            <button class="btn btn-sm btn-danger" onclick="removeNavLink(${idx})"><i class="fa-solid fa-trash"></i></button>
+          </div>
+        </div>
+        <div class="form-grid">
+          <div class="form-group"><label class="form-label">Label</label>
+            <input class="form-input" value="${esc(lk.label)}" onchange="updateNavLink(${idx},'label',this.value)"></div>
+          <div class="form-group"><label class="form-label">URL</label>
+            <input class="form-input" value="${esc(lk.url)}" onchange="updateNavLink(${idx},'url',this.value)"></div>
+        </div>
+      </div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addNavLink()"><i class="fa-solid fa-plus"></i> Add Nav Link</button>`,)}
+  `;
+}
+
+/* ─── SECTION 2: HERO ─── */
+function renderHero(d){
+  const s = d.hero||{};
+  return `
+  ${card('Hero Content',`
+    <div class="form-grid">
+      ${field('Label Tag','hero.label',2,s.label||'Welcome to Growing in Christ Ministry')}
+      ${field('Headline (H1)','hero.headline',2,s.headline||'Grow, Serve & Belong in Christ')}
+    </div>
+    ${textarea('Subheading Paragraph','hero.subheading',2,s.subheading||'')}
+    <div class="form-group"><label class="form-label">Overlay Opacity (0–100%)</label>
+      <input type="range" min="0" max="100" value="${s.overlayOpacity??50}"
+        oninput="fieldChange(2,'hero.overlayOpacity',this.value);this.nextElementSibling.textContent=this.value+'%'">
+      <span style="font-size:.82rem;color:var(--gray)">${s.overlayOpacity??50}%</span>
+    </div>
+    <div class="divider"></div>
+    <div class="form-grid">
+      ${field('Background Image URL','hero.bgImage',2,s.bgImage||'','url','Paste Firebase Storage URL or any public image URL')}
+      ${field('Background Video URL (YouTube embed)','hero.bgVideo',2,s.bgVideo||'','url')}
+    </div>`)}
+
+  ${card('CTA Buttons',`
+    <div class="form-grid">
+      ${field('Button 1 Text','hero.cta1Text',2,s.cta1Text||'Join Our Community')}
+      ${field('Button 1 URL','hero.cta1Url',2,s.cta1Url||'membership.html')}
+      ${select('Button 1 Style','hero.cta1Style',2,s.cta1Style||'btn-green',['btn-green','btn-gold','btn-outline','btn-white'])}
+    </div>
+    <div class="divider"></div>
+    <div class="form-grid">
+      ${field('Button 2 Text','hero.cta2Text',2,s.cta2Text||'Learn More')}
+      ${field('Button 2 URL','hero.cta2Url',2,s.cta2Url||'about.html')}
+      ${select('Button 2 Style','hero.cta2Style',2,s.cta2Style||'btn-outline',['btn-green','btn-gold','btn-outline','btn-white'])}
+    </div>`)}
+  `;
+}
+
+/* ─── SECTION 3: ABOUT ─── */
+function renderAbout(d){
+  const s = d.about||{};
+  const stats = s.stats||[{number:'15,000+',label:'Lives Impacted'},{number:'247',label:'Active Members'},{number:'12+',label:'Years of Ministry'}];
+  const team = s.team||[];
+  return `
+  ${card('Vision & Mission',`
+    ${textarea('Vision Statement','about.vision',3,s.vision||'')}
+    ${textarea('Mission Statement','about.mission',3,s.mission||'')}
+    <div class="form-grid">
+      ${field('Church Slogan','about.slogan',3,s.slogan||'Freedom, Healing & Hope')}
+      ${field('Church Motto','about.motto',3,s.motto||'The Advent Message to All the World in My Generation.')}
+    </div>`)}
+
+  ${card('Statistics',`
+    <div id="stats-list">
+      ${stats.map((st,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">Stat ${idx+1}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeStat(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Number / Value</label>
+          <input class="form-input" value="${esc(st.number)}" onchange="updateStat(${idx},'number',this.value)"></div>
+        <div class="form-group"><label class="form-label">Label</label>
+          <input class="form-input" value="${esc(st.label)}" onchange="updateStat(${idx},'label',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addStat()"><i class="fa-solid fa-plus"></i> Add Stat</button>`)}
+
+  ${card('Leadership Team',`
+    <div id="team-list">
+      ${team.map((m,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">${esc(m.name||`Member ${idx+1}`)}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeTeamMember(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Name</label>
+          <input class="form-input" value="${esc(m.name||'')}" onchange="updateTeam(${idx},'name',this.value)"></div>
+        <div class="form-group"><label class="form-label">Role / Title</label>
+          <input class="form-input" value="${esc(m.role||'')}" onchange="updateTeam(${idx},'role',this.value)"></div>
+        <div class="form-group full"><label class="form-label">Bio</label>
+          <textarea class="form-textarea" style="min-height:60px" onchange="updateTeam(${idx},'bio',this.value)">${esc(m.bio||'')}</textarea></div>
+        <div class="form-group"><label class="form-label">Photo URL</label>
+          <input class="form-input" value="${esc(m.photo||'')}" onchange="updateTeam(${idx},'photo',this.value)"></div>
+        <div class="form-group"><label class="form-label">Initial (avatar fallback)</label>
+          <input class="form-input" value="${esc(m.initial||m.name?.charAt(0)||'A')}" onchange="updateTeam(${idx},'initial',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addTeamMember()"><i class="fa-solid fa-plus"></i> Add Team Member</button>`)}
+  `;
+}
+
+/* ─── SECTION 4: DEPARTMENTS ─── */
+function renderDepts(d){
+  const s = d.departments||{};
+  const items = (Array.isArray(d.departments)?d.departments:s.items)||[
+    {name:'Ushering & Hospitality',desc:'Our ushers create a warm, welcoming atmosphere.',head:'John Mutua',members:'Director, Team Leaders',color:'green'},
+    {name:'Media & Communications',desc:'Sound, projection, live streams, digital.',head:'Brian Kariuki',members:'Sound, Video, Social Media',color:'gold'},
+  ];
+  return `
+  ${card('Section Heading',`
+    <div class="form-grid">
+      ${field('Section Title','departments.heading',4,s.heading||'Our Departments')}
+      ${select('Grid Columns','departments.columns',4,s.columns||'3',['2','3'])}
+    </div>
+    ${textarea('Intro Paragraph','departments.intro',4,s.intro||'')}`)}
+
+  ${card('Departments',`
+    <div id="depts-list">
+      ${items.map((dept,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">${esc(dept.name||`Department ${idx+1}`)}</span>
+        <div class="array-item-actions">
+          <button class="btn btn-sm btn-danger" onclick="removeDept(${idx})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Department Name</label>
+          <input class="form-input" value="${esc(dept.name||'')}" onchange="updateDept(${idx},'name',this.value)"></div>
+        <div class="form-group"><label class="form-label">Department Head</label>
+          <input class="form-input" value="${esc(dept.head||'')}" onchange="updateDept(${idx},'head',this.value)"></div>
+        <div class="form-group full"><label class="form-label">Description</label>
+          <textarea class="form-textarea" style="min-height:60px" onchange="updateDept(${idx},'desc',this.value)">${esc(dept.desc||dept.description||'')}</textarea></div>
+        <div class="form-group"><label class="form-label">Team Members (comma-separated)</label>
+          <input class="form-input" value="${esc(dept.members||'')}" onchange="updateDept(${idx},'members',this.value)"></div>
+        <div class="form-group"><label class="form-label">Accent Color</label>
+          <select class="form-select" onchange="updateDept(${idx},'color',this.value)">
+            <option value="green" ${dept.color==='green'?'selected':''}>Green</option>
+            <option value="gold" ${dept.color==='gold'?'selected':''}>Gold</option>
+            <option value="blue" ${dept.color==='blue'?'selected':''}>Blue</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">Icon (Font Awesome class)</label>
+          <input class="form-input" value="${esc(dept.icon||'fa-users')}" placeholder="e.g. fa-music" onchange="updateDept(${idx},'icon',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addDept()"><i class="fa-solid fa-plus"></i> Add Department</button>`)}
+  `;
+}
+
+/* ─── SECTION 5: MINISTRIES ─── */
+function renderMin(d){
+  const items = d.ministries||(Array.isArray(d.ministries)?d.ministries:[])||[
+    {name:'Worship & Prayer',desc:'Spirit-led, Word-anchored worship and intercession.',schedule:'Sunday 8AM & 10AM · Wednesday 6:30PM'},
+    {name:'Youth Ministry',desc:'Ages 13-35. Discipleship, friendship, practical faith.',schedule:'Ages 13–35'},
+  ];
+  const arr = Array.isArray(items)?items:[];
+  return `
+  ${card('Ministries List',`
+    <div id="min-list">
+      ${arr.map((m,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">${esc(m.name||`Ministry ${idx+1}`)}</span>
+        <div class="array-item-actions">
+          <button class="btn btn-sm btn-danger" onclick="removeMin(${idx})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Ministry Name</label>
+          <input class="form-input" value="${esc(m.name||'')}" onchange="updateMin(${idx},'name',this.value)"></div>
+        <div class="form-group"><label class="form-label">Icon / Emoji</label>
+          <input class="form-input" value="${esc(m.icon||'🙏')}" onchange="updateMin(${idx},'icon',this.value)"></div>
+        <div class="form-group full"><label class="form-label">Description</label>
+          <textarea class="form-textarea" style="min-height:60px" onchange="updateMin(${idx},'desc',this.value)">${esc(m.desc||m.description||'')}</textarea></div>
+        <div class="form-group"><label class="form-label">Schedule / Target Audience</label>
+          <input class="form-input" value="${esc(m.schedule||'')}" onchange="updateMin(${idx},'schedule',this.value)"></div>
+        <div class="form-group"><label class="form-label">Contact Person</label>
+          <input class="form-input" value="${esc(m.contact||'')}" onchange="updateMin(${idx},'contact',this.value)"></div>
+        <div class="form-group"><label class="form-label">CTA Button Text</label>
+          <input class="form-input" value="${esc(m.ctaText||'Get Involved')}" onchange="updateMin(${idx},'ctaText',this.value)"></div>
+        <div class="form-group"><label class="form-label">CTA Button URL</label>
+          <input class="form-input" value="${esc(m.ctaUrl||'contact.html')}" onchange="updateMin(${idx},'ctaUrl',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addMin()"><i class="fa-solid fa-plus"></i> Add Ministry</button>`)}
+  `;
+}
+
+/* ─── SECTION 6: EVENTS ─── */
+function renderEvents(d){
+  const items = d.events||[];
+  const arr = Array.isArray(items)?items:[];
+  return `
+  ${card('Events List',`
+    <div id="events-list">
+      ${arr.map((ev,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">${esc(ev.title||`Event ${idx+1}`)}</span>
+        <div class="array-item-actions">
+          <button class="btn btn-sm btn-danger" onclick="removeEvent(${idx})"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      <div class="form-grid-3">
+        <div class="form-group"><label class="form-label">Day</label>
+          <input class="form-input" value="${esc(ev.day||'')}" onchange="updateEvent(${idx},'day',this.value)"></div>
+        <div class="form-group"><label class="form-label">Month</label>
+          <input class="form-input" value="${esc(ev.month||'')}" onchange="updateEvent(${idx},'month',this.value)"></div>
+        <div class="form-group"><label class="form-label">Year</label>
+          <input class="form-input" value="${esc(ev.year||'2025')}" onchange="updateEvent(${idx},'year',this.value)"></div>
+      </div>
+      <div class="form-group"><label class="form-label">Event Title</label>
+        <input class="form-input" value="${esc(ev.title||'')}" onchange="updateEvent(${idx},'title',this.value)"></div>
+      <div class="form-group"><label class="form-label">Description</label>
+        <textarea class="form-textarea" style="min-height:60px" onchange="updateEvent(${idx},'desc',this.value)">${esc(ev.desc||ev.description||'')}</textarea></div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Time</label>
+          <input class="form-input" value="${esc(ev.time||'')}" onchange="updateEvent(${idx},'time',this.value)"></div>
+        <div class="form-group"><label class="form-label">Location</label>
+          <input class="form-input" value="${esc(ev.location||'')}" onchange="updateEvent(${idx},'location',this.value)"></div>
+        <div class="form-group"><label class="form-label">Duration / Extra Info</label>
+          <input class="form-input" value="${esc(ev.duration||ev.extraInfo||'')}" onchange="updateEvent(${idx},'duration',this.value)"></div>
+        <div class="form-group"><label class="form-label">Registration Type</label>
+          <select class="form-select" onchange="updateEvent(${idx},'reg',this.value)">
+            <option value="register" ${ev.reg==='register'?'selected':''}>Register</option>
+            <option value="volunteer" ${ev.reg==='volunteer'?'selected':''}>Volunteer</option>
+            <option value="apply" ${ev.reg==='apply'?'selected':''}>Apply</option>
+            <option value="rsvp" ${ev.reg==='rsvp'?'selected':''}>RSVP</option>
+          </select></div>
+        <div class="form-group"><label class="form-label">Date Card Color</label>
+          <select class="form-select" onchange="updateEvent(${idx},'color',this.value)">
+            <option value="gold" ${(ev.color||'gold')==='gold'?'selected':''}>Gold</option>
+            <option value="green" ${ev.color==='green'?'selected':''}>Green</option>
+            <option value="green-dark" ${ev.color==='green-dark'?'selected':''}>Dark Green</option>
+            <option value="green-deep" ${ev.color==='green-deep'?'selected':''}>Deep Green</option>
+            <option value="green-mid" ${ev.color==='green-mid'?'selected':''}>Mid Green</option>
+          </select></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addEvent()"><i class="fa-solid fa-plus"></i> Add Event</button>`)}
+  `;
+}
+
+/* ─── SECTION 7: GALLERY ─── */
+function renderGallery(d){
+  const items = d.gallery||[];
+  const arr = Array.isArray(items)?items:[];
+  return `
+  ${card('Gallery Images',`
+    <div class="help-text" style="margin-bottom:16px">
+      <strong>How to add images:</strong> Upload to Firebase Storage → copy the download URL → paste it below.
+      Images appear on the gallery page instantly after saving.
+    </div>
+    <div id="gallery-list">
+      ${arr.map((img,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">Photo ${idx+1}: ${esc(img.caption||'Untitled')}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeGalleryItem(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Image URL</label>
+          <input class="form-input" value="${esc(img.url||'')}" onchange="updateGallery(${idx},'url',this.value)"></div>
+        <div class="form-group"><label class="form-label">Caption</label>
+          <input class="form-input" value="${esc(img.caption||'')}" onchange="updateGallery(${idx},'caption',this.value)"></div>
+        <div class="form-group"><label class="form-label">Category</label>
+          <input class="form-input" value="${esc(img.category||'')}" placeholder="e.g. Worship, Outreach, Youth" onchange="updateGallery(${idx},'category',this.value)"></div>
+      </div>
+      ${img.url?`<img src="${esc(img.url)}" style="max-height:120px;border-radius:6px;object-fit:cover;margin-top:8px">`:''}</div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addGalleryItem()"><i class="fa-solid fa-plus"></i> Add Photo</button>`)}
+  `;
+}
+
+/* ─── SECTION 8: GIVE ─── */
+function renderGive(d){
+  const s = d.give||d.homepage||{};
+  return `
+  ${card('Hero Section',`
+    <div class="form-grid">
+      ${field('Page Label','give.label',8,s.label||'Support the Ministry')}
+      ${field('Headline','give.headline',8,s.headline||'Give Online')}
+    </div>
+    ${textarea('Subheading','give.subheading',8,s.subheading||'Your generosity enables us to make disciples, serve communities, and advance the Gospel.')}`)}
+
+  ${card('M-Pesa Details',`
+    <div class="form-grid">
+      ${field('Paybill Number','give.mpesaPaybill',8,s.mpesaPaybill||'400200')}
+      ${field('Account Number','give.mpesaAccount',8,s.mpesaAccount||'GROWING25')}
+    </div>
+    ${textarea('M-Pesa Instructions','give.mpesaInstructions',8,s.mpesaInstructions||'Enter your name as reference. SMS confirmation will be sent.')}`)}
+
+  ${card('Quick-Select Amounts (KSh)',`
+    <div class="help-text" style="margin-bottom:12px">Comma-separated amounts that appear as quick-select buttons on the Give page.</div>
+    ${field('Amount Buttons','give.amounts',8,s.amounts||'500,1000,2500,5000,10000','text','Enter comma-separated values: 500,1000,2500,5000,10000')}`)}
+
+  ${card('Help Box',`
+    <div class="form-grid">
+      ${field('Finance Email','give.helpEmail',8,s.helpEmail||'giving@growinginchrist.org','email')}
+      ${field('Finance Phone','give.helpPhone',8,s.helpPhone||'0705 214 338','tel')}
+    </div>`)}
+  `;
+}
+
+/* ─── SECTION 9: MEMBERSHIP ─── */
+function renderMember(d){
+  const s = d.membership||{};
+  const benefits = s.benefits||[];
+  const steps = s.steps||[];
+  return `
+  ${card('Page Hero',`
+    <div class="form-grid">
+      ${field('Label','membership.label',9,s.label||'Join the Family')}
+      ${field('Headline','membership.headline',9,s.headline||'Membership')}
+    </div>
+    ${textarea('Subheading','membership.subheading',9,s.subheading||'')}`)}
+
+  ${card('Benefits Cards',`
+    <div id="benefits-list">
+      ${benefits.map((b,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">${esc(b.title||`Benefit ${idx+1}`)}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeBenefit(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Icon / Emoji</label>
+          <input class="form-input" value="${esc(b.icon||'✓')}" onchange="updateBenefit(${idx},'icon',this.value)"></div>
+        <div class="form-group"><label class="form-label">Title</label>
+          <input class="form-input" value="${esc(b.title||'')}" onchange="updateBenefit(${idx},'title',this.value)"></div>
+        <div class="form-group full"><label class="form-label">Description</label>
+          <textarea class="form-textarea" style="min-height:50px" onchange="updateBenefit(${idx},'description',this.value)">${esc(b.description||'')}</textarea></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addBenefit()"><i class="fa-solid fa-plus"></i> Add Benefit</button>`)}
+
+  ${card('Membership Steps',`
+    <div id="steps-list">
+      ${steps.map((st,idx)=>`
+      <div class="array-item"><div class="array-item-header">
+        <span class="array-item-title">Step ${idx+1}: ${esc(st.title||'')}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeStep(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-group"><label class="form-label">Title</label>
+        <input class="form-input" value="${esc(st.title||'')}" onchange="updateStep(${idx},'title',this.value)"></div>
+      <div class="form-group"><label class="form-label">Description</label>
+        <textarea class="form-textarea" style="min-height:50px" onchange="updateStep(${idx},'description',this.value)">${esc(st.description||'')}</textarea></div>
+      </div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addStep()"><i class="fa-solid fa-plus"></i> Add Step</button>`)}
+  `;
+}
+
+/* ─── SECTION 10: CONTACT ─── */
+function renderContact(d){
+  const s = d.contact||{};
+  const svcTimes = s.serviceTimes||[
+    {name:'Sunday Early Service',time:'8:00 AM'},
+    {name:'Sunday Main Service',time:'10:00 AM'},
+    {name:'Wednesday Bible Study',time:'6:30 PM'},
+    {name:'Friday Youth Night',time:'6:00 PM'},
+  ];
+  return `
+  ${card('Address & Contact Details',`
+    <div class="form-grid">
+      ${field('Phone Number','contact.phone',10,s.phone||'0705 214 338','tel')}
+      ${field('Email 1','contact.email',10,s.email||'info@growinginchrist.org','email')}
+      ${field('Email 2 (Pastor)','contact.emailPastor',10,s.emailPastor||'pastor@growinginchrist.org','email')}
+    </div>
+    ${textarea('Address (multiline)','contact.address',10,s.address||'Growing in Christ Ministry\nThika Road, Roysambu\nNairobi, Kenya')}
+    <div class="form-grid">
+      ${field('Office Hours (Weekday)','contact.officeWeekday',10,s.officeWeekday||'Monday – Friday: 9:00 AM – 5:00 PM')}
+      ${field('Office Hours (Saturday)','contact.officeSaturday',10,s.officeSaturday||'Saturday: 10:00 AM – 2:00 PM')}
+    </div>`)}
+
+  ${card('Service Times',`
+    <div id="svc-list">
+      ${svcTimes.map((sv,idx)=>`
+      <div class="array-item" style="padding:12px 16px"><div class="array-item-header">
+        <span class="array-item-title">Service ${idx+1}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeSvc(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Service Name</label>
+          <input class="form-input" value="${esc(sv.name||'')}" onchange="updateSvc(${idx},'name',this.value)"></div>
+        <div class="form-group"><label class="form-label">Time</label>
+          <input class="form-input" value="${esc(sv.time||'')}" onchange="updateSvc(${idx},'time',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addSvc()"><i class="fa-solid fa-plus"></i> Add Service Time</button>`)}
+
+  ${card('Google Maps',`
+    ${field('Google Maps Embed URL','contact.mapsUrl',10,s.mapsUrl||'','url','Paste the full Google Maps embed URL (src from the iframe embed code)')}
+    <div class="help-text">Go to Google Maps → Share → Embed a map → copy just the src="" URL value</div>`)}
+  `;
+}
+
+/* ─── SECTION 11: FOOTER ─── */
+function renderFooter(d){
+  const s = d.footer||{};
+  const links = s.quickLinks||[{label:'About Us',url:'about.html'},{label:'Events',url:'events.html'},{label:'Give',url:'give.html'}];
+  const socials = s.socials||[{platform:'Facebook',url:'https://www.facebook.com/GrowingInChristMinistryKenya'},{platform:'Instagram',url:'https://www.instagram.com/growinginchristministry'},{platform:'YouTube',url:'https://www.youtube.com/@GrowingInChristMinistry'}];
+  return `
+  ${card('Footer Branding',`
+    <div class="form-grid">
+      ${field('Church Name in Footer','footer.churchName',11,s.churchName||'Growing in Christ')}
+      ${field('Footer Tagline','footer.tagline',11,s.tagline||'A community devoted to spiritual growth, discipleship, and Christ-centred service.')}
+      ${colorField('Footer Background Color','footer.bgColor',11,s.bgColor||'#082A17')}
+      ${colorField('Footer Text Color','footer.textColor',11,s.textColor||'rgba(255,255,255,0.75)')}
+    </div>
+    ${field('Copyright Text','footer.copyright',11,s.copyright||'© 2025 Growing in Christ Ministry. All rights reserved.')}
+    ${toggle('Back-to-Top Button','footer.backToTop',11,s.backToTop!==false)}`)}
+
+  ${card('Quick Links',`
+    <div id="footer-links-list">
+      ${links.map((lk,idx)=>`
+      <div class="array-item" style="padding:10px 14px"><div class="array-item-header">
+        <span class="array-item-title">Link ${idx+1}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeFooterLink(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Label</label>
+          <input class="form-input" value="${esc(lk.label)}" onchange="updateFooterLink(${idx},'label',this.value)"></div>
+        <div class="form-group"><label class="form-label">URL</label>
+          <input class="form-input" value="${esc(lk.url)}" onchange="updateFooterLink(${idx},'url',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addFooterLink()"><i class="fa-solid fa-plus"></i> Add Link</button>`)}
+
+  ${card('Social Links',`
+    <div id="footer-socials-list">
+      ${socials.map((s2,idx)=>`
+      <div class="array-item" style="padding:10px 14px"><div class="array-item-header">
+        <span class="array-item-title">${esc(s2.platform||`Social ${idx+1}`)}</span>
+        <button class="btn btn-sm btn-danger" onclick="removeFooterSocial(${idx})"><i class="fa-solid fa-trash"></i></button>
+      </div>
+      <div class="form-grid">
+        <div class="form-group"><label class="form-label">Platform</label>
+          <select class="form-select" onchange="updateFooterSocial(${idx},'platform',this.value)">
+            ${['Facebook','Instagram','YouTube','WhatsApp','Twitter / X','TikTok','Telegram'].map(p=>`<option ${s2.platform===p?'selected':''}>${p}</option>`).join('')}
+          </select></div>
+        <div class="form-group"><label class="form-label">URL</label>
+          <input class="form-input" value="${esc(s2.url||'')}" onchange="updateFooterSocial(${idx},'url',this.value)"></div>
+      </div></div>`).join('')}
+    </div>
+    <button class="btn btn-add" onclick="addFooterSocial()"><i class="fa-solid fa-plus"></i> Add Social Link</button>`)}
+  `;
+}
+
+/* ─────────────────────────────────────────────
+   ARRAY MUTATION HELPERS
+   These update SAVED data directly then re-render
+───────────────────────────────────────────── */
+function mutateArr(path, fn, sectionIdx){
+  let arr = get(path, SAVED);
+  if(!Array.isArray(arr)) arr=[];
+  fn(arr);
+  if(!SAVED[path.split('.')[0]]) SAVED[path.split('.')[0]]={};
+  set(path, arr, SAVED);
+  unsavedSections.add(sectionIdx);
+  updateSyncDots();
+  refreshPanel(sectionIdx);
+}
+
+// Nav links
+window.updateNavLink=(idx,k,v)=>{let arr=SAVED.header?.navLinks||[];if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.header)SAVED.header={};SAVED.header.navLinks=arr;unsavedSections.add(1);updateSyncDots();};
+window.removeNavLink=(idx)=>mutateArr('header.navLinks',a=>a.splice(idx,1),1);
+window.addNavLink=()=>mutateArr('header.navLinks',a=>a.push({label:'New Link',url:'#'}),1);
+// Stats
+window.updateStat=(idx,k,v)=>{let arr=SAVED.about?.stats||[];if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.about)SAVED.about={};SAVED.about.stats=arr;unsavedSections.add(3);updateSyncDots();};
+window.removeStat=(idx)=>mutateArr('about.stats',a=>a.splice(idx,1),3);
+window.addStat=()=>mutateArr('about.stats',a=>a.push({number:'0',label:'New Stat'}),3);
+// Team
+window.updateTeam=(idx,k,v)=>{let arr=SAVED.about?.team||[];if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.about)SAVED.about={};SAVED.about.team=arr;unsavedSections.add(3);updateSyncDots();};
+window.removeTeamMember=(idx)=>mutateArr('about.team',a=>a.splice(idx,1),3);
+window.addTeamMember=()=>mutateArr('about.team',a=>a.push({initial:'N',name:'New Member',role:'Ministry Role',bio:''}),3);
+// Departments
+function getDepts(){return Array.isArray(SAVED.departments)?SAVED.departments:(SAVED.departments?.items||[]);}
+function setDepts(arr){if(Array.isArray(SAVED.departments))SAVED.departments=arr;else{if(!SAVED.departments)SAVED.departments={};SAVED.departments.items=arr;}}
+window.updateDept=(idx,k,v)=>{const arr=getDepts();if(!arr[idx])arr[idx]={};arr[idx][k]=v;setDepts(arr);unsavedSections.add(4);updateSyncDots();};
+window.removeDept=(idx)=>{const arr=getDepts();arr.splice(idx,1);setDepts(arr);unsavedSections.add(4);updateSyncDots();refreshPanel(4);};
+window.addDept=()=>{const arr=getDepts();arr.push({name:'New Department',desc:'',head:'',members:'',color:'green'});setDepts(arr);unsavedSections.add(4);updateSyncDots();refreshPanel(4);};
+// Ministries
+function getMin(){return Array.isArray(SAVED.ministries)?SAVED.ministries:[];}
+function setMin(arr){SAVED.ministries=arr;}
+window.updateMin=(idx,k,v)=>{const arr=getMin();if(!arr[idx])arr[idx]={};arr[idx][k]=v;setMin(arr);unsavedSections.add(5);updateSyncDots();};
+window.removeMin=(idx)=>{const arr=getMin();arr.splice(idx,1);setMin(arr);unsavedSections.add(5);updateSyncDots();refreshPanel(5);};
+window.addMin=()=>{const arr=getMin();arr.push({icon:'✝',name:'New Ministry',desc:'',schedule:''});setMin(arr);unsavedSections.add(5);updateSyncDots();refreshPanel(5);};
+// Events
+function getEvts(){return Array.isArray(SAVED.events)?SAVED.events:[];}
+window.updateEvent=(idx,k,v)=>{const arr=getEvts();if(!arr[idx])arr[idx]={};arr[idx][k]=v;SAVED.events=arr;unsavedSections.add(6);updateSyncDots();};
+window.removeEvent=(idx)=>{const arr=getEvts();arr.splice(idx,1);SAVED.events=arr;unsavedSections.add(6);updateSyncDots();refreshPanel(6);};
+window.addEvent=()=>{const arr=getEvts();arr.push({day:new Date().getDate().toString(),month:new Date().toLocaleString('en',{month:'long'}),year:new Date().getFullYear().toString(),title:'New Event',desc:'',time:'',location:'',duration:'',reg:'register',color:'gold'});SAVED.events=arr;unsavedSections.add(6);updateSyncDots();refreshPanel(6);};
+// Gallery
+function getGal(){return Array.isArray(SAVED.gallery)?SAVED.gallery:[];}
+window.updateGallery=(idx,k,v)=>{const arr=getGal();if(!arr[idx])arr[idx]={};arr[idx][k]=v;SAVED.gallery=arr;unsavedSections.add(7);updateSyncDots();};
+window.removeGalleryItem=(idx)=>{const arr=getGal();arr.splice(idx,1);SAVED.gallery=arr;unsavedSections.add(7);updateSyncDots();refreshPanel(7);};
+window.addGalleryItem=()=>{const arr=getGal();arr.push({url:'',caption:'',category:'General',uploadedAt:new Date().toISOString()});SAVED.gallery=arr;unsavedSections.add(7);updateSyncDots();refreshPanel(7);};
+// Service times
+function getSvc(){return SAVED.contact?.serviceTimes||[{name:'Sunday Early Service',time:'8:00 AM'},{name:'Sunday Main Service',time:'10:00 AM'},{name:'Wednesday Bible Study',time:'6:30 PM'},{name:'Friday Youth Night',time:'6:00 PM'}];}
+window.updateSvc=(idx,k,v)=>{const arr=getSvc();if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.contact)SAVED.contact={};SAVED.contact.serviceTimes=arr;unsavedSections.add(10);updateSyncDots();};
+window.removeSvc=(idx)=>{const arr=getSvc();arr.splice(idx,1);if(!SAVED.contact)SAVED.contact={};SAVED.contact.serviceTimes=arr;unsavedSections.add(10);updateSyncDots();refreshPanel(10);};
+window.addSvc=()=>{const arr=getSvc();arr.push({name:'New Service',time:''});if(!SAVED.contact)SAVED.contact={};SAVED.contact.serviceTimes=arr;unsavedSections.add(10);updateSyncDots();refreshPanel(10);};
+// Benefits
+function getBenefits(){return SAVED.membership?.benefits||[];}
+window.updateBenefit=(idx,k,v)=>{const arr=getBenefits();if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.membership)SAVED.membership={};SAVED.membership.benefits=arr;unsavedSections.add(9);updateSyncDots();};
+window.removeBenefit=(idx)=>{const arr=getBenefits();arr.splice(idx,1);if(!SAVED.membership)SAVED.membership={};SAVED.membership.benefits=arr;unsavedSections.add(9);updateSyncDots();refreshPanel(9);};
+window.addBenefit=()=>{const arr=getBenefits();arr.push({icon:'✓',title:'New Benefit',description:''});if(!SAVED.membership)SAVED.membership={};SAVED.membership.benefits=arr;unsavedSections.add(9);updateSyncDots();refreshPanel(9);};
+// Steps
+function getSteps(){return SAVED.membership?.steps||[];}
+window.updateStep=(idx,k,v)=>{const arr=getSteps();if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.membership)SAVED.membership={};SAVED.membership.steps=arr;unsavedSections.add(9);updateSyncDots();};
+window.removeStep=(idx)=>{const arr=getSteps();arr.splice(idx,1);if(!SAVED.membership)SAVED.membership={};SAVED.membership.steps=arr;unsavedSections.add(9);updateSyncDots();refreshPanel(9);};
+window.addStep=()=>{const arr=getSteps();arr.push({title:'New Step',description:''});if(!SAVED.membership)SAVED.membership={};SAVED.membership.steps=arr;unsavedSections.add(9);updateSyncDots();refreshPanel(9);};
+// Footer links
+function getFooterLinks(){return SAVED.footer?.quickLinks||[];}
+window.updateFooterLink=(idx,k,v)=>{const arr=getFooterLinks();if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.footer)SAVED.footer={};SAVED.footer.quickLinks=arr;unsavedSections.add(11);updateSyncDots();};
+window.removeFooterLink=(idx)=>{const arr=getFooterLinks();arr.splice(idx,1);if(!SAVED.footer)SAVED.footer={};SAVED.footer.quickLinks=arr;unsavedSections.add(11);updateSyncDots();refreshPanel(11);};
+window.addFooterLink=()=>{const arr=getFooterLinks();arr.push({label:'New Link',url:'#'});if(!SAVED.footer)SAVED.footer={};SAVED.footer.quickLinks=arr;unsavedSections.add(11);updateSyncDots();refreshPanel(11);};
+// Footer socials
+function getFooterSocials(){return SAVED.footer?.socials||[];}
+window.updateFooterSocial=(idx,k,v)=>{const arr=getFooterSocials();if(!arr[idx])arr[idx]={};arr[idx][k]=v;if(!SAVED.footer)SAVED.footer={};SAVED.footer.socials=arr;unsavedSections.add(11);updateSyncDots();};
+window.removeFooterSocial=(idx)=>{const arr=getFooterSocials();arr.splice(idx,1);if(!SAVED.footer)SAVED.footer={};SAVED.footer.socials=arr;unsavedSections.add(11);updateSyncDots();refreshPanel(11);};
+window.addFooterSocial=()=>{const arr=getFooterSocials();arr.push({platform:'Facebook',url:'https://'});if(!SAVED.footer)SAVED.footer={};SAVED.footer.socials=arr;unsavedSections.add(11);updateSyncDots();refreshPanel(11);};
+
+/* ── MOBILE NAV ── */
+function setupMobileNav(){
+  document.getElementById('hamburgerBtn').addEventListener('click',()=>{
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('drawerOverlay').classList.toggle('open');
   });
-
-  /* ── LOGOUT ───────────────────────────────────────── */
-  window.doLogout = async function () {
-    await signOut(auth);
-  };
-
-  /* ── PASSWORD RESET via Firebase ─────────────────── */
-  window.showResetRequest = function () {
-    $('loginForm').style.display        = 'none';
-    $('resetRequestForm').style.display = 'block';
-    hideAlert('resetRequestAlert');
-    $('resetEmail').value = '';
-  };
-  window.showLogin = function () {
-    $('loginForm').style.display        = 'block';
-    $('resetRequestForm').style.display = 'none';
-  };
-
-  window.sendPasswordReset = async function () {
-    const email = V('resetEmail').trim();
-    if (!email) { showAlert('resetRequestAlert', 'Please enter your email address.'); return; }
-    const btn = document.querySelector('#resetRequestForm .btn-primary');
-    btn.disabled = true; btn.textContent = 'Sending…';
-    try {
-      await sendPasswordResetEmail(auth, email);
-      showAlert('resetRequestAlert',
-        'Password reset email sent! Check your inbox (and spam folder) for a link from Firebase. Click it to set a new password, then return here to log in.',
-        'success');
-    } catch (e) {
-      let msg = 'Could not send reset email.';
-      if (e.code === 'auth/invalid-email') msg = 'Please enter a valid email address.';
-      if (e.code === 'auth/too-many-requests') msg = 'Too many requests. Please wait a few minutes and try again.';
-      showAlert('resetRequestAlert', msg);
-    }
-    btn.disabled = false; btn.textContent = 'Send Reset Link';
-  };
-
-  /* ── LOAD SITE DATA ──────────────────────────────── */
-  const MAIN_DOC = doc(db, 'siteData', 'main');
-
-  async function loadSiteData () {
-    try {
-      const snap = await getDoc(MAIN_DOC);
-      siteData   = snap.exists() ? snap.data() : {};
-    } catch (e) {
-      siteData = {};
-    }
-    populateAllForms();
-    updateDashboard();
-  }
-
-  /* ── POPULATE FORMS ──────────────────────────────── */
-  function populateAllForms () {
-    const d = siteData;
-    // Homepage
-    if (d.homepage) {
-      const h = d.homepage;
-      Object.keys(h).forEach(k => { const el = $('hp-' + k); if (el) el.value = h[k] || ''; });
-    }
-    // About
-    if (d.about) {
-      Object.keys(d.about).forEach(k => { const el = $('ab-' + k); if (el) el.value = d.about[k] || ''; });
-    }
-    // Contact
-    if (d.contact) {
-      const c = d.contact;
-      if ($('ct-phone')) $('ct-phone').value = c.phone || '';
-      const map = { 'ct-email':c.email,'ct-emailPastor':c.emailPastor,'ct-officeHours':c.officeHours,'ct-address':c.address,
-                    'ct-s1l':c.service1Label,'ct-s1t':c.service1Time,'ct-s2l':c.service2Label,'ct-s2t':c.service2Time,
-                    'ct-s3l':c.service3Label,'ct-s3t':c.service3Time,'ct-s4l':c.service4Label,'ct-s4t':c.service4Time };
-      Object.entries(map).forEach(([id,val]) => { const el = $(id); if (el) el.value = val || ''; });
-    }
-    // Lists
-    renderHistoryEditor(d.history || []);
-    renderLeadershipEditor(d.leadership || []);
-    renderEventsEditor(d.events || []);
-    renderAnnouncementsEditor(d.announcements || []);
-    renderMinistriesEditor(d.ministries || []);
-    renderDepartmentsEditor(d.departments || []);
-    renderGalleryAdmin(d.gallery || []);
-  }
-
-  /* ── DASHBOARD ───────────────────────────────────── */
-  function updateDashboard () {
-    const d = siteData || {};
-    $('dash-members').textContent   = d.homepage?.stat2Num || '247';
-    $('dash-events').textContent    = (d.events    || []).length;
-    $('dash-gallery').textContent   = (d.gallery   || []).length;
-    $('dash-announce').textContent  = (d.announcements || []).length;
-  }
-
-  /* ── PANEL SWITCHING ─────────────────────────────── */
-  window.showPanel = function (name) {
-    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-    document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
-    $('panel-' + name)?.classList.add('active');
-    document.querySelector(`.nav-item[data-panel="${name}"]`)?.classList.add('active');
-    $('panelTitle').textContent = document.querySelector(`.nav-item[data-panel="${name}"]`)?.textContent.trim() || '';
-  };
-
-  /* ── SAVE HELPERS ────────────────────────────────── */
-  async function savePart (key, value) {
-    try {
-      const update = {};
-      update[key] = value;
-      update._lastSaved = new Date().toISOString();
-      await setDoc(MAIN_DOC, update, { merge: true });
-      toast('✓ Saved! Changes are live on the website.');
-      if (!siteData) siteData = {};
-      siteData[key] = value;
-      updateDashboard();
-    } catch (e) {
-      toast('❌ Save failed: ' + e.message);
-    }
-  }
-
-  /* ── SAVE HOMEPAGE ───────────────────────────────── */
-  window.saveHomepage = function () {
-    savePart('homepage', {
-      heroHeadline: V('hp-heroHeadline'), heroSubtext: V('hp-heroSubtext'),
-      ctaPrimary:   V('hp-ctaPrimary'),   ctaSecondary: V('hp-ctaSecondary'),
-      heroImage:    V('hp-heroImage'),
-      stat1Num:  V('hp-stat1Num'),  stat1Label: V('hp-stat1Label'),
-      stat2Num:  V('hp-stat2Num'),  stat2Label: V('hp-stat2Label'),
-      stat3Num:  V('hp-stat3Num'),  stat3Label: V('hp-stat3Label'),
-      stat4Num:  V('hp-stat4Num'),  stat4Label: V('hp-stat4Label'),
-      verseText: V('hp-verseText'), verseRef:   V('hp-verseRef'),
-      welcomeImage: V('hp-welcomeImage'),
-    });
-  };
-
-  /* ── SAVE ABOUT ──────────────────────────────────── */
-  window.saveAbout = function () {
-    savePart('about', {
-      mission: V('ab-mission'), vision: V('ab-vision'),
-      slogan:  V('ab-slogan'),  motto:  V('ab-motto'),
-    });
-  };
-
-  /* ── SAVE CONTACT ────────────────────────────────── */
-  window.saveContact = function () {
-    savePart('contact', {
-      phone:       V('ct-phone'),   email:       V('ct-email'),
-      emailPastor: V('ct-emailPastor'), officeHours: V('ct-officeHours'),
-      address:     V('ct-address'),
-      service1Label: V('ct-s1l'), service1Time: V('ct-s1t'),
-      service2Label: V('ct-s2l'), service2Time: V('ct-s2t'),
-      service3Label: V('ct-s3l'), service3Time: V('ct-s3t'),
-      service4Label: V('ct-s4l'), service4Time: V('ct-s4t'),
-    });
-  };
-
-  /* ── HISTORY ──────────────────────────────────────── */
-  function renderHistoryEditor (items) {
-    $('historyList').innerHTML = items.map((item, i) => `
-      <div class="list-editor-item" id="hist-${i}">
-        <div class="item-header"><span class="item-num">Entry ${i+1}</span><button class="btn-remove" onclick="removeHistoryItem(${i})">Remove</button></div>
-        <div class="field-grid">
-          <div class="form-group"><label>Year</label><input type="text" class="form-control" id="hist-year-${i}" value="${esc(item.year)}"></div>
-          <div class="form-group"><label>Title</label><input type="text" class="form-control" id="hist-title-${i}" value="${esc(item.title)}"></div>
-          <div class="field-full form-group"><label>Description</label><textarea class="form-control" id="hist-body-${i}">${esc(item.body)}</textarea></div>
-        </div>
-      </div>`).join('');
-  }
-  window.addHistoryItem = function () {
-    const items = collectHistory(); items.push({ year:'', title:'', body:'' });
-    renderHistoryEditor(items);
-  };
-  window.removeHistoryItem = function (i) {
-    const items = collectHistory(); items.splice(i,1); renderHistoryEditor(items);
-  };
-  function collectHistory () {
-    const items = [];
-    document.querySelectorAll('[id^="hist-year-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ year: el.value.trim(), title: V('hist-title-'+i), body: V('hist-body-'+i) });
-    });
-    return items;
-  }
-  window.saveHistory = function () { savePart('history', collectHistory()); };
-
-  /* ── LEADERSHIP ──────────────────────────────────── */
-  function renderLeadershipEditor (items) {
-    $('leadershipList').innerHTML = items.map((l, i) => `
-      <div class="list-editor-item" id="lead-${i}">
-        <div class="item-header"><span class="item-num">${esc(l.name) || 'Leader ' + (i+1)}</span><button class="btn-remove" onclick="removeLeaderItem(${i})">Remove</button></div>
-        <div class="field-grid">
-          <div class="form-group"><label>Name</label><input type="text" class="form-control" id="lead-name-${i}" value="${esc(l.name)}"></div>
-          <div class="form-group"><label>Role / Title</label><input type="text" class="form-control" id="lead-role-${i}" value="${esc(l.role)}"></div>
-          <div class="form-group"><label>Initial (Avatar)</label><input type="text" class="form-control" id="lead-initial-${i}" value="${esc(l.initial)}" maxlength="2"></div>
-          <div class="form-group"><label>Contact Email</label><input type="email" class="form-control" id="lead-contact-${i}" value="${esc(l.contact)}"></div>
-          <div class="field-full form-group"><label>Bio</label><textarea class="form-control" id="lead-bio-${i}">${esc(l.bio)}</textarea></div>
-          <div class="field-full form-group"><label>Photo URL</label><input type="url" class="form-control" id="lead-photo-${i}" value="${esc(l.photo)}" placeholder="https://..."></div>
-        </div>
-      </div>`).join('');
-  }
-  window.addLeaderItem = function () {
-    const items = collectLeadership(); items.push({ name:'', role:'', initial:'', bio:'', photo:'', contact:'' });
-    renderLeadershipEditor(items);
-  };
-  window.removeLeaderItem = function (i) {
-    const items = collectLeadership(); items.splice(i,1); renderLeadershipEditor(items);
-  };
-  function collectLeadership () {
-    const items = [];
-    document.querySelectorAll('[id^="lead-name-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ name: el.value.trim(), role: V('lead-role-'+i), initial: V('lead-initial-'+i), bio: V('lead-bio-'+i), photo: V('lead-photo-'+i), contact: V('lead-contact-'+i) });
-    });
-    return items;
-  }
-  window.saveLeadership = function () { savePart('leadership', collectLeadership()); };
-
-  /* ── EVENTS ──────────────────────────────────────── */
-  function renderEventsEditor (items) {
-    $('eventsList').innerHTML = items.map((ev, i) => `
-      <div class="list-editor-item">
-        <div class="item-header"><span class="item-num">${esc(ev.title) || 'Event ' + (i+1)}</span><button class="btn-remove" onclick="removeEventItem(${i})">Remove</button></div>
-        <div class="field-grid">
-          <div class="form-group"><label>Day</label><input type="text" class="form-control" id="ev-day-${i}" value="${esc(ev.day)}" placeholder="15"></div>
-          <div class="form-group"><label>Month</label><input type="text" class="form-control" id="ev-month-${i}" value="${esc(ev.month)}" placeholder="June"></div>
-          <div class="form-group"><label>Year</label><input type="text" class="form-control" id="ev-year-${i}" value="${esc(ev.year)}"></div>
-          <div class="form-group"><label>Registration Type</label>
-            <select class="form-control" id="ev-reg-${i}">
-              <option value="register" ${ev.reg==='register'?'selected':''}>Register</option>
-              <option value="volunteer" ${ev.reg==='volunteer'?'selected':''}>Volunteer</option>
-              <option value="apply" ${ev.reg==='apply'?'selected':''}>Apply</option>
-              <option value="rsvp" ${ev.reg==='rsvp'?'selected':''}>RSVP</option>
-            </select>
-          </div>
-          <div class="field-full form-group"><label>Title</label><input type="text" class="form-control" id="ev-title-${i}" value="${esc(ev.title)}"></div>
-          <div class="field-full form-group"><label>Description</label><textarea class="form-control" id="ev-desc-${i}">${esc(ev.desc)}</textarea></div>
-          <div class="form-group"><label>Time</label><input type="text" class="form-control" id="ev-time-${i}" value="${esc(ev.time)}"></div>
-          <div class="form-group"><label>Location</label><input type="text" class="form-control" id="ev-loc-${i}" value="${esc(ev.location)}"></div>
-          <div class="form-group"><label>Duration / Note</label><input type="text" class="form-control" id="ev-dur-${i}" value="${esc(ev.duration)}"></div>
-        </div>
-      </div>`).join('');
-  }
-  window.addEventItem = function () {
-    const items = collectEvents(); items.push({ day:'', month:'', year:'2025', title:'', desc:'', time:'', location:'', duration:'', reg:'register', color:'', image:'' });
-    renderEventsEditor(items);
-  };
-  window.removeEventItem = function (i) {
-    const items = collectEvents(); items.splice(i,1); renderEventsEditor(items);
-  };
-  function collectEvents () {
-    const items = [];
-    document.querySelectorAll('[id^="ev-day-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ day: el.value.trim(), month: V('ev-month-'+i), year: V('ev-year-'+i), title: V('ev-title-'+i), desc: V('ev-desc-'+i), time: V('ev-time-'+i), location: V('ev-loc-'+i), duration: V('ev-dur-'+i), reg: V('ev-reg-'+i) || 'register', color:'', image:'' });
-    });
-    return items;
-  }
-  window.saveEvents = function () { savePart('events', collectEvents()); };
-
-  /* ── ANNOUNCEMENTS ───────────────────────────────── */
-  function renderAnnouncementsEditor (items) {
-    $('announcementsList').innerHTML = items.map((a, i) => `
-      <div class="list-editor-item">
-        <div class="item-header"><span class="item-num">Announcement ${i+1}</span><button class="btn-remove" onclick="removeAnnouncementItem(${i})">Remove</button></div>
-        <div class="form-group"><label>Title</label><input type="text" class="form-control" id="ann-title-${i}" value="${esc(a.title)}"></div>
-        <div class="form-group"><label>Body</label><textarea class="form-control" id="ann-body-${i}">${esc(a.body)}</textarea></div>
-        <div class="form-group"><label>Type</label>
-          <select class="form-control" id="ann-type-${i}">
-            <option value="green" ${a.type==='green'?'selected':''}>Green</option>
-            <option value="gold"  ${a.type==='gold'?'selected':''}>Gold</option>
-            <option value="blue"  ${a.type==='blue'?'selected':''}>Blue</option>
-          </select>
-        </div>
-      </div>`).join('');
-  }
-  window.addAnnouncementItem = function () {
-    const items = collectAnnouncements(); items.push({ title:'', body:'', type:'green' });
-    renderAnnouncementsEditor(items);
-  };
-  window.removeAnnouncementItem = function (i) {
-    const items = collectAnnouncements(); items.splice(i,1); renderAnnouncementsEditor(items);
-  };
-  function collectAnnouncements () {
-    const items = [];
-    document.querySelectorAll('[id^="ann-title-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ title: el.value.trim(), body: V('ann-body-'+i), type: V('ann-type-'+i) || 'green' });
-    });
-    return items;
-  }
-  window.saveAnnouncements = function () { savePart('announcements', collectAnnouncements()); };
-
-  /* ── MINISTRIES ──────────────────────────────────── */
-  function renderMinistriesEditor (items) {
-    $('ministriesList').innerHTML = items.map((m, i) => `
-      <div class="list-editor-item">
-        <div class="item-header"><span class="item-num">${esc(m.name) || 'Ministry ' + (i+1)}</span><button class="btn-remove" onclick="removeMinistryItem(${i})">Remove</button></div>
-        <div class="field-grid">
-          <div class="form-group"><label>Name</label><input type="text" class="form-control" id="min-name-${i}" value="${esc(m.name)}"></div>
-          <div class="form-group"><label>Icon (emoji)</label><input type="text" class="form-control" id="min-icon-${i}" value="${esc(m.icon)}"></div>
-          <div class="field-full form-group"><label>Description</label><textarea class="form-control" id="min-desc-${i}">${esc(m.desc)}</textarea></div>
-          <div class="form-group"><label>Schedule</label><input type="text" class="form-control" id="min-sched-${i}" value="${esc(m.schedule)}"></div>
-          <div class="form-group"><label>Contact</label><input type="text" class="form-control" id="min-contact-${i}" value="${esc(m.contact)}"></div>
-        </div>
-      </div>`).join('');
-  }
-  window.addMinistryItem = function () {
-    const items = collectMinistries(); items.push({ name:'', icon:'', desc:'', schedule:'', contact:'', image:'' });
-    renderMinistriesEditor(items);
-  };
-  window.removeMinistryItem = function (i) {
-    const items = collectMinistries(); items.splice(i,1); renderMinistriesEditor(items);
-  };
-  function collectMinistries () {
-    const items = [];
-    document.querySelectorAll('[id^="min-name-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ name: el.value.trim(), icon: V('min-icon-'+i), desc: V('min-desc-'+i), schedule: V('min-sched-'+i), contact: V('min-contact-'+i), image:'' });
-    });
-    return items;
-  }
-  window.saveMinistries = function () { savePart('ministries', collectMinistries()); };
-
-  /* ── DEPARTMENTS ─────────────────────────────────── */
-  function renderDepartmentsEditor (items) {
-    $('departmentsList').innerHTML = items.map((d, i) => `
-      <div class="list-editor-item">
-        <div class="item-header"><span class="item-num">${esc(d.name) || 'Department ' + (i+1)}</span><button class="btn-remove" onclick="removeDepartmentItem(${i})">Remove</button></div>
-        <div class="field-grid">
-          <div class="form-group"><label>Name</label><input type="text" class="form-control" id="dept-name-${i}" value="${esc(d.name)}"></div>
-          <div class="form-group"><label>Head / Leader</label><input type="text" class="form-control" id="dept-head-${i}" value="${esc(d.head)}"></div>
-          <div class="field-full form-group"><label>Description</label><textarea class="form-control" id="dept-desc-${i}">${esc(d.desc)}</textarea></div>
-          <div class="form-group"><label>Team Members</label><input type="text" class="form-control" id="dept-members-${i}" value="${esc(d.members)}"></div>
-          <div class="form-group"><label>Accent Color</label>
-            <select class="form-control" id="dept-color-${i}">
-              <option value="green" ${d.color==='green'?'selected':''}>Green</option>
-              <option value="gold"  ${d.color==='gold'?'selected':''}>Gold</option>
-              <option value="blue"  ${d.color==='blue'?'selected':''}>Blue</option>
-            </select>
-          </div>
-          <div class="field-full form-group"><label>Image URL</label><input type="url" class="form-control" id="dept-img-${i}" value="${esc(d.image)}" placeholder="https://..."></div>
-        </div>
-      </div>`).join('');
-  }
-  window.addDepartmentItem = function () {
-    const items = collectDepartments(); items.push({ name:'', head:'', desc:'', members:'', color:'green', image:'' });
-    renderDepartmentsEditor(items);
-  };
-  window.removeDepartmentItem = function (i) {
-    const items = collectDepartments(); items.splice(i,1); renderDepartmentsEditor(items);
-  };
-  function collectDepartments () {
-    const items = [];
-    document.querySelectorAll('[id^="dept-name-"]').forEach(el => {
-      const i = el.id.split('-').pop();
-      items.push({ name: el.value.trim(), head: V('dept-head-'+i), desc: V('dept-desc-'+i), members: V('dept-members-'+i), color: V('dept-color-'+i) || 'green', image: V('dept-img-'+i) });
-    });
-    return items;
-  }
-  window.saveDepartments = function () { savePart('departments', collectDepartments()); };
-
-  /* ── GALLERY ─────────────────────────────────────── */
-  let galleryItems = [];
-
-  function renderGalleryAdmin (items) {
-    galleryItems = items || [];
-    $('galleryCount').textContent = galleryItems.length;
-    $('galleryAdminGrid').innerHTML = galleryItems.map((item, i) => `
-      <div class="gallery-thumb">
-        <img src="${esc(item.url)}" alt="${esc(item.caption||'')}">
-        <button class="gth-del" onclick="removeGalleryItem(${i})" title="Delete">✕</button>
-        ${item.caption ? `<div class="gth-cap">${esc(item.caption)}</div>` : ''}
-      </div>`).join('');
-  }
-
-  window.addGalleryItem = function () {
-    const url  = V('newGalleryUrl');
-    const cap  = V('newGalleryCaption');
-    const cat  = V('newGalleryCategory');
-    if (!url) { toast('Please enter an image URL.'); return; }
-    galleryItems.push({ id: Date.now().toString(), url, caption: cap, category: cat, date: new Date().toISOString() });
-    renderGalleryAdmin(galleryItems);
-    $('newGalleryUrl').value = $('newGalleryCaption').value = $('newGalleryCategory').value = '';
-  };
-
-  window.removeGalleryItem = function (i) {
-    galleryItems.splice(i, 1);
-    renderGalleryAdmin(galleryItems);
-  };
-
-  window.saveGallery = function () { savePart('gallery', galleryItems); };
-
-  /* ── CHANGE PASSWORD ─────────────────────────────── */
-  window.changePassword = async function () {
-    const cur = V('pw-current');
-    const p1  = V('pw-new');
-    const p2  = V('pw-confirm');
-    if (!cur) { showAlert('pwAlert','Enter your current password.'); return; }
-    if (!p1 || p1.length < 8) { showAlert('pwAlert','New password must be at least 8 characters.'); return; }
-    if (p1 !== p2) { showAlert('pwAlert','Passwords do not match.'); return; }
-    hideAlert('pwAlert');
-    try {
-      const cred = EmailAuthProvider.credential(currentUser.email, cur);
-      await reauthenticateWithCredential(currentUser, cred);
-      await updatePassword(currentUser, p1);
-      showAlert('pwAlert','Password updated successfully!', 'success');
-      $('pw-current').value = $('pw-new').value = $('pw-confirm').value = '';
-    } catch (e) {
-      let msg = 'Failed to update password.';
-      if (e.code === 'auth/wrong-password') msg = 'Current password is incorrect.';
-      showAlert('pwAlert', msg);
-    }
-  };
-
-  /* ── ESCAPE HELPER ───────────────────────────────── */
-  function esc (str) {
-    return String(str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
+}
+window.closeSidebar=function(){
+  document.getElementById('sidebar').classList.remove('open');
+  document.getElementById('drawerOverlay').classList.remove('open');
+};
+window.switchBottomTab=function(tabIdx,el){
+  document.querySelectorAll('.bottom-tab').forEach(b=>b.classList.remove('active'));
+  el.classList.add('active');
+  // Activate first section in this tab's group
+  const groups=[[0,1,2],[3,4,5],[6,7,8],[9,10,11]];
+  activateSection(groups[tabIdx][0]);
+};
 
 </script>
 </body>
