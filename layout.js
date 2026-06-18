@@ -50,7 +50,7 @@
   const navbar = `
   <nav class="navbar">
     <div class="container">
-      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry" style="width:46px;height:46px;border-radius:50%;object-fit:cover"></div>
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><img src="Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry" style="width:46px;height:46px;border-radius:50%;object-fit:cover"></div>
         <div class="nav-logo-text">
         
           <strong>Growing in Christ</strong>
@@ -84,7 +84,7 @@
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-header">
       <div class="nav-logo">
-        <div class="nav-logo-icon" style="background:var(--white)"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry shown in mobile navigation header" style="width:40px;height:40px;border-radius:50%;object-fit:cover"></div>
+        <div class="nav-logo-icon" style="background:var(--white)"><img src="Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry shown in mobile navigation header" style="width:40px;height:40px;border-radius:50%;object-fit:cover"></div>
         <div class="nav-logo-text">
           <strong style="color:white">Growing in Christ</strong>
           <span>Ministry</span>
@@ -113,7 +113,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo">
-            <div class="footer-logo-icon"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry in the footer" style="width:44px;height:44px;border-radius:50%;object-fit:cover"></div>
+            <div class="footer-logo-icon"><img src="Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry in the footer" style="width:44px;height:44px;border-radius:50%;object-fit:cover"></div>
             <div class="footer-logo-text">
               <strong>Growing in Christ</strong>
               <span>Ministry — Kenya</span>
