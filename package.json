@@ -1,0 +1,29 @@
+{
+  "name": "growing-in-christ-ministry",
+  "version": "1.0.0",
+  "description": "Official website for Growing in Christ Ministry — Nairobi, Kenya",
+  "private": true,
+  "scripts": {
+    "start": "npx serve . --listen 3000",
+    "dev": "npx live-server --port=3000 --open=index.html",
+    "lint:html": "npx htmlhint *.html",
+    "preview": "npx serve ."
+  },
+  "keywords": [
+    "church",
+    "ministry",
+    "adventist",
+    "nairobi",
+    "kenya"
+  ],
+  "author": "Growing in Christ Ministry",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "live-server": "^1.2.2",
+    "serve": "^14.2.3",
+    "htmlhint": "^1.1.4"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}
