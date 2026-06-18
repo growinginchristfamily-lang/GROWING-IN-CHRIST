@@ -2,8 +2,16 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Give Online — Support Growing in Christ Ministry through M-Pesa or online giving. Your generosity advances the Gospel in Kenya.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Give Online — Growing in Christ Ministry</title>
+  <meta property="og:title" content="Give Online — Growing in Christ Ministry">
+  <meta property="og:description" content="Give Online — Support Growing in Christ Ministry through M-Pesa or online giving. Your generosity advances the Gospel in Kenya.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://growinginchrist.org/give.html">
+  <meta property="og:site_name" content="Growing in Christ Ministry">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
   <link rel="stylesheet" href="styles.css">
   <style>
     .give-layout {
@@ -95,14 +103,14 @@
     }
     .mpesa-box h3 { color: white; font-size: 1.1rem; margin-bottom: 8px; }
     .mpesa-box p  { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
-    .mpesa-paybill {
+    .mpesa{
       background: rgba(255,255,255,0.15);
       border-radius: 8px;
       padding: 14px 18px;
       margin-top: 14px;
       font-family: var(--font-sans);
     }
-    .mpesa-paybill strong {
+    .mpesa strong {
       display: block;
       font-size: 0.7rem;
       letter-spacing: 0.1em;
@@ -110,7 +118,7 @@
       color: rgba(255,255,255,0.6);
       margin-bottom: 4px;
     }
-    .mpesa-paybill span {
+    .mpesa span {
       font-size: 1.4rem;
       font-weight: 700;
       letter-spacing: 0.06em;
@@ -142,8 +150,7 @@
 
         <div class="give-type-tabs">
           <button class="give-tab active">One-Time Gift</button>
-          <button class="give-tab">Monthly Giving</button>
-          <button class="give-tab">Tithe &amp; Offering</button>
+          <button class="give-tab">Monthly Registration</button>
         </div>
 
         <label style="font-family:var(--font-sans);font-size:0.82rem;font-weight:600;color:var(--green-dark);display:block;margin-bottom:10px">Select Amount (KSh)</label>
@@ -237,31 +244,27 @@
         <div class="mpesa-box">
           <h3> Give via M-Pesa</h3>
           <p>Prefer to give directly via M-Pesa? Use our Paybill number:</p>
-          <div class="mpesa-paybill">
-            <strong>Paybill Number</strong>
-            <span>400200</span>
+          <div class="mpesa">
+            <strong>Mpesa Number</strong>
+            <span>07....</span>
           </div>
-          <div class="mpesa-paybill" style="margin-top:8px">
-            <strong>Account Number</strong>
-            <span>GROWING25</span>
+          <div class="mpesa" style="margin-top:8px">
+            <strong>MPESA NAME</strong>
+            <span>DEBRA DAVID</span>
           </div>
           <p style="margin-top:12px;font-size:0.8rem">Enter your name as reference. SMS confirmation will be sent.</p>
         </div>
 
         <div style="background:var(--gold-pale);border-radius:12px;padding:24px;margin-top:24px;border:1px solid var(--border)">
           <h4 style="font-size:0.95rem;margin-bottom:8px">Need Help?</h4>
-          <p style="font-size:0.85rem">Contact our finance team at <a href="mailto:giving@growinginchrist.org">giving@growinginchrist.org</a> or call <strong>0705 214 338</strong></p>
+          <p style="font-size:0.85rem">Contact our finance team at <a href="mailto:growinginchristfamily@gmail.com">growinginchristfamily@gmail.com</a> or call <strong>0798981285</strong></p>
         </div>
       </div>
 
     </div>
   </div>
 </section>
-
-<script src="site-data.js"></script>
-<script src="layout.js"></script>
-<script src="site-sync.js"></script>
-<script>
+<script src="layout.js"></script><script>
   function selectAmount(btn) {
     document.querySelectorAll('.amount-btn').forEach(b => b.classList.remove('selected'));
     btn.classList.add('selected');

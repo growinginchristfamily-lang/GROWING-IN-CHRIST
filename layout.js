@@ -34,13 +34,13 @@
   <div class="top-bar">
     <div class="container">
       <div class="top-bar-left">
-        <a href="mailto:info@growinginchrist.org"><i class="fa-solid fa-envelope" style="margin-right:5px"></i>info@growinginchrist.org</a>
+        <a href="mailto:growinginchristfamily@gmail.com"><i class="fa-solid fa-envelope" style="margin-right:5px"></i>growinginchristfamily@gmail.com</a>
         <a href="tel:+254705214338"><i class="fa-solid fa-phone" style="margin-right:5px"></i>0705 214 338</a>
       </div>
       <div class="top-bar-right">
         <a href="https://www.facebook.com/GrowingInChristMinistryKenya" target="_blank" rel="noopener" class="social-icon" title="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
         <a href="https://www.instagram.com/growinginchristministry"      target="_blank" rel="noopener" class="social-icon" title="Instagram"><i class="fa-brands fa-instagram"></i></a>
-        <a href="https://www.youtube.com/@GrowingInChristMinistry"       target="_blank" rel="noopener" class="social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
+        <a href="https://www.youtube.com/@GrowingInChristministry"       target="_blank" rel="noopener" class="social-icon" title="YouTube"><i class="fa-brands fa-youtube"></i></a>
         <a href="https://wa.me/${WA_NUM}"                                target="_blank" rel="noopener" class="social-icon" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
       </div>
     </div>
@@ -50,9 +50,9 @@
   const navbar = `
   <nav class="navbar">
     <div class="container">
-      <a href="index.html" class="nav-logo">
-        <div class="nav-logo-icon"><i class="fa-solid fa-church"></i></div>
+      <a href="index.html" class="nav-logo"><div class="nav-logo-icon"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry" style="width:46px;height:46px;border-radius:50%;object-fit:cover"></div>
         <div class="nav-logo-text">
+        
           <strong>Growing in Christ</strong>
           <span>Ministry — Kenya</span>
         </div>
@@ -61,24 +61,17 @@
         <a href="index.html">Home</a>
         <a href="about.html">About</a>
         <a href="departments.html">Departments</a>
-        <a href="ministries.html">Ministries</a>
         <a href="events.html">Events</a>
         <div class="nav-dropdown">
           <a href="#">Resources</a>
           <div class="dropdown-menu">
             <a href="resources.html#quarterly"><i class="fa-solid fa-book-open" style="margin-right:7px;color:var(--green)"></i>Sabbath School Quarterly</a>
             <a href="resources.html#online"><i class="fa-solid fa-globe" style="margin-right:7px;color:var(--green)"></i>Online Resources</a>
-            <a href="beliefs.html">28 Fundamental Beliefs</a>
-            <a href="ellen-white.html">Ellen G. White</a>
-            <a href="gallery.html">Photo Gallery</a>
-            <hr style="margin:4px 0;border:none;border-top:1px solid var(--border)">
-            <a href="ministries.html#worship">Worship &amp; Prayer</a>
-            <a href="ministries.html#youth">Youth Ministry</a>
-            <a href="ministries.html#outreach">Community Outreach</a>
-            <a href="ministries.html#discipleship">Discipleship</a>
-            <a href="ministries.html#children">Children's Ministry</a>
+            <a href="beliefs.html"><i class="fa-solid fa-cross" style="margin-right:7px;color:var(--green)"></i>28 Fundamental Beliefs</a>
+            <a href="ellen-white.html"><i class="fa-solid fa-book" style="margin-right:7px;color:var(--green)"></i>Ellen G. White</a>
           </div>
         </div>
+        <a href="gallery.html">Gallery</a>
         <a href="membership.html">Membership</a>
         <a href="contact.html">Contact</a>
       </div>
@@ -91,7 +84,7 @@
   <div class="mobile-nav" id="mobileNav">
     <div class="mobile-nav-header">
       <div class="nav-logo">
-        <div class="nav-logo-icon" style="background:var(--green-mid)"><i class="fa-solid fa-church"></i></div>
+        <div class="nav-logo-icon" style="background:var(--white)"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry shown in mobile navigation header" style="width:40px;height:40px;border-radius:50%;object-fit:cover"></div>
         <div class="nav-logo-text">
           <strong style="color:white">Growing in Christ</strong>
           <span>Ministry</span>
@@ -102,12 +95,11 @@
     <a href="index.html">Home</a>
     <a href="about.html">About Us</a>
     <a href="departments.html">Departments</a>
-    <a href="ministries.html">Ministries</a>
     <a href="events.html">Events</a>
     <a href="resources.html">Resources</a>
     <a href="resources.html#quarterly">&nbsp;&nbsp;Quarterly Lessons</a>
-    <a href="beliefs.html">28 Fundamental Beliefs</a>
-    <a href="ellen-white.html">Ellen G. White</a>
+    <a href="beliefs.html">&nbsp;&nbsp;28 Fundamental Beliefs</a>
+    <a href="ellen-white.html">&nbsp;&nbsp;Ellen G. White</a>
     <a href="gallery.html">Photo Gallery</a>
     <a href="membership.html">Membership</a>
     <a href="contact.html">Contact</a>
@@ -121,7 +113,7 @@
       <div class="footer-grid">
         <div>
           <div class="footer-logo">
-            <div class="footer-logo-icon"><i class="fa-solid fa-church"></i></div>
+            <div class="footer-logo-icon"><img src="Images/Logo.jpeg" alt="Circular ministry logo with a stylized open book and leaf inside a green and gold circle representing Growing in Christ Ministry in the footer" style="width:44px;height:44px;border-radius:50%;object-fit:cover"></div>
             <div class="footer-logo-text">
               <strong>Growing in Christ</strong>
               <span>Ministry — Kenya</span>
@@ -146,7 +138,6 @@
             <li><a href="beliefs.html">28 Fundamental Beliefs</a></li>
             <li><a href="ellen-white.html">Ellen G. White</a></li>
             <li><a href="gallery.html">Photo Gallery</a></li>
-            <li><a href="ministries.html">Ministries</a></li>
             <li><a href="give.html">Give Online</a></li>
             <li><a href="membership.html">Membership</a></li>
             <li><a href="contact.html">Contact</a></li>
@@ -158,15 +149,15 @@
             <li><a href="resources.html#quarterly">Adult Quarterly Lessons</a></li>
             <li><a href="resources.html#quarterly">Children's Quarterly</a></li>
             <li><a href="resources.html#online">Online Study Tools</a></li>
-            <li><a href="ministries.html#worship">Worship &amp; Prayer</a></li>
-            <li><a href="ministries.html#discipleship">Discipleship</a></li>
+            <li><a href="beliefs.html">28 Fundamental Beliefs</a></li>
+            <li><a href="ellen-white.html">Ellen G. White Writings</a></li>
           </ul>
         </div>
         <div>
           <h4>Contact Information</h4>
           <div class="footer-contact-item">
             <span class="footer-contact-icon"><i class="fa-solid fa-location-dot"></i></span>
-            <span>Growing in Christ Ministry<br>Thika Road, Roysambu<br>Nairobi, Kenya</span>
+            <span>Growing in Christ Ministry<br>Nairobi, Kenya</span>
           </div>
           <div class="footer-contact-item">
             <span class="footer-contact-icon"><i class="fa-solid fa-phone"></i></span>
@@ -174,11 +165,7 @@
           </div>
           <div class="footer-contact-item">
             <span class="footer-contact-icon"><i class="fa-solid fa-envelope"></i></span>
-            <a href="mailto:info@growinginchrist.org" style="color:rgba(255,255,255,0.65)">info@growinginchrist.org</a>
-          </div>
-          <div class="footer-contact-item">
-            <span class="footer-contact-icon"><i class="fa-solid fa-clock"></i></span>
-            <span>Sunday: 8 AM &amp; 10 AM<br>Wednesday: 6:30 PM</span>
+            <a href="mailto:growinginchristfamily@gmail.com" style="color:rgba(255,255,255,0.65)">growinginchristfamily@gmail.com</a>
           </div>
           <div style="margin-top:16px;padding:14px;background:rgba(255,255,255,0.06);border-radius:8px;border-left:3px solid var(--green-light)">
             <p style="font-size:0.8rem;font-style:italic;color:rgba(255,255,255,0.7);line-height:1.5">
@@ -191,7 +178,7 @@
     </div>
     <div class="container">
       <div class="footer-bottom">
-        <span>© 2025 Growing in Christ Ministry. All rights reserved.</span>
+        <span>© 2026 Growing in Christ Ministry. All rights reserved.</span>
         <span><a href="#">Privacy Policy</a> · <a href="#">Terms of Use</a></span>
       </div>
     </div>

@@ -2,63 +2,85 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Resources — Growing in Christ Ministry. Sabbath School quarterly lessons, online resources, 28 Fundamental Beliefs, and Ellen G. White writings.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Resources — Growing in Christ Ministry</title>
+  <meta property="og:title" content="Resources — Growing in Christ Ministry">
+  <meta property="og:description" content="Resources — Growing in Christ Ministry. Sabbath School quarterly lessons, online resources, 28 Fundamental Beliefs, and Ellen G. White writings.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://growinginchrist.org/resources.html">
+  <meta property="og:site_name" content="Growing in Christ Ministry">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /*  Resource Category Tabs  */
-    .res-tabs {
-      display: flex;
-      gap: 0;
-      border: 1.5px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      margin-bottom: 48px;
-      width: fit-content;
+    /* Resource Hub Cards */
+    .res-hub-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      margin-top: 48px;
     }
-    .res-tab {
-      padding: 11px 24px;
+    .res-hub-card {
       background: var(--white);
-      border: none;
-      font-family: var(--font-sans);
-      font-size: 0.85rem;
-      font-weight: 500;
-      color: var(--gray);
-      cursor: pointer;
-      transition: all var(--transition);
-      border-right: 1px solid var(--border);
-    }
-    .res-tab:last-child { border-right: none; }
-    .res-tab.active, .res-tab:hover {
-      background: var(--green);
-      color: var(--white);
-    }
-
-    /*  Section Header  */
-    .resource-section { margin-bottom: 72px; }
-    .resource-section-header {
+      border-radius: 14px;
+      padding: 36px 24px 28px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border-top: 4px solid var(--green);
+      transition: transform var(--transition), box-shadow var(--transition);
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 32px;
-      padding-bottom: 20px;
-      border-bottom: 2px solid var(--border);
     }
-    .resource-section-icon {
-      width: 56px; height: 56px;
+    .res-hub-card:nth-child(2) { border-top-color: var(--gold); }
+    .res-hub-card:nth-child(3) { border-top-color: var(--green-mid); }
+    .res-hub-card:nth-child(4) { border-top-color: #7B1FA2; }
+    .res-hub-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+    .res-hub-icon {
+      width: 64px; height: 64px;
       border-radius: 50%;
       display: flex; align-items: center; justify-content: center;
       font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .res-hub-icon.green  { background: var(--green-pale); color: var(--green); }
+    .res-hub-icon.gold   { background: var(--gold-pale);  color: var(--gold); }
+    .res-hub-icon.mid    { background: #E8F5E9; color: var(--green-mid); }
+    .res-hub-icon.purple { background: #F3E5F5; color: #7B1FA2; }
+    .res-hub-card h3 { font-size: 1.1rem; margin-bottom: 10px; }
+    .res-hub-card p  { font-size: 0.88rem; flex: 1; margin-bottom: 20px; }
+
+    /* Section separator */
+    .res-section {
+      padding: 72px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .res-section:last-of-type { border-bottom: none; }
+    .res-section-header {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 36px;
+    }
+    .res-section-num {
+      width: 52px; height: 52px;
+      border-radius: 50%;
+      background: var(--green);
+      color: white;
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      font-weight: 700;
       flex-shrink: 0;
     }
-    .resource-section-icon.green { background: var(--green-pale); }
-    .resource-section-icon.gold  { background: var(--gold-pale); }
 
-    /*  Quarterly Cards  */
+    /* Quarterly cards */
     .quarterly-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 24px;
+      margin-top: 8px;
     }
     .quarterly-card {
       background: var(--white);
@@ -70,112 +92,83 @@
       flex-direction: column;
     }
     .quarterly-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
-    .quarterly-badge-wrap {
-      padding: 28px 24px 20px;
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-      flex: 1;
-    }
-    .quarterly-icon-wrap {
-      width: 60px; height: 80px;
-      border-radius: 6px;
+    .quarterly-cover {
+      height: 100px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.8rem;
-      flex-shrink: 0;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.15);
-      position: relative;
+      font-size: 2.5rem;
+      color: rgba(255,255,255,0.6);
     }
-    .quarterly-icon-wrap::after {
-      content: 'PDF';
-      position: absolute;
-      bottom: -8px; right: -8px;
-      background: #E53935;
-      color: white;
+    .quarterly-cover.q1 { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); }
+    .quarterly-cover.q2 { background: linear-gradient(135deg, #1565C0, #1976D2); }
+    .quarterly-cover.q3 { background: linear-gradient(135deg, #6B1B1B, #C8962A); }
+    .quarterly-cover.q4 { background: linear-gradient(135deg, #4A148C, #7B1FA2); }
+    .quarterly-cover.q5 { background: linear-gradient(135deg, var(--green-deep), var(--green)); }
+    .quarterly-cover.q6 { background: linear-gradient(135deg, #E65100, #F57C00); }
+    .quarterly-body { padding: 20px 20px 16px; flex: 1; }
+    .quarterly-body h4 { font-size: 1rem; margin-bottom: 6px; }
+    .quarterly-body p  { font-size: 0.83rem; }
+    .quarterly-period {
       font-family: var(--font-sans);
-      font-size: 0.55rem;
-      font-weight: 700;
-      padding: 2px 5px;
-      border-radius: 3px;
-      letter-spacing: 0.05em;
-    }
-    .quarterly-icon-wrap.q1 { background: linear-gradient(135deg, var(--green-dark), var(--green-mid)); }
-    .quarterly-icon-wrap.q2 { background: linear-gradient(135deg, #1565C0, #1976D2); }
-    .quarterly-icon-wrap.q3 { background: linear-gradient(135deg, #6B1B1B, #C8962A); }
-    .quarterly-icon-wrap.q4 { background: linear-gradient(135deg, #4A148C, #7B1FA2); }
-    .quarterly-icon-wrap.q5 { background: linear-gradient(135deg, #1B5E20, #388E3C); }
-    .quarterly-icon-wrap.q6 { background: linear-gradient(135deg, #E65100, #F57C00); }
-    .quarterly-info h4 { font-size: 0.98rem; margin-bottom: 5px; }
-    .quarterly-info .q-cat {
-      font-family: var(--font-sans);
-      font-size: 0.7rem;
-      letter-spacing: 0.1em;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
+      color: var(--green);
       font-weight: 600;
       margin-bottom: 6px;
+      display: block;
     }
-    .quarterly-info p  { font-size: 0.82rem; }
     .quarterly-footer {
-      padding: 14px 24px 18px;
+      padding: 12px 20px 16px;
       border-top: 1px solid var(--border);
       display: flex;
       gap: 8px;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-    .quarterly-period {
-      font-family: var(--font-sans);
-      font-size: 0.75rem;
-      color: var(--gray);
     }
 
-    /*  Quick Tips Box  */
-    .tips-box {
-      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
-      border-radius: 14px;
-      padding: 36px 40px;
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 32px;
-      align-items: center;
-      margin-bottom: 72px;
-    }
-    .tips-box h3 { color: white; font-size: 1.3rem; margin-bottom: 8px; }
-    .tips-box p  { color: rgba(255,255,255,0.7); font-size: 0.9rem; }
-    .tips-list {
+    /* Beliefs & EGW preview cards */
+    .preview-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      gap: 40px;
+      align-items: center;
     }
-    .tips-list-item {
+    .preview-visual {
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+    }
+    .preview-visual-inner {
+      height: 320px;
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-family: var(--font-sans);
-      font-size: 0.82rem;
-      color: rgba(255,255,255,0.8);
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      color: rgba(255,255,255,0.5);
+      font-size: 5rem;
     }
-    .tips-list-item::before {
-      content: '';
-      color: var(--green-light);
-      font-weight: 700;
-      flex-shrink: 0;
+    .preview-visual-inner p {
+      font-family: var(--font-display);
+      font-style: italic;
+      font-size: 1.1rem;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 0 32px;
+      max-width: 360px;
+      line-height: 1.5;
     }
 
-    /*  Online Resources Banner  */
+    /* Online resources */
     .online-res-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
       gap: 20px;
-      margin-top: 40px;
     }
     .online-res-card {
       background: var(--white);
       border-radius: 10px;
-      padding: 24px 20px;
+      padding: 28px 20px;
       text-align: center;
       box-shadow: var(--shadow);
       border-bottom: 3px solid var(--green);
@@ -196,17 +189,15 @@
     .online-res-card a:hover { color: var(--green-light); }
 
     @media (max-width: 900px) {
-
+      .res-hub-grid { grid-template-columns: 1fr 1fr; }
       .quarterly-grid { grid-template-columns: 1fr 1fr; }
-      .tips-box { grid-template-columns: 1fr; }
-      .tips-list { grid-template-columns: 1fr; }
+      .preview-grid  { grid-template-columns: 1fr; }
       .online-res-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 600px) {
+      .res-hub-grid { grid-template-columns: 1fr 1fr; }
       .quarterly-grid { grid-template-columns: 1fr; }
       .online-res-grid { grid-template-columns: 1fr; }
-      .res-tabs { width: 100%; flex-wrap: wrap; }
-      .res-tab { flex: 1; border-bottom: 1px solid var(--border); }
     }
   </style>
 </head>
@@ -216,81 +207,231 @@
   <div class="container">
     <span class="label">Study &amp; Grow</span>
     <h1>Resources</h1>
-    <p>Access trusted Bible study tools and online resources to deepen your walk with God.</p>
+    <p>Free, trusted tools and writings to deepen your walk with God and ground you in Scripture.</p>
     <div class="breadcrumb"><a href="index.html">Home</a> › <span>Resources</span></div>
   </div>
 </section>
 
-<section class="section">
-  <div class="container">
-
-    <!--  TIPS BOX  -->
-    <div class="tips-box">
-      <div>
-        <h3>Free for All Believers</h3>
-        <p>All resources on this page are free to download and share freely within your family and congregation.</p>
-        <a href="https://wa.me/254705214338" target="_blank" rel="noopener" class="btn-download" style="margin-top:20px;background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.25)"> Request Hard Copies via WhatsApp</a>
+<!-- Resource Hub Overview -->
+<section class="section" style="background:var(--white);padding-bottom:48px">
+  <div class="container text-center">
+    <span class="label">What's Available</span>
+    <h2>Four Areas of Study</h2>
+    <div class="divider"></div>
+    <p style="max-width:540px;margin:0 auto">Everything below is free to use, download, and share within your family and congregation.</p>
+    <div class="res-hub-grid">
+      <div class="res-hub-card">
+        <div class="res-hub-icon green"><i class="fa-solid fa-book-open"></i></div>
+        <h3>Sabbath School Quarterly</h3>
+        <p>Adult, youth, and children's lesson guides for weekly Sabbath School study.</p>
+        <a href="#quarterly" class="btn btn-outline" style="font-size:0.82rem;padding:9px 20px">Explore →</a>
       </div>
-      <div class="tips-list">
-        <div class="tips-list-item">All materials are free to download and share within your congregation</div>
-        <div class="tips-list-item">Use these trusted SDA resources for personal and group Bible study</div>
-        <div class="tips-list-item">Contact us to arrange physical copies or request study materials</div>
+      <div class="res-hub-card">
+        <div class="res-hub-icon gold"><i class="fa-solid fa-globe"></i></div>
+        <h3>Online Resources</h3>
+        <p>Trusted SDA websites, Bible tools, sermons, and study guides available 24/7.</p>
+        <a href="#online" class="btn btn-outline" style="font-size:0.82rem;padding:9px 20px">Explore →</a>
       </div>
-    </div>
-
-    <!--  ADDITIONAL ONLINE RESOURCES  -->
-    <div class="resource-section" id="online" style="margin-bottom:0">
-      <div class="resource-section-header">
-        <div class="resource-section-icon green"></div>
-        <div>
-          <span class="label">Further Study</span>
-          <h2 style="font-size:1.7rem;margin:0">Online Resources</h2>
-        </div>
+      <div class="res-hub-card">
+        <div class="res-hub-icon mid"><i class="fa-solid fa-cross"></i></div>
+        <h3>28 Fundamental Beliefs</h3>
+        <p>The core doctrinal positions of the Seventh-day Adventist Church, explained clearly.</p>
+        <a href="beliefs.html" class="btn btn-outline" style="font-size:0.82rem;padding:9px 20px">Explore →</a>
       </div>
-      <p style="max-width:680px;margin-bottom:0">Trusted Seventh-day Adventist resources to support your personal Bible study and spiritual growth.</p>
-
-      <div class="online-res-grid">
-        <div class="online-res-card">
-          <div class="icon"></div>
-          <h4>EGW Writings</h4>
-          <p style="font-size:0.78rem">Full library of Ellen G. White's books and articles online.</p>
-          <a href="https://egwwritings.org" target="_blank" rel="noopener">Visit egwwritings.org ↗</a>
-        </div>
-        <div class="online-res-card" style="border-bottom-color:var(--gold)">
-          <div class="icon"></div>
-          <h4>Adventist Bible Study</h4>
-          <p style="font-size:0.78rem">The official General Conference Sabbath School resource centre.</p>
-          <a href="https://absg.adventist.org" target="_blank" rel="noopener">Visit absg.adventist.org ↗</a>
-        </div>
-        <div class="online-res-card">
-          <div class="icon"></div>
-          <h4>Amazing Facts</h4>
-          <p style="font-size:0.78rem">Evangelistic Bible study guides, sermons, and media resources.</p>
-          <a href="https://amazingfacts.org" target="_blank" rel="noopener">Visit amazingfacts.org ↗</a>
-        </div>
-        <div class="online-res-card" style="border-bottom-color:var(--gold)">
-          <div class="icon"></div>
-          <h4>Hope Channel</h4>
-          <p style="font-size:0.78rem">Watch SDA television programmes, sermons, and documentaries free online.</p>
-          <a href="https://hopetv.org" target="_blank" rel="noopener">Visit hopetv.org ↗</a>
-        </div>
+      <div class="res-hub-card">
+        <div class="res-hub-icon purple"><i class="fa-solid fa-feather-pointed"></i></div>
+        <h3>Ellen G. White</h3>
+        <p>Browse and download inspired writings — Steps to Christ, The Great Controversy, and more.</p>
+        <a href="ellen-white.html" class="btn btn-outline" style="font-size:0.82rem;padding:9px 20px">Explore →</a>
       </div>
     </div>
-
   </div>
 </section>
 
-<!--  CTA  -->
+<!-- 1. Sabbath School Quarterly -->
+<section class="res-section section" id="quarterly">
+  <div class="container">
+    <div class="res-section-header">
+      <div class="res-section-num">1</div>
+      <div>
+        <span class="label">Weekly Lesson Guides</span>
+        <h2 style="margin:0;font-size:2rem">Sabbath School Quarterly</h2>
+      </div>
+    </div>
+    <p style="max-width:660px;margin-bottom:40px">The Sabbath School Quarterly provides structured Bible study lessons used by Seventh-day Adventist congregations worldwide. New lessons are issued every quarter. Download PDFs or read online.</p>
+
+    <div class="quarterly-grid">
+      <!-- Adult -->
+      <div class="quarterly-card">
+        <div class="quarterly-cover q1"><i class="fa-solid fa-book-open" style="font-size:2.2rem"></i></div>
+        <div class="quarterly-body">
+          <span class="quarterly-period">Adult · Q3 2025</span>
+          <h4>Rest in Christ</h4>
+          <p>A study of Sabbath rest, spiritual renewal, and finding peace in God's promises.</p>
+        </div>
+        <div class="quarterly-footer">
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-green" style="font-size:0.78rem;padding:8px 16px">Read Online ↗</a>
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.78rem;padding:8px 16px">Download PDF</a>
+        </div>
+      </div>
+      <!-- Youth -->
+      <div class="quarterly-card">
+        <div class="quarterly-cover q2"><i class="fa-solid fa-users" style="font-size:2.2rem"></i></div>
+        <div class="quarterly-body">
+          <span class="quarterly-period">Youth · Q3 2025</span>
+          <h4>Standing Firm</h4>
+          <p>Lessons for young people on faith, identity, and living for God in a challenging world.</p>
+        </div>
+        <div class="quarterly-footer">
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-green" style="font-size:0.78rem;padding:8px 16px">Read Online ↗</a>
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.78rem;padding:8px 16px">Download PDF</a>
+        </div>
+      </div>
+      <!-- Children -->
+      <div class="quarterly-card">
+        <div class="quarterly-cover q3"><i class="fa-solid fa-child" style="font-size:2.2rem"></i></div>
+        <div class="quarterly-body">
+          <span class="quarterly-period">Children · Q3 2025</span>
+          <h4>God's Amazing World</h4>
+          <p>Age-appropriate Bible lessons helping children aged 6–12 discover God's creation and love.</p>
+        </div>
+        <div class="quarterly-footer">
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-green" style="font-size:0.78rem;padding:8px 16px">Read Online ↗</a>
+          <a href="https://absg.adventist.org" target="_blank" rel="noopener" class="btn btn-outline" style="font-size:0.78rem;padding:8px 16px">Download PDF</a>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:28px;padding:20px 24px;background:var(--gold-pale);border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <i class="fa-solid fa-circle-info" style="color:var(--gold);font-size:1.2rem;flex-shrink:0"></i>
+      <p style="font-size:0.88rem;margin:0;flex:1">Need printed copies for your home or cell group? We can arrange physical quarterlies.</p>
+      <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20request%20physical%20copies%20of%20the%20Quarterly%20lessons." target="_blank" rel="noopener" class="btn btn-gold" style="font-size:0.82rem;padding:10px 20px;flex-shrink:0">Request via WhatsApp</a>
+    </div>
+  </div>
+</section>
+
+<!-- 2. Online Resources -->
+<section class="res-section section" id="online" style="background:var(--cream)">
+  <div class="container">
+    <div class="res-section-header">
+      <div class="res-section-num" style="background:var(--gold)">2</div>
+      <div>
+        <span class="label">Web Tools &amp; Websites</span>
+        <h2 style="margin:0;font-size:2rem">Online Resources</h2>
+      </div>
+    </div>
+    <p style="max-width:660px;margin-bottom:40px">Trusted Seventh-day Adventist websites for personal Bible study, sermons, and spiritual growth — available any time, anywhere.</p>
+    <div class="online-res-grid">
+      <div class="online-res-card">
+        <div class="icon"><i class="fa-solid fa-feather-pointed" style="color:#7B1FA2"></i></div>
+        <h4>EGW Writings</h4>
+        <p>Full library of Ellen G. White's books and articles, fully searchable online and as a mobile app.</p>
+        <a href="https://egwwritings.org" target="_blank" rel="noopener">Visit egwwritings.org ↗</a>
+      </div>
+      <div class="online-res-card" style="border-bottom-color:var(--gold)">
+        <div class="icon"><i class="fa-solid fa-graduation-cap" style="color:var(--gold)"></i></div>
+        <h4>Adventist Bible Study</h4>
+        <p>The official General Conference Sabbath School resource centre with all current lesson guides.</p>
+        <a href="https://absg.adventist.org" target="_blank" rel="noopener">Visit absg.adventist.org ↗</a>
+      </div>
+      <div class="online-res-card">
+        <div class="icon"><i class="fa-solid fa-satellite-dish" style="color:var(--green)"></i></div>
+        <h4>Amazing Facts</h4>
+        <p>Evangelistic Bible study guides, free correspondence courses, sermons, and media resources.</p>
+        <a href="https://amazingfacts.org" target="_blank" rel="noopener">Visit amazingfacts.org ↗</a>
+      </div>
+      <div class="online-res-card" style="border-bottom-color:#E53935">
+        <div class="icon"><i class="fa-brands fa-youtube" style="color:#E53935"></i></div>
+        <h4>Hope Channel</h4>
+        <p>Watch SDA television programmes, sermons, health shows, and documentaries free online.</p>
+        <a href="https://hopetv.org" target="_blank" rel="noopener">Visit hopetv.org ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 3. 28 Fundamental Beliefs -->
+<section class="res-section section">
+  <div class="container">
+    <div class="preview-grid">
+      <div>
+        <div class="res-section-header" style="margin-bottom:20px">
+          <div class="res-section-num" style="background:var(--green-mid)">3</div>
+          <div>
+            <span class="label">Doctrine &amp; Theology</span>
+            <h2 style="margin:0;font-size:2rem">28 Fundamental Beliefs</h2>
+          </div>
+        </div>
+        <p>The 28 Fundamental Beliefs represent the core doctrinal positions of the Seventh-day Adventist Church — grounded entirely in Scripture and held by Growing in Christ Ministry.</p>
+        <p style="margin-top:14px">From the nature of God and salvation by grace, to the Sabbath, the Second Coming, and healthy living — these beliefs guide our worship, our community, and our mission.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:var(--green);flex-shrink:0"></i> 28 beliefs across 6 categories
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:var(--green);flex-shrink:0"></i> Every belief fully anchored in Scripture
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:var(--green);flex-shrink:0"></i> Filterable by category — God, Salvation, Church, Living
+          </div>
+        </div>
+        <a href="beliefs.html" class="btn btn-green" style="margin-top:28px">Explore All 28 Beliefs →</a>
+      </div>
+      <div class="preview-visual">
+        <div class="preview-visual-inner" style="background:linear-gradient(135deg,var(--green-dark),var(--green-mid))">
+          <i class="fa-solid fa-cross"></i>
+          <p>"All Scripture is God-breathed and is useful for teaching, rebuking, correcting and training in righteousness." — 2 Timothy 3:16</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. Ellen G. White -->
+<section class="res-section section" style="background:var(--cream)">
+  <div class="container">
+    <div class="preview-grid">
+      <div class="preview-visual" style="order:2">
+        <div class="preview-visual-inner" style="background:linear-gradient(135deg,#4A148C,#7B1FA2)">
+          <i class="fa-solid fa-feather-pointed"></i>
+          <p>"The greatest want of the world is the want of men who will not be bought or sold; men who in their inmost souls are true and honest." — Ellen G. White</p>
+        </div>
+      </div>
+      <div style="order:1">
+        <div class="res-section-header" style="margin-bottom:20px">
+          <div class="res-section-num" style="background:#7B1FA2">4</div>
+          <div>
+            <span class="label">Inspired Writings</span>
+            <h2 style="margin:0;font-size:2rem">Ellen G. White</h2>
+          </div>
+        </div>
+        <p>Ellen G. White (1827–1915) was a co-founder of the Seventh-day Adventist Church and a prolific Christian author. Her writings are considered an expression of the spirit of prophecy and are a continuing source of truth and guidance.</p>
+        <p style="margin-top:14px">Browse and download her most widely read books, including <em>Steps to Christ</em>, <em>The Great Controversy</em>, <em>The Desire of Ages</em>, and many more — all available free of charge.</p>
+        <div style="display:flex;flex-direction:column;gap:10px;margin-top:24px">
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:#7B1FA2;flex-shrink:0"></i> Over 100 books and thousands of articles
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:#7B1FA2;flex-shrink:0"></i> Free to download in PDF format
+          </div>
+          <div style="display:flex;align-items:center;gap:10px;font-family:var(--font-sans);font-size:0.88rem;color:var(--mid)">
+            <i class="fa-solid fa-check-circle" style="color:#7B1FA2;flex-shrink:0"></i> Available via egwwritings.org app and website
+          </div>
+        </div>
+        <a href="ellen-white.html" class="btn btn-green" style="margin-top:28px;background:#7B1FA2">Browse EGW Books →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
 <section class="section-sm" style="background:var(--green-deep)">
   <div class="container text-center">
-    <h3 style="color:white;font-size:1.3rem;margin-bottom:8px">Need a physical copy or have a question?</h3>
-    <p style="color:rgba(255,255,255,0.65);margin-bottom:20px;font-size:0.95rem">Our team can arrange printed lesson booklets for your home or cell group.</p>
-    <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20request%20physical%20copies%20of%20the%20Quarterly%20lessons." target="_blank" rel="noopener" class="btn btn-gold"> WhatsApp Us</a>
+    <h3 style="color:white;font-size:1.3rem;margin-bottom:8px">Need help with any of these resources?</h3>
+    <p style="color:rgba(255,255,255,0.65);margin-bottom:20px;font-size:0.95rem">Our team is happy to arrange printed materials, answer questions, or guide your study.</p>
+    <a href="https://wa.me/254705214338?text=Hello%2C%20I%20need%20help%20with%20some%20study%20resources." target="_blank" rel="noopener" class="btn btn-gold">WhatsApp Us</a>
   </div>
 </section>
-
-<script src="site-data.js"></script>
 <script src="layout.js"></script>
-<script src="site-sync.js"></script>
 </body>
 </html>

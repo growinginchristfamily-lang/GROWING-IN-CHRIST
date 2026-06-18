@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: growing-in-christ-ministry
+    runtime: static
+    staticPublishPath: .
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: public, max-age=3600
+      - path: /styles.css
+        name: Cache-Control
+        value: public, max-age=86400
+      - path: /layout.js
+        name: Cache-Control
+        value: public, max-age=86400
+    routes:
+      - type: rewrite
+        source: /index
+        destination: /index.html

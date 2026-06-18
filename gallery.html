@@ -2,41 +2,135 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Photo Gallery — Growing in Christ Ministry. Moments of worship, service, and fellowship captured in photos.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Gallery — Growing in Christ Ministry</title>
+  <meta property="og:title" content="Gallery — Growing in Christ Ministry">
+  <meta property="og:description" content="Photo Gallery — Growing in Christ Ministry. Moments of worship, service, and fellowship captured in photos.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://growinginchrist.org/gallery.html">
+  <meta property="og:site_name" content="Growing in Christ Ministry">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
   <link rel="stylesheet" href="styles.css">
   <style>
-    .gallery-filter {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-bottom: 36px;
-    }
-    .filter-btn {
-      padding: 8px 20px;
-      border: 1.5px solid var(--border);
-      border-radius: 24px;
-      background: var(--white);
-      color: var(--mid);
-      font-family: var(--font-sans);
-      font-size: 0.82rem;
-      font-weight: 500;
-      cursor: pointer;
-      transition: all var(--transition);
-    }
-    .filter-btn.active, .filter-btn:hover {
-      background: var(--green);
-      border-color: var(--green);
-      color: var(--white);
-    }
     #publicGalleryGrid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-      gap: 16px;
+      /* Fills the row with as many columns as fit at min 200px each.
+         At 10 images → ~4 cols on desktop; at 20+ images → still 4 cols, neat rows */
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+    }
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: 10px;
+      background: var(--green-pale);
+      aspect-ratio: 4/3;
+      cursor: pointer;
     }
     .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
       transition: transform 0.3s ease;
     }
+    .gallery-item:hover img {
+      transform: scale(1.05);
+    }
+    .gallery-item-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 10px 12px;
+      background: linear-gradient(transparent, rgba(0,0,0,0.55));
+      color: white;
+      font-family: var(--font-sans);
+      font-size: 0.8rem;
+      font-weight: 500;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+    .gallery-item:hover .gallery-item-overlay {
+      opacity: 1;
+    }
+    .gallery-item-category {
+      display: none;
+    }
+    /* Lightbox */
+    .lightbox-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox-overlay.open {
+      display: flex;
+    }
+    .lightbox-inner {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      text-align: center;
+    }
+    .lightbox-inner img {
+      max-height: 80vh;
+      max-width: 100%;
+      border-radius: 8px;
+      object-fit: contain;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+    }
+    .lightbox-caption {
+      color: rgba(255,255,255,0.8);
+      font-family: var(--font-sans);
+      font-size: 0.9rem;
+      margin-top: 14px;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -36px;
+      right: 0;
+      background: none;
+      border: none;
+      color: white;
+      font-size: 1.8rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.7;
+      transition: opacity 0.2s;
+    }
+    .lightbox-close:hover { opacity: 1; }
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.15);
+      border: none;
+      color: white;
+      font-size: 1.6rem;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background 0.2s;
+    }
+    .lightbox-nav:hover { background: rgba(255,255,255,0.3); }
+    .lightbox-prev { left: -56px; }
+    .lightbox-next { right: -56px; }
+    @media (max-width: 700px) {
+      .lightbox-prev { left: -4px; }
+      .lightbox-next { right: -4px; }
+    }
+
     .gallery-count-badge {
       display: inline-flex;
       align-items: center;
@@ -64,8 +158,10 @@
     #publicGalleryEmpty h3 { font-size: 1.3rem; margin-bottom: 10px; }
     #publicGalleryEmpty p  { font-size: 0.95rem; max-width: 440px; margin: 0 auto; }
     @media (max-width: 600px) {
-      #publicGalleryGrid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+      /* 2 columns on phones — works cleanly for 10, 15, 20+ images */
+      #publicGalleryGrid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
     }
+
   </style>
 </head>
 <body>
@@ -86,10 +182,6 @@
       <strong id="publicGalleryCount">0</strong> photos in our gallery
     </div>
 
-    <div class="gallery-filter" id="publicGalleryFilter">
-      <button class="filter-btn active" data-cat="">All Photos</button>
-    </div>
-
     <div id="publicGalleryGrid"></div>
 
     <div id="publicGalleryEmpty">
@@ -102,6 +194,17 @@
   </div>
 </section>
 
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" role="dialog" aria-modal="true">
+  <div class="lightbox-inner">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Close">&times;</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Previous">&#8249;</button>
+    <img src="" alt="" id="lightboxImg">
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Next">&#8250;</button>
+    <div class="lightbox-caption" id="lightboxCaption"></div>
+  </div>
+</div>
+
 <!-- CTA -->
 <section class="section-sm" style="background:var(--green-deep)">
   <div class="container text-center">
@@ -110,9 +213,118 @@
     <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20share%20some%20photos%20with%20Growing%20in%20Christ%20Ministry." target="_blank" rel="noopener" class="btn btn-gold">Share Photos via WhatsApp</a>
   </div>
 </section>
+<script src="layout.js"></script><script>
+(function () {
+  /* ====================================================================
+     GALLERY IMAGES — hardcoded directly here for reliability.
+     To add or update images:
+       1. Copy any object inside the array below.
+       2. Replace the `src` with your real image URL (Google Drive share
+          link, Dropbox, WhatsApp CDN, Cloudinary, etc.)
+       3. Update `title`, `category`, and `date` as needed.
+       4. Paste the new object before the closing ]; line.
+     Categories currently in use: Conference, Outreach, Youth, Worship
+     You can invent new category names — filter buttons are auto-generated.
+  ==================================================================== */
+  var images = [
+    // ── IMAGE 1 ── Replace src with your actual image URL
+    { src: 'Images/T-shirt.jpeg',  title: 'Growing in Christ Merchandise',   category: 'Conference', date: '2025-06-15' },
+    // ── IMAGE 2 ──
+    { src: 'Images/1.jpg',  title: 'AGM',date: '2025-06-22' },
+    // ── IMAGE 3 ──
+    { src: 'Images/2.jpg',  title: 'AGM',date: '2025-07-05' },
+    // ── IMAGE 4 ──
+    { src: 'Images/3.jpg',  title: 'AGM',date: '2025-06-01' },
+    // ── IMAGE 5 ──
+    { src: 'Images/4.jpg',  title: 'AGM',date: '2025-05-20' },
+    // ── IMAGE 6 ──
+    { src: 'Images/5.jpeg',  title: 'AGM',date: '2025-04-10' },
+    // ── IMAGE 7 ──
+    { src: 'Images/6.jpeg',  title: 'AGM',date: '2025-03-15' },
+    // ── IMAGE 8 ──
+    { src: 'Images/7.jpeg',  title: 'AGM',date: '2025-02-28' },
+    // ── IMAGE 9 ──
+    { src: 'Images/8.jpeg',  title: 'AGM',date: '2025-01-18' },
+    // ── IMAGE 10 ──
+    { src: 'Images/9.jpg', title: 'AGM',date: '2024-12-01' },
+  ];
 
-<script src="site-data.js"></script>
-<script src="layout.js"></script>
-<script src="site-sync.js"></script>
+  var grid      = document.getElementById('publicGalleryGrid');
+  var countEl   = document.getElementById('publicGalleryCount');
+  var emptyEl   = document.getElementById('publicGalleryEmpty');
+
+  /* Clear grid before rendering */
+  grid.innerHTML = '';
+  countEl.textContent = images.length;
+
+  if (images.length === 0) {
+    emptyEl.style.display = 'block';
+  } else {
+    emptyEl.style.display = 'none';
+    images.forEach(function (img, idx) {
+      var item = document.createElement('div');
+      item.className = 'gallery-item';
+
+      var pic = document.createElement('img');
+      pic.src = img.src;
+      pic.alt = img.title || '';
+      pic.loading = 'lazy';
+
+      var overlay = document.createElement('div');
+      overlay.className = 'gallery-item-overlay';
+      overlay.textContent = img.title || '';
+
+      item.appendChild(pic);
+      item.appendChild(overlay);
+      item.addEventListener('click', function () { openLightbox(idx); });
+      grid.appendChild(item);
+    });
+  }
+
+  // ── Lightbox ───────────────────────────────────────────────────────────────
+  var lightbox    = document.getElementById('lightbox');
+  var lbImg       = document.getElementById('lightboxImg');
+  var lbCaption   = document.getElementById('lightboxCaption');
+  var lbClose     = document.getElementById('lightboxClose');
+  var lbPrev      = document.getElementById('lightboxPrev');
+  var lbNext      = document.getElementById('lightboxNext');
+  var currentIdx  = 0;
+
+  function openLightbox(idx) {
+    currentIdx = idx;
+    showLightboxImage(currentIdx);
+    lightbox.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function showLightboxImage(idx) {
+    var img = images[idx];
+    lbImg.src = img.src;
+    lbImg.alt = img.title || '';
+    lbCaption.textContent = [img.title, img.date].filter(Boolean).join(' · ');
+    lbPrev.style.visibility = idx > 0 ? 'visible' : 'hidden';
+    lbNext.style.visibility = idx < images.length - 1 ? 'visible' : 'hidden';
+  }
+
+  lbClose.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', function (e) { if (e.target === lightbox) closeLightbox(); });
+  lbPrev.addEventListener('click', function () { if (currentIdx > 0) { currentIdx--; showLightboxImage(currentIdx); } });
+  lbNext.addEventListener('click', function () { if (currentIdx < images.length - 1) { currentIdx++; showLightboxImage(currentIdx); } });
+
+  document.addEventListener('keydown', function (e) {
+    if (!lightbox.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft' && currentIdx > 0) { currentIdx--; showLightboxImage(currentIdx); }
+    if (e.key === 'ArrowRight' && currentIdx < images.length - 1) { currentIdx++; showLightboxImage(currentIdx); }
+  });
+
+  // ── Init ───────────────────────────────────────────────────────────────────
+})();
+</script>
 </body>
 </html>

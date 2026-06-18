@@ -4,425 +4,375 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home — Growing in Christ Ministry</title>
-  <meta name="description" content="Growing in Christ Ministry — A community devoted to spiritual growth, discipleship, and Christ-centred service in Kenya.">
+  <meta name="description" content="Growing in Christ Ministry — A community devoted to spiritual growth, discipleship, and Christ-centred service in Nairobi, Kenya.">
+  <meta property="og:title" content="Home — Growing in Christ Ministry">
+  <meta property="og:description" content="Growing in Christ Ministry — A community devoted to spiritual growth, discipleship, and Christ-centred service in Nairobi, Kenya.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://growinginchrist.org/">
+  <meta property="og:site_name" content="Growing in Christ Ministry">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
   <link rel="stylesheet" href="styles.css">
   <style>
-    /*  Hero  */
+    /* ── HERO ── */
     .hero {
       position: relative;
-      min-height: 92vh;
+      min-height: 95vh;
       display: flex;
       align-items: center;
       overflow: hidden;
-      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 50%, var(--green) 100%);
+      background: linear-gradient(135deg, var(--green-deep) 0%, var(--green-dark) 55%, var(--green) 100%);
     }
     .hero-bg {
       position: absolute; inset: 0;
       background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100'%3E%3Cdefs%3E%3CradialGradient id='a'%3E%3Cstop offset='0' stop-color='%23C8962A' stop-opacity='0.08'/%3E%3Cstop offset='1' stop-color='transparent'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='40' fill='url(%23a)'/%3E%3C/svg%3E") repeat;
       opacity: 0.6;
     }
-    .hero-cross {
+    /* Decorative orbs */
+    .hero-orb {
       position: absolute;
-      right: 8%;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 18rem;
-      color: rgba(200,150,42,0.07);
-      font-family: serif;
-      line-height: 1;
-      user-select: none;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+    .hero-orb-1 {
+      width: 520px; height: 520px;
+      background: rgba(200,150,42,0.12);
+      top: -100px; right: -100px;
+    }
+    .hero-orb-2 {
+      width: 360px; height: 360px;
+      background: rgba(61,173,110,0.10);
+      bottom: -80px; left: 30%;
     }
     .hero-content {
       position: relative;
       z-index: 2;
-      max-width: 700px;
+      max-width: 720px;
     }
-    .hero-content .label {
-      animation: fadeUp 0.6s ease both;
-    }
+    .hero-content .label { animation: fadeUp 0.6s ease both; color: var(--gold-light); }
     .hero-content h1 {
       color: var(--white);
       margin-bottom: 20px;
       font-style: italic;
       animation: fadeUp 0.7s ease 0.1s both;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
     }
-    .hero-content h1 em {
-      color: var(--gold-light);
-      font-style: italic;
-    }
+    .hero-content h1 em { color: var(--gold-light); font-style: italic; }
     .hero-content p {
-      color: rgba(255,255,255,0.75);
+      color: rgba(255,255,255,0.78);
       font-size: 1.2rem;
       max-width: 560px;
-      margin-bottom: 36px;
+      margin-bottom: 40px;
       animation: fadeUp 0.7s ease 0.2s both;
     }
-    .hero-btns {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      animation: fadeUp 0.7s ease 0.3s both;
+    .hero-btns { display: flex; gap: 16px; flex-wrap: wrap; animation: fadeUp 0.7s ease 0.3s both; }
+
+    /* Floating service times card */
+    .hero-card {
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,0.07);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 16px;
+      padding: 28px 32px;
+      min-width: 240px;
+      animation: fadeUp 0.8s ease 0.4s both;
+      z-index: 2;
     }
+    .hero-card h4 {
+      color: var(--gold-light);
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-family: var(--font-sans);
+      margin-bottom: 16px;
+    }
+    .hero-service-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      font-family: var(--font-sans);
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.8);
+      gap: 24px;
+    }
+    .hero-service-row:last-child { border-bottom: none; }
+    .hero-service-row strong { color: var(--gold-light); font-size: 0.78rem; white-space:nowrap }
+
     .hero-scroll {
       position: absolute;
-      bottom: 32px;
-      left: 50%;
+      bottom: 32px; left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      color: rgba(255,255,255,0.4);
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      animation: bounce 2s infinite;
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      color: rgba(255,255,255,0.35);
+      font-size: 0.7rem; letter-spacing: 0.14em; text-transform: uppercase;
+      animation: bounce 2.2s infinite;
     }
 
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to   { opacity: 1; transform: translateY(0); }
+      from { opacity:0; transform:translateY(24px); }
+      to   { opacity:1; transform:translateY(0); }
     }
     @keyframes bounce {
-      0%, 100% { transform: translateX(-50%) translateY(0); }
-      50%       { transform: translateX(-50%) translateY(8px); }
+      0%,100% { transform:translateX(-50%) translateY(0); }
+      50%      { transform:translateX(-50%) translateY(9px); }
     }
 
-    /*  Welcome Section  */
-    .welcome {
-      background: var(--white);
-      padding: 80px 0;
-    }
-    .welcome-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: center;
-    }
+    /* ── WELCOME ── */
+    .welcome { background: var(--white); padding: 88px 0; }
+    .welcome-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center; }
     .welcome-verse {
       background: var(--gold-pale);
       border-left: 4px solid var(--gold);
       padding: 24px 28px;
       border-radius: 0 var(--radius) var(--radius) 0;
-      margin-top: 24px;
+      margin-top: 28px;
     }
     .welcome-verse blockquote {
       font-family: var(--font-display);
       font-style: italic;
-      font-size: 1.15rem;
+      font-size: 1.1rem;
       color: var(--green-dark);
-      line-height: 1.6;
+      line-height: 1.65;
     }
     .welcome-verse cite {
-      display: block;
-      margin-top: 10px;
-      font-family: var(--font-sans);
-      font-size: 0.8rem;
-      font-weight: 600;
-      color: var(--green);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
+      display: block; margin-top: 10px;
+      font-family: var(--font-sans); font-size: 0.78rem;
+      font-weight: 600; color: var(--green);
+      letter-spacing: 0.08em; text-transform: uppercase;
     }
-    .welcome-image {
-      position: relative;
+    .welcome-image { position: relative; }
+    .welcome-image img { width:100%; border-radius:16px; box-shadow:var(--shadow-lg); }
+    .welcome-badge {
+      position: absolute; bottom: -20px; left: -20px;
+      background: var(--gold); color: white;
+      padding: 20px 24px; border-radius: 12px;
+      text-align: center; box-shadow: var(--shadow);
     }
-    .welcome-image img {
-      width: 100%;
-      border-radius: 12px;
-      box-shadow: var(--shadow-lg);
-    }
-    .welcome-image-badge {
-      position: absolute;
-      bottom: -20px;
-      left: -20px;
-      background: var(--gold);
-      color: var(--white);
-      padding: 20px 24px;
-      border-radius: 10px;
-      text-align: center;
-      box-shadow: var(--shadow);
-    }
-    .welcome-image-badge strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 2rem;
-      line-height: 1;
-    }
-    .welcome-image-badge span {
-      font-family: var(--font-sans);
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      opacity: 0.9;
-    }
+    .welcome-badge strong { display:block; font-family:var(--font-display); font-size:2.1rem; line-height:1; }
+    .welcome-badge span { font-family:var(--font-sans); font-size:0.7rem; letter-spacing:0.1em; text-transform:uppercase; opacity:0.9; }
 
-    /*  Ministries  */
-    .ministries-home { background: var(--cream); }
-    .ministries-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 48px;
-    }
-    .ministry-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 36px 28px;
-      text-align: center;
-      box-shadow: var(--shadow);
-      transition: all var(--transition);
-      border: 1px solid transparent;
-    }
-    .ministry-card:hover {
-      transform: translateY(-6px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--border);
-    }
-    .ministry-icon {
-      width: 64px; height: 64px;
-      background: var(--gold-pale);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.6rem;
-      margin: 0 auto 20px;
-      transition: background var(--transition);
-    }
-    .ministry-card:hover .ministry-icon { background: var(--gold); }
-    .ministry-card h3 { font-size: 1.15rem; margin-bottom: 12px; }
-    .ministry-card p  { font-size: 0.93rem; }
-
-    /*  Stats  */
-    .stats-section {
-      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
-      padding: 64px 0;
-    }
-    .stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 32px;
-      text-align: center;
-    }
+    /* ── STATS ── */
+    .stats-section { background: linear-gradient(135deg, var(--green-deep), var(--green-dark)); padding: 72px 0; }
+    .stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px; text-align: center; }
     .stats-grid .stat-num { font-size: 3rem; }
 
-    /*  Events Home  */
-    .events-home { background: var(--white); }
-    .events-grid {
+    /* ── ABOUT STRIP ── */
+    .about-strip {
+      background: var(--cream);
+      padding: 80px 0;
+    }
+    .about-strip-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
+      gap: 32px;
       margin-top: 48px;
     }
+    .about-strip-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      border-bottom: 4px solid var(--green);
+      transition: transform var(--transition);
+    }
+    .about-strip-card:nth-child(2) { border-bottom-color: var(--gold); }
+    .about-strip-card:nth-child(3) { border-bottom-color: var(--green-mid); }
+    .about-strip-card:hover { transform: translateY(-5px); }
+    .about-strip-icon {
+      width: 56px; height: 56px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+      margin-bottom: 20px;
+    }
+    .about-strip-card:nth-child(1) .about-strip-icon { background: var(--green-pale); color: var(--green); }
+    .about-strip-card:nth-child(2) .about-strip-icon { background: var(--gold-pale); color: var(--gold); }
+    .about-strip-card:nth-child(3) .about-strip-icon { background: #E8F5E9; color: var(--green-mid); }
+    .about-strip-card h3 { font-size: 1.2rem; margin-bottom: 12px; }
+
+    /* ── EVENTS ── */
+    .events-home { background: var(--white); }
+    .events-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
     .event-card {
-      background: var(--cream);
-      border-radius: 10px;
-      overflow: hidden;
-      border: 1px solid var(--border);
+      background: var(--cream); border-radius: 12px;
+      overflow: hidden; border: 1px solid var(--border);
       transition: all var(--transition);
     }
     .event-card:hover { transform: translateY(-4px); box-shadow: var(--shadow); }
     .event-card-date {
-      background: var(--gold);
-      color: var(--white);
-      padding: 16px;
-      text-align: center;
+      background: var(--gold); color: white;
+      padding: 18px; text-align: center;
     }
-    .event-card-date strong {
-      display: block;
-      font-family: var(--font-display);
-      font-size: 2rem;
-      line-height: 1;
-    }
-    .event-card-date span {
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-    }
-    .event-card-body { padding: 22px; }
+    .event-card-date strong { display:block; font-family:var(--font-display); font-size:2.2rem; line-height:1; }
+    .event-card-date span { font-family:var(--font-sans); font-size:0.78rem; letter-spacing:0.1em; text-transform:uppercase; }
+    .event-card-body { padding: 24px; }
     .event-card-body h3 { font-size: 1.05rem; margin-bottom: 8px; }
     .event-card-body p  { font-size: 0.88rem; }
-    .event-meta {
-      display: flex;
-      gap: 16px;
-      margin-top: 14px;
-      font-family: var(--font-sans);
-      font-size: 0.78rem;
-      color: var(--gray);
-    }
+    .event-meta { display:flex; gap:16px; margin-top:14px; font-family:var(--font-sans); font-size:0.78rem; color:var(--gray); flex-wrap:wrap; }
 
-    /*  Testimonials  */
-    .testimonials { background: var(--gold-pale); }
-    .testimonials-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 48px;
+    /* ── WEEKLY SERVICES ── */
+    .services-strip { background: var(--green-deep); padding: 72px 0; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 48px; }
+    .service-item {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 28px 20px;
+      text-align: center;
+      transition: background var(--transition);
     }
+    .service-item:hover { background: rgba(255,255,255,0.10); }
+    .service-item .day {
+      font-family: var(--font-sans); font-size: 0.7rem;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--gold-light); font-weight: 600; margin-bottom: 10px;
+    }
+    .service-item h4 { font-family: var(--font-display); color: white; font-size: 1.05rem; margin-bottom: 10px; }
+    .service-item .time {
+      font-family: var(--font-sans); font-size: 1.2rem;
+      font-weight: 600; color: var(--gold-light); display: block; margin-bottom: 8px;
+    }
+    .service-item p { font-size: 0.82rem; color: rgba(255,255,255,0.55); margin: 0; }
+
+    /* ── TESTIMONIALS ── */
+    .testimonials { background: var(--gold-pale); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
     .testimonial-card {
-      background: var(--white);
-      border-radius: 12px;
-      padding: 32px 28px;
-      box-shadow: var(--shadow);
-      position: relative;
+      background: var(--white); border-radius: 14px; padding: 36px 28px;
+      box-shadow: var(--shadow); position: relative;
     }
     .testimonial-card::before {
       content: '"';
-      position: absolute;
-      top: 16px; left: 20px;
-      font-family: var(--font-display);
-      font-size: 5rem;
-      color: var(--gold-pale);
-      line-height: 1;
+      position: absolute; top: 12px; left: 20px;
+      font-family: var(--font-display); font-size: 6rem;
+      color: var(--gold-pale); line-height: 1;
     }
     .testimonial-text {
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 0.98rem;
-      color: var(--mid);
-      line-height: 1.75;
-      position: relative;
-      z-index: 1;
-      margin-bottom: 20px;
+      font-family: var(--font-serif); font-style: italic;
+      font-size: 0.98rem; color: var(--mid);
+      line-height: 1.8; position: relative; z-index: 1; margin-bottom: 22px;
     }
-    .testimonial-author { display: flex; align-items: center; gap: 12px; }
+    .testimonial-author { display: flex; align-items: center; gap: 14px; }
     .testimonial-avatar {
-      width: 44px; height: 44px;
-      border-radius: 50%;
-      background: var(--gold);
+      width: 52px; height: 52px; border-radius: 50%; overflow: hidden;
+      flex-shrink: 0; border: 2px solid var(--border);
       display: flex; align-items: center; justify-content: center;
-      color: white;
-      font-family: var(--font-display);
-      font-size: 1.1rem;
-      font-weight: 700;
-      flex-shrink: 0;
+      background: var(--green); color: white;
+      font-family: var(--font-display); font-size: 1.2rem;
     }
-    .testimonial-name strong {
-      display: block;
-      font-family: var(--font-sans);
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: var(--green-deep);
-    }
-    .testimonial-name span {
-      font-size: 0.78rem;
-      color: var(--gray);
-    }
+    .testimonial-avatar img { width:100%; height:100%; object-fit:cover; object-position:center; }
+    .testimonial-name strong { display:block; font-family:var(--font-sans); font-size:0.9rem; font-weight:600; color:var(--green-deep); }
+    .testimonial-name span { font-size:0.78rem; color:var(--gray); }
 
-    /*  CTA Banner  */
-    .cta-banner {
-      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
-      padding: 72px 0;
-      text-align: center;
-      position: relative;
+    /* ── BELIEFS PREVIEW ── */
+    .beliefs-home { background: var(--white); }
+    .beliefs-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; margin-top: 48px; }
+
+    /* ── GALLERY STRIP ── */
+    .gallery-home { background: var(--cream); }
+    .gallery-strip-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      grid-template-rows: 240px 240px;
+      gap: 12px;
+      margin-top: 40px;
+      border-radius: 16px;
       overflow: hidden;
     }
-    .cta-banner::before {
-      content: '';
-      position: absolute;
-      font-size: 22rem;
-      color: rgba(200,150,42,0.04);
-      left: 50%;
-      top: 50%;
-      transform: translate(-50%, -50%);
+    .gallery-strip-item {
+      background: var(--green-pale);
+      overflow: hidden;
+      position: relative;
     }
-    .cta-banner h2 { color: var(--white); position: relative; }
+    .gallery-strip-item:first-child { grid-row: 1 / 3; }
+    .gallery-strip-item img { width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s ease; }
+    .gallery-strip-item:hover img { transform: scale(1.05); }
+    .gallery-strip-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(8,42,23,0.65) 0%, transparent 50%);
+      display: flex; align-items: flex-end; padding: 16px;
+      opacity: 0; transition: opacity 0.3s;
+    }
+    .gallery-strip-item:hover .gallery-strip-overlay { opacity: 1; }
+    .gallery-strip-overlay span { font-family:var(--font-sans); font-size:0.8rem; color:white; font-weight:500; }
+    .gallery-placeholder {
+      background: linear-gradient(135deg, var(--green-pale), #C8D8C8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem; color: rgba(27,107,58,0.25);
+    }
+
+    /* ── CTA BANNER ── */
+    .cta-banner {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-dark));
+      padding: 88px 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .cta-banner::before {
+      content: '✝'; position: absolute;
+      font-size: 28rem; color: rgba(200,150,42,0.04);
+      left: 50%; top: 50%; transform: translate(-50%,-50%);
+      pointer-events: none; font-family: serif;
+    }
+    .cta-banner h2 { color: white; position: relative; }
     .cta-banner p  { color: rgba(255,255,255,0.7); max-width: 520px; margin: 16px auto 32px; position: relative; }
     .cta-banner .btn { position: relative; }
+    .cta-banner .cta-btns { display:flex; justify-content:center; gap:16px; flex-wrap:wrap; }
 
-    /*  Blog home  */
-    .blog-home { background: var(--cream); }
-    .blog-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      margin-top: 48px;
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .hero-card { display: none; }
     }
-
-
-    /* Gallery Home */
-    .gallery-home-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin-top: 40px;
-    }
-    /* Departments Home */
-    .departments-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
-      margin-top: 40px;
-    }
-    @media(max-width:900px){
-      .gallery-home-grid { grid-template-columns: repeat(2,1fr); }
-      .departments-grid  { grid-template-columns: repeat(2,1fr); }
-    }
-    @media(max-width:600px){
-      .gallery-home-grid { grid-template-columns: 1fr 1fr; }
-      .departments-grid  { grid-template-columns: 1fr; }
-    }
-
-    /*  Responsive  */
     @media (max-width: 900px) {
-      .welcome-grid, .ministries-grid, .stats-grid,
-      .events-grid, .testimonials-grid, .blog-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-      .welcome-grid { grid-template-columns: 1fr; }
+      .welcome-grid, .about-strip-grid { grid-template-columns: 1fr; }
+      .stats-grid, .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .events-grid, .testimonials-grid, .beliefs-grid { grid-template-columns: 1fr 1fr; }
+      .gallery-strip-grid { grid-template-columns: 1fr 1fr; grid-template-rows: auto; }
+      .gallery-strip-item:first-child { grid-row: auto; }
     }
     @media (max-width: 600px) {
-      .ministries-grid, .stats-grid,
-      .events-grid, .testimonials-grid, .blog-grid {
-        grid-template-columns: 1fr;
-      }
+      .stats-grid, .events-grid, .testimonials-grid, .beliefs-grid, .services-grid { grid-template-columns: 1fr; }
+      .gallery-strip-grid { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
-<!-- Layout injected by layout.js -->
-
-<!-- Admin Access Button (fixed bottom-left) -->
-<a href="admin.html" id="adminAccessBtn" title="Website Admin" style="
-  position:fixed;bottom:24px;left:24px;z-index:8000;
-  background:var(--green-deep);color:white;
-  width:48px;height:48px;border-radius:50%;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 4px 18px rgba(8,42,23,0.45);
-  font-size:1.1rem;transition:all 0.3s ease;
-  border:2px solid rgba(255,255,255,0.15);
-  text-decoration:none;
-" onmouseover="this.style.background='var(--green)';this.style.transform='scale(1.1)'"
-   onmouseout="this.style.background='var(--green-deep)';this.style.transform='scale(1)'">
-  ⚙
-</a>
-
-<!-- 
-     HERO
- -->
+<!-- ── HERO ── -->
 <section class="hero">
   <div class="hero-bg"></div>
-  <div class="hero-cross"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
   <div class="container">
     <div class="hero-content">
-      <span class="label">Welcome to Our Community</span>
-      <h1>Growing Deeper<br>in <em>Christ Together</em></h1>
-      <p>Discipleship, worship, and service rooted in the Gospel. Join a growing family of believers committed to knowing Christ and making Him known.</p>
+      <span class="label">Welcome to Growing in Christ Ministry</span>
+      <h1>Rooted in <em>Faith,</em><br>Growing Together</h1>
+      <p>A community devoted to discipleship, worship, and Christ-centred service in the heart of Nairobi, Kenya.</p>
       <div class="hero-btns">
         <a href="about.html" class="btn btn-green">Discover Our Story</a>
-        <a href="events.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.5);color:white">Upcoming Events</a>
+        <a href="events.html" class="btn btn-outline" style="border-color:rgba(255,255,255,0.45);color:white">Upcoming Events</a>
       </div>
+    </div>
+    <!-- Floating service times -->
+    <div class="hero-card">
+      <h4>Join Us This Week</h4>
+      <div class="hero-service-row"><span>Wednesday Morning Devotion</span><strong>6:00 AM</strong></div>
+      <div class="hero-service-row"><span>Friday Vespers</span><strong>9:00 PM</strong></div>
+      <a href="contact.html" class="btn btn-gold" style="width:100%;justify-content:center;margin-top:20px;font-size:0.82rem;padding:11px">Get Directions →</a>
     </div>
   </div>
   <div class="hero-scroll">
     <span>Scroll</span>
-    <span style="font-size:1rem">↓</span>
+    <i class="fa-solid fa-chevron-down" style="font-size:0.8rem"></i>
   </div>
 </section>
 
-<!-- 
-     WELCOME
- -->
+<!-- ── WELCOME ── -->
 <section class="welcome">
   <div class="container">
     <div class="welcome-grid">
@@ -436,12 +386,11 @@
           <blockquote>"But grow in the grace and knowledge of our Lord and Savior Jesus Christ. To him be glory both now and forever!"</blockquote>
           <cite>— 2 Peter 3:18 (NIV)</cite>
         </div>
-        <a href="about.html" class="btn btn-green" style="margin-top:28px">Learn More About Us</a>
+        <a href="about.html" class="btn btn-green" style="margin-top:32px">Learn More About Us</a>
       </div>
       <div class="welcome-image">
-        <!-- Placeholder image replaced with a styled div -->
-        <div style="width:100%;height:420px;background:linear-gradient(135deg,var(--green-dark),var(--green-light));border-radius:12px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.3);font-size:4rem;box-shadow:var(--shadow-lg)"></div>
-        <div class="welcome-image-badge">
+        <img src="Images/congregation.jpg" alt="Congregation in worship" style="width:100%;height:440px;object-fit:cover;border-radius:16px;box-shadow:var(--shadow-lg)">
+        <div class="welcome-badge">
           <strong>10+</strong>
           <span>Years of<br>Ministry</span>
         </div>
@@ -450,85 +399,97 @@
   </div>
 </section>
 
-<!-- 
-     STATS
- -->
+<!-- ── STATS ── -->
 <section class="stats-section">
   <div class="container">
     <div class="stats-grid">
       <div class="stat-item">
-        <div class="stat-num">2,400+</div>
-        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Members Baptised</div>
+        <div class="stat-num">20+</div>
+        <div class="stat-label">Members Baptised</div>
       </div>
       <div class="stat-item">
         <div class="stat-num">35+</div>
-        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Community Outreaches</div>
+        <div class="stat-label">Community Outreaches</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">15,000+</div>
-        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Lives Impacted</div>
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Lives Impacted</div>
       </div>
       <div class="stat-item">
-        <div class="stat-num">12</div>
-        <div class="stat-label" style="color:rgba(255,255,255,0.5)">Active Ministries</div>
+        <div class="stat-num">115+</div>
+        <div class="stat-label">Active Members</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 
-     MINISTRIES
- -->
-<section class="ministries-home section">
+<!-- ── ABOUT PILLARS ── -->
+<section class="about-strip">
   <div class="container text-center">
-    <span class="label">What We Do</span>
-    <h2>Our Ministries</h2>
+    <span class="label">Our Foundation</span>
+    <h2>What Drives Everything We Do</h2>
     <div class="divider"></div>
-    <p style="max-width:560px;margin:0 auto">Every ministry exists to equip believers and bless the community — from Sunday worship to weekday outreach.</p>
-    <div class="ministries-grid">
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Worship &amp; Prayer</h3>
-        <p>Spirit-filled worship experiences and intercessory prayer that usher in the presence of God and transform hearts.</p>
-        <a href="ministries.html#worship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+    <div class="about-strip-grid">
+      <div class="about-strip-card">
+        <div class="about-strip-icon"><i class="fa-solid fa-bullseye"></i></div>
+        <h3>Our Mission</h3>
+        <p>To make disciples of Jesus Christ who live as His loving witnesses — growing in faith, serving in love, and sharing the hope of the Gospel with all of Kenya and beyond.</p>
       </div>
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Youth Ministry</h3>
-        <p>Empowering the next generation with biblical truth, mentorship, and a community where young people thrive.</p>
-        <a href="ministries.html#youth" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      <div class="about-strip-card">
+        <div class="about-strip-icon"><i class="fa-solid fa-eye"></i></div>
+        <h3>Our Vision</h3>
+        <p>A spiritually mature, outward-looking church that raises transformed believers who impact every sphere of society with the grace and truth of Jesus Christ.</p>
       </div>
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Community Outreach</h3>
-        <p>Taking the love of Christ beyond our walls through practical service, health missions, and evangelism.</p>
-        <a href="ministries.html#outreach" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      <div class="about-strip-card">
+        <div class="about-strip-icon"><i class="fa-solid fa-heart"></i></div>
+        <h3>Our Values</h3>
+        <p>Scripture-anchored faith, Spirit-led worship, servant-hearted leadership, radical generosity, and a deep love for every person God places in our path.</p>
       </div>
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Discipleship &amp; Training</h3>
-        <p>Systematic Bible study, small groups, and leadership development to help every believer grow in faith.</p>
-        <a href="ministries.html#discipleship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+    </div>
+    <a href="about.html" class="btn btn-outline" style="margin-top:40px">Read Our Full Story →</a>
+  </div>
+</section>
+
+<!-- ── WEEKLY SERVICES ── -->
+<section class="services-strip">
+  <div class="container text-center">
+    <span class="label" style="color:var(--gold-light)">Gather With Us</span>
+    <h2 style="color:white">Regular Gatherings</h2>
+    <div class="divider"></div>
+    <div class="services-grid">
+      <div class="service-item">
+        <div class="day">Sabbath (Saturday)</div>
+        <h4>Morning Prayer</h4>
+        <span class="time">6:00 AM</span>
+        <p>Google Meet — join online</p>
       </div>
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Children's Ministry</h3>
-        <p>Fun, age-appropriate teaching that plants eternal seeds in the hearts of our youngest members.</p>
-        <a href="ministries.html#children" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      <div class="service-item">
+        <div class="day">Sabbath (Saturday)</div>
+        <h4>Sabbath School</h4>
+        <span class="time">9:30 AM</span>
+        <p>Respective churches</p>
       </div>
-      <div class="ministry-card">
-        <div class="ministry-icon"></div>
-        <h3>Mentorship &amp; Care</h3>
-        <p>Connecting believers with experienced mentors for personal, spiritual, and professional growth.</p>
-        <a href="ministries.html#mentorship" class="btn btn-outline" style="margin-top:16px">Learn More</a>
+      <div class="service-item">
+        <div class="day">Sabbath (Saturday)</div>
+        <h4>Main Worship</h4>
+        <span class="time">11:00 AM</span>
+        <p>Respective churches</p>
       </div>
+      <div class="service-item">
+        <div class="day">Friday Evening</div>
+        <h4>Sabbath Welcoming</h4>
+        <span class="time">9:00 PM</span>
+        <p>Google Meet — join online</p>
+      </div>
+    </div>
+    <div style="margin-top:36px;display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+      <a href="https://meet.google.com/acb-jkix-gjj" target="_blank" rel="noopener" class="btn btn-gold">Join Google Meet ↗</a>
+      <a href="contact.html" class="btn btn-outline-white">Get Location →</a>
     </div>
   </div>
 </section>
 
-<!-- 
-     UPCOMING EVENTS
- -->
+<!-- ── UPCOMING EVENTS ── -->
 <section class="events-home section">
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
@@ -542,56 +503,58 @@
     <div class="events-grid">
       <div class="event-card">
         <div class="event-card-date">
-          <strong>15</strong>
-          <span>June 2025</span>
+          <strong>7–9</strong>
+          <span>August 2025</span>
         </div>
         <div class="event-card-body">
-          <h3>Annual Revival Conference</h3>
-          <p>A three-day encounter with God featuring worship, teaching, and powerful testimonies from across Kenya.</p>
+          <h3>Annual General Meeting</h3>
+          <p>Three days of powerful worship, teaching, and testimonies. Theme: "Rooted &amp; Established in Christ."</p>
           <div class="event-meta">
-            <span> 9:00 AM</span>
-            <span> Main Auditorium</span>
+            <span><i class="fa-solid fa-clock"></i> Whole Weekend</span>
+            <span><i class="fa-solid fa-location-dot"></i> Kapsokwony SDA</span>
           </div>
-          <a href="events.html" class="btn btn-green" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Register Now</a>
+          <a href="https://wa.me/254705214338?text=Hello%2C%20I%20would%20like%20to%20register%20for%20the%20Annual%20General%20Meeting." target="_blank" rel="noopener" class="btn btn-green" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Register Now</a>
         </div>
       </div>
-      <div class="event-card">
-        <div class="event-card-date">
-          <strong>22</strong>
-          <span>June 2025</span>
-        </div>
-        <div class="event-card-body">
-          <h3>Community Health Outreach</h3>
-          <p>Free medical checkups, prayer, and Gospel sharing in the Mathare Valley neighbourhood.</p>
-          <div class="event-meta">
-            <span> 8:00 AM</span>
-            <span> Mathare Valley</span>
-          </div>
-          <a href="events.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Learn More</a>
-        </div>
+</section>
+
+<!-- ── GALLERY STRIP ── -->
+<section class="gallery-home section">
+  <div class="container">
+    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
+      <div>
+        <span class="label">Our Life Together</span>
+        <h2>Moments &amp; Memories</h2>
+        <div class="divider divider-left" style="margin-bottom:0"></div>
       </div>
-      <div class="event-card">
-        <div class="event-card-date">
-          <strong>05</strong>
-          <span>July 2025</span>
-        </div>
-        <div class="event-card-body">
-          <h3>Youth Camp — Arise</h3>
-          <p>A weekend retreat for young people: worship, adventure, mentorship, and discipleship sessions.</p>
-          <div class="event-meta">
-            <span> Fri–Sun</span>
-            <span> Naivasha</span>
-          </div>
-          <a href="events.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:9px 18px">Learn More</a>
-        </div>
+      <a href="gallery.html" class="btn btn-outline">View Full Gallery</a>
+    </div>
+    <div class="gallery-strip-grid">
+      <div class="gallery-strip-item">
+        <img src="Images/1.jpg" alt="Ministry moment" onerror="this.parentElement.classList.add('gallery-placeholder');this.style.display='none'">
+        <div class="gallery-strip-overlay"><span>Annual General Meeting</span></div>
+      </div>
+      <div class="gallery-strip-item">
+        <img src="Images/2.jpg" alt="Ministry moment" onerror="this.parentElement.classList.add('gallery-placeholder');this.style.display='none'">
+        <div class="gallery-strip-overlay"><span>AGM 2025</span></div>
+      </div>
+      <div class="gallery-strip-item">
+        <img src="Images/3.jpg" alt="Ministry moment" onerror="this.parentElement.classList.add('gallery-placeholder');this.style.display='none'">
+        <div class="gallery-strip-overlay"><span>AGM 2025</span></div>
+      </div>
+      <div class="gallery-strip-item">
+        <img src="Images/4.jpg" alt="Ministry moment" onerror="this.parentElement.classList.add('gallery-placeholder');this.style.display='none'">
+        <div class="gallery-strip-overlay"><span>Community Outreach</span></div>
+      </div>
+      <div class="gallery-strip-item">
+        <img src="Images/5.jpeg" alt="Ministry moment" onerror="this.parentElement.classList.add('gallery-placeholder');this.style.display='none'">
+        <div class="gallery-strip-overlay"><span>Fellowship</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 
-     TESTIMONIALS
- -->
+<!-- ── TESTIMONIALS ── -->
 <section class="testimonials section">
   <div class="container text-center">
     <span class="label">Stories of Grace</span>
@@ -601,9 +564,9 @@
       <div class="testimonial-card">
         <p class="testimonial-text">Joining the discipleship programme at Growing in Christ changed everything. I found a community that loved me, taught me the Word, and helped me discover my purpose in God.</p>
         <div class="testimonial-author">
-          <div class="testimonial-avatar">A</div>
+          <div class="testimonial-avatar"><img src="Images/Kwalia-Ian-Kibet.jpeg" alt="Kwalia Ian Kibet" onerror="this.parentElement.textContent='K'"></div>
           <div class="testimonial-name">
-            <strong>Alice Wambui</strong>
+            <strong>Kwalia Ian Kibet</strong>
             <span>Member since 2021</span>
           </div>
         </div>
@@ -632,10 +595,8 @@
   </div>
 </section>
 
-<!-- 
-     BELIEFS PREVIEW
- -->
-<section class="blog-home section">
+<!-- ── BELIEFS PREVIEW ── -->
+<section class="beliefs-home section">
   <div class="container">
     <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:48px">
       <div>
@@ -645,9 +606,11 @@
       </div>
       <a href="beliefs.html" class="btn btn-outline">All 28 Beliefs</a>
     </div>
-    <div class="blog-grid">
+    <div class="beliefs-grid">
       <div class="card">
-        <div style="height:180px;background:linear-gradient(135deg,var(--green-dark),var(--green));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div style="height:180px;overflow:hidden;border-radius:8px 8px 0 0">
+          <img src="Images/Holy Trinity.jpg" alt="The Holy Trinity" style="width:100%;height:180px;object-fit:cover" onerror="this.parentElement.style.background='var(--green-pale)'">
+        </div>
         <div class="card-body">
           <span class="label" style="font-size:0.68rem">Doctrine · God</span>
           <h3>The Holy Trinity</h3>
@@ -656,7 +619,9 @@
         </div>
       </div>
       <div class="card">
-        <div style="height:180px;background:linear-gradient(135deg,var(--green-deep),var(--green-mid));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div style="height:180px;overflow:hidden;border-radius:8px 8px 0 0">
+          <img src="Images/Salvation in Christ.jpg" alt="Salvation in Christ" style="width:100%;height:180px;object-fit:cover" onerror="this.parentElement.style.background='var(--gold-pale)'">
+        </div>
         <div class="card-body">
           <span class="label" style="font-size:0.68rem">Doctrine · Salvation</span>
           <h3>Salvation in Christ</h3>
@@ -665,11 +630,13 @@
         </div>
       </div>
       <div class="card">
-        <div style="height:180px;background:linear-gradient(135deg,var(--green),rgba(200,150,42,0.4));display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:3rem"></div>
+        <div style="height:180px;overflow:hidden;border-radius:8px 8px 0 0">
+          <img src="Images/Gift Of Prophecy.jpg" alt="The Gift of Prophecy" style="width:100%;height:180px;object-fit:cover" onerror="this.parentElement.style.background='var(--green-pale)'">
+        </div>
         <div class="card-body">
           <span class="label" style="font-size:0.68rem">Doctrine · Prophecy</span>
           <h3>The Gift of Prophecy</h3>
-          <p style="font-size:0.9rem">The Holy Spirit has manifested this gift in the ministry of Ellen G. White, whose writings are a continuing source of truth.</p>
+          <p style="font-size:0.9rem">The Spirit manifested this gift in Ellen G. White, whose writings are a continuing source of truth and guidance.</p>
           <a href="ellen-white.html" class="btn btn-outline" style="margin-top:16px;font-size:0.8rem;padding:8px 18px">Learn More →</a>
         </div>
       </div>
@@ -677,54 +644,18 @@
   </div>
 </section>
 
-
-<!-- GALLERY -->
-<section id="galleryHomeSection" class="section" style="background:var(--white);display:none">
-  <div class="container">
-    <div style="display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:16px;margin-bottom:8px">
-      <div>
-        <span class="label">Our Life Together</span>
-        <h2>Photo Gallery</h2>
-        <div class="divider divider-left" style="margin-bottom:0"></div>
-      </div>
-    </div>
-    <div class="gallery-home-grid">
-      <!-- Rendered by site-sync.js -->
-    </div>
-  </div>
-</section>
-
-
-<!-- DEPARTMENTS -->
-<section id="departmentsHomeSection" class="section" style="background:var(--cream)">
-  <div class="container text-center">
-    <span class="label">How We're Organised</span>
-    <h2>Our Departments</h2>
-    <div class="divider"></div>
-    <p style="max-width:560px;margin:0 auto">Each department serves a vital role in keeping our ministry running and our community thriving.</p>
-    <div class="departments-grid">
-      <!-- Rendered by site-sync.js from GicData -->
-    </div>
-  </div>
-</section>
-
-<!-- 
-     CTA BANNER
- -->
+<!-- ── CTA BANNER ── -->
 <section class="cta-banner">
   <div class="container">
-    <span class="label">Join the Family</span>
+    <span class="label" style="color:var(--gold-light)">Join the Family</span>
     <h2>Be Part of Something Greater</h2>
     <p>Whether you're new to faith or looking for a spiritual home — you are welcome here. Come as you are.</p>
-    <div style="display:flex;justify-content:center;gap:16px;flex-wrap:wrap">
+    <div class="cta-btns">
       <a href="membership.html" class="btn btn-green">Become a Member</a>
       <a href="give.html" class="btn btn-outline-white">Support Our Ministry</a>
     </div>
   </div>
 </section>
-
-<script src="site-data.js"></script>
 <script src="layout.js"></script>
-<script src="site-sync.js"></script>
 </body>
 </html>

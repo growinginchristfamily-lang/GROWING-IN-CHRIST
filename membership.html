@@ -2,10 +2,76 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta name="description" content="Membership — Join Growing in Christ Ministry. Discover the process to become an official member of our faith community in Nairobi.">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Membership — Growing in Christ Ministry</title>
+  <meta property="og:title" content="Membership — Growing in Christ Ministry">
+  <meta property="og:description" content="Membership — Join Growing in Christ Ministry. Discover the process to become an official member of our faith community in Nairobi.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://growinginchrist.org/membership.html">
+  <meta property="og:site_name" content="Growing in Christ Ministry">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTQiIGZpbGw9IiMxQjZCM0EiLz4KICA8IS0tIENyb3NzIC0tPgogIDxyZWN0IHg9IjI5IiB5PSIxMCIgd2lkdGg9IjYiIGhlaWdodD0iMzgiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDxyZWN0IHg9IjE0IiB5PSIyMiIgd2lkdGg9IjM2IiBoZWlnaHQ9IjYiIHJ4PSIzIiBmaWxsPSJ3aGl0ZSIvPgogIDwhLS0gU21hbGwgbGVhZiBhY2NlbnQgLS0+CiAgPGVsbGlwc2UgY3g9IjQ4IiBjeT0iNDYiIHJ4PSI3IiByeT0iNCIgZmlsbD0iI0M4OTYyQSIgdHJhbnNmb3JtPSJyb3RhdGUoLTM1IDQ4IDQ2KSIvPgo8L3N2Zz4K">
   <link rel="stylesheet" href="styles.css">
   <style>
+    /* The Card Container on the right */
+.welcome-family-card {
+  height: 520px;
+  width: 100%;
+  border-radius: 16px;
+  box-shadow: var(--shadow-lg, 0 10px 30px rgba(0, 0, 0, 0.15));
+  background: linear-gradient(135deg, var(--green-dark, #134e4a), var(--green-mid, #0f766e));
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  padding: 40px;
+  text-align: center;
+}
+
+/* The Rounded Image Placeholder */
+.welcome-family-avatar {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid rgba(255, 255, 255, 0.25); /* Elegant translucent white frame */
+  background-color: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.welcome-family-card:hover .welcome-family-avatar {
+  transform: scale(1.04); /* Subtle hover effect */
+}
+
+/* Forces whatever image you use to fit beautifully inside the circle */
+.welcome-family-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; 
+}
+
+/* Card Typography Styling */
+.welcome-family-card h3 {
+  color: #ffffff;
+  font-size: 1.6rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.welcome-family-card .quote {
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  max-width: 300px;
+  line-height: 1.5;
+  margin: 0;
+  font-style: italic;
+}
     .membership-benefits {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -82,52 +148,10 @@
 
 <section class="page-hero">
   <div class="container">
-    <span class="label">Join the Family</span>
+    <span class="label">Join Our Family</span>
     <h1>Membership</h1>
-    <p>Become an official member of Growing in Christ Ministry and commit to growing, serving, and belonging.</p>
+    <p>Become an official part of Growing in Christ Ministry — rooted in faith, growing together, and serving with purpose.</p>
     <div class="breadcrumb"><a href="index.html">Home</a> › <span>Membership</span></div>
-  </div>
-</section>
-
-<!-- Why become a member -->
-<section class="section">
-  <div class="container text-center">
-    <span class="label">Why Join?</span>
-    <h2>Benefits of Membership</h2>
-    <div class="divider"></div>
-    <p style="max-width:540px;margin:0 auto">Membership is not just a title — it's a commitment to belong, grow, serve, and be accountable within a community of faith.</p>
-    <div class="membership-benefits">
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>A Spiritual Home</h4>
-        <p style="font-size:0.88rem">Find belonging in a community that knows your name, walks with you, and celebrates your growth.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>Discipleship Access</h4>
-        <p style="font-size:0.88rem">Priority access to Bible training, small groups, and discipleship programmes designed for members.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>Ministry Involvement</h4>
-        <p style="font-size:0.88rem">Discover and deploy your spiritual gifts by serving in one of our active ministries.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>Pastoral Care</h4>
-        <p style="font-size:0.88rem">Receive dedicated pastoral support, counselling, and prayer from our leadership team.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>Network &amp; Fellowship</h4>
-        <p style="font-size:0.88rem">Connect with a wide network of believers across Nairobi and the broader Growing in Christ community.</p>
-      </div>
-      <div class="benefit-card">
-        <div class="icon"></div>
-        <h4>Leadership Pipeline</h4>
-        <p style="font-size:0.88rem">Be identified for mentorship and developed for leadership within the church and beyond.</p>
-      </div>
-    </div>
   </div>
 </section>
 
@@ -178,11 +202,18 @@
           </div>
         </div>
       </div>
-      <div style="background:linear-gradient(135deg,var(--green-deep),var(--gold)30);height:520px;border-radius:16px;display:flex;align-items:center;justify-content:center;color:rgba(255,255,255,0.15);font-size:10rem;box-shadow:var(--shadow-lg)"></div>
+      
+      <!-- Styled Right Column Card -->
+      <div class="welcome-family-card">
+        <div class="welcome-family-avatar">
+          <img src="images/Growing in Christ Logo.jpeg" alt="Membership Illustration" onerror="this.parentElement.textContent='K'">
+        </div>
+        <h3>Welcome to the Family</h3>
+        <p class="quote">"You are no longer foreigners and strangers, but fellow citizens with God's people." — Ephesians 2:19</p>
+      </div>
     </div>
   </div>
 </section>
-
 <!-- Membership Form -->
 <section class="section">
   <div class="container">
@@ -265,9 +296,5 @@
     </div>
   </div>
 </section>
-
-<script src="site-data.js"></script>
-<script src="layout.js"></script>
-<script src="site-sync.js"></script>
-</body>
+<script src="layout.js"></script></body>
 </html>
